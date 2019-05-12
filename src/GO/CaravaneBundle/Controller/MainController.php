@@ -25,7 +25,7 @@ class MainController extends BaseController{
     }
     public function getRepo($class)
     {
-        $main_bundle_entities=array('Client', 'CarteKheweul', 'Promo', 'RemiseCarte');
+        $main_bundle_entities=array('CarteKheweul', 'Promo', 'RemiseCarte');
         if(in_array($class, $main_bundle_entities))
         return $this->getDoctrine()->getRepository('GOMainBundle:'.$class);
         elseif($class=="User")

@@ -224,5 +224,15 @@ exit( "Toutes les insertions ont réussi");
         $em->flush();
         Exit("Créations réussi!  $i Rows affected!");
     }
-
+    
+/**
+ * @Route("/test/test_client_caravane", name="testclientcaravane")
+ */
+    public function testClientCaravaneAction()
+    {
+        $client= new \GO\CaravaneBundle\Entity\Client();
+        $client->setCoordonnees($this->getDoctrine()->getRepository("GOClientBundle:Client")->find(1));
+        echo $client->getAdresse();
+        die();
+    }
 }

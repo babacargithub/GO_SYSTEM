@@ -60,9 +60,9 @@ class Reservation
      */
     private $paiement;
     /**
-     * @var \GO\MainBundle\Entity\Client
+     * @var \GO\CaravaneBundle\Entity\Client
      *
-     * @ORM\ManyToOne(targetEntity="GO\MainBundle\Entity\Client", inversedBy="reservations")
+     * @ORM\ManyToOne(targetEntity="GO\CaravaneBundle\Entity\Client", inversedBy="reservations")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="client", referencedColumnName="id",onDelete="CASCADE", nullable=false)
      * })
@@ -241,10 +241,10 @@ class Reservation
     /**
      * Set client
      *
-     * @param \GO\MainBundle\Entity\Client $client
+     * @param \GO\CaravaneBundle\Entity\Client $client
      * @return Reservation
      */
-    public function setClient(\GO\MainBundle\Entity\Client $client)
+    public function setClient(\GO\CaravaneBundle\Entity\Client $client)
     {
         $this->client = $client;
 
@@ -254,7 +254,7 @@ class Reservation
     /**
      * Get client
      *
-     * @return \GO\MainBundle\Entity\Client 
+     * @return \GO\CaravaneBundle\Entity\Client 
      */
     public function getClient()
     {

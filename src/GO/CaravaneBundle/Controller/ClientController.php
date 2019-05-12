@@ -8,14 +8,14 @@
 
 namespace GO\CaravaneBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use GO\MainBundle\Entity\Client;
+use GO\CaravaneBundle\Entity\Client;
 use GO\CaravaneBundle\Entity\Reservation;
-use GO\MainBundle\Form\ClientType;
-use GO\MainBundle\Form\ClientDetailType;
+use GO\CaravaneBundle\Form\ClientType;
 use GO\MainBundle\Form\ClientSearchType;
 use Symfony\Component\HttpFoundation\Request;
 use GO\MainBundle\Controller\ClientController as ClientMainController;
 use GO\CaravaneBundle\Utils\Constants as Cons;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 /**
  * Description of ClientController
  *
@@ -161,6 +161,49 @@ class ClientController extends ClientMainController {
            
         
     }
+  
+    /**
+     * @Route("/ajouter_client.golob", name="go_caravane_client_new")
+     */
+   public function newAction(Request $req)
+    {
+        
+      
+        $Client=new Client();
+        $form= $this->createForm(new ClientType(), $Client,["action"=> $this->generateUrl("go_caravane_client_new")]);
+        $form->handleRequest($req);
+       
+        if($form->isSubmitted()&&$form->isValid())
+        {
+            $Client->getCoordonnees()->setCreatedAt(new \DateTime());
+           $em=$this->em();
+           $em->persist($Client->getCoordonnees());
+           $em->persist($Client);
+           $em->flush();
+            return $this->sendResponse(array('view'=>'GOCaravaneBundle::flash_message.html.twig',
+                    'msg'=>"Client enregistré avec succès"));
+        } else {
+        
+        return $this->render('GOCaravaneBundle:Client:_form.html.twig', array('form'=>$form->createView()));
    
+        }
+        
+    }
+    public function getDetailsAction(Request $req)
+    {
+        $client=$this->getRepo('Client')->findOneByTel($req->get('tel'));
+          $clientForm= $this->createForm(new ClientDetailType(), $client);
+        $voyage_en_cours= null;
+        //si le client existe dans la base, on va compter le nombre de voyages qu'il a effectué, sinon on ne fait rien
+        if(!empty($client))
+        {
+        $clientForm->get('nombre_voy')->setData($this->getRepo('Reservation')->getNombreVoyage($client->getTel()));
+        $en_cours=$this->getRepo('Reservation')->getDernierVoyage($client->getTel());
+        if(!is_null($en_cours))
+            $voyage_en_cours=$en_cours;
+        }
+        return $this->render('GOCaravaneBundle:Client:_details.html.twig', 
+                                array('voyage_en_cours'=>$voyage_en_cours,'form'=>$clientForm->createView(), 'data'=>$clientForm->getData()));
+    }
     
 }
