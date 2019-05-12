@@ -1,0 +1,40 @@
+
+ 
+        {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('update_achat',{'id':form.vars.data.id})}}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+    
+    
+    
+    <div>
+    {{ form_label(form.produit, "Produit à acheter ")}}
+    {{ form_widget(form.produit,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.codeBar, "Code Barre")}}
+    {{ form_widget(form.codeBar,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.quantite, "Quantité")}}
+    {{ form_widget(form.quantite,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.prixUnit, "Prix Unitaire")}}
+    {{ form_widget(form.prixUnit,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.prixVente, "Prix Vente")}}
+    {{ form_widget(form.prixVente,{"attr":{"class":"form-control"}} )}}
+    </div>
+    
+   
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+
+  

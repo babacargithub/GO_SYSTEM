@@ -1,0 +1,173 @@
+{% extends '@GOShop/Admin/layout.html.twig' %}
+{% block main %}{# empty Twig template #}
+    <div class="row">
+         <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-buysellads"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Vente Journée</span>
+              <span class="info-box-number">{{ shop.totalVenteJour|nombre()}}<br>{{ shop.totalVenteExercice|nombre()}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          </div>
+             <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="fa fa-shopping-cart"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Bénéfice Journée</span>
+              <span class="info-box-number">{{ shop.totalBeneficeJour|nombre()}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+          <!-- /.info-box -->
+         <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Achat Journée</span>
+              <span class="info-box-number">{{ shop.totalAchatJour|nombre()}}<br></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-exchange"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Dépense</span>
+              <span class="info-box-number">93,139</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-gray"><i class="fa fa-bar-chart"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Factures V Non Payées</span>
+              <span class="info-box-number">{{ shop.totalCreanceProduitJour|nombre()}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-credit-card"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Factures A Non Payée</span>
+              <span class="info-box-number">{{shop.TotalDetteFacture|nombre()}}<br><br></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        </div>
+       <div class='row-border'>
+        <!-- /.col -->
+       <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Vente Mois</span>
+              <span class="info-box-number">{{ shop.totalVenteMois|nombre()}}</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Bénéfices Mois</span>
+              <span class="info-box-number">{{ shop.totalBeneficeMois|nombre()}}</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Achats Mois</span>
+              <span class="info-box-number">{{shop.totalAchatMois|nombre()}}<br></span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Dépenses Mois</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+      <!-- /.row -->
+
+        <!-- ./col -->
+        </div>
+        Créance liquide:{{ shop.totalCreanceLiquide|nombre()}}<br>
+        Créance produit:{{ shop.totalCreanceProduit|nombre()}}<br>
+        Créance Liquide Mois{{ shop.totalCreanceLiquideMois|nombre()}}<br>
+        Créance Jour{{ shop.totalCreanceLiquideJour|nombre()}}<br>
+        Créance Produit Mois{{ shop.totalCreanceProduitMois|nombre()}}<br>
+        
+        
+        
+        
+    {%endblock %}

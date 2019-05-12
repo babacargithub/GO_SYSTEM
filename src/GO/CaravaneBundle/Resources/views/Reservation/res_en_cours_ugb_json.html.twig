@@ -1,0 +1,7 @@
+ 
+        {% if res is defined %}
+            {{ res|json_encode()}}
+            {% else %}
+                <span>Liste undefined</span>
+    {% endif %}
+ 

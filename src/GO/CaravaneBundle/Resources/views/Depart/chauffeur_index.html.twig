@@ -1,0 +1,11 @@
+{% extends "GOCaravaneBundle:Depart:depart_main_layout.html.twig" %}
+{% block content_body %}
+    <div class="row">
+        <form id="{{ form.vars.name }}" method="post" action="{{path("chauffeur_index")}}">
+{{form_widget(form)}}
+<input type="submit" value="Enregistrer"/>
+    </form>
+</div>
+
+    
+    {% endblock %}

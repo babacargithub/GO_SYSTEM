@@ -1,0 +1,20 @@
+ {% if form is defined %}
+{{ form_errors(form)}}
+   <tr>
+        <td>
+             
+       {{ form_widget(form.depense,{"attr":{"class":"form-control","placeholder":form.depense.vars.name}} )}}
+        </td>
+        <td>
+        
+        {{ form_widget(form.montant,{"attr":{"class":"form-control"}} )}}
+        </td>
+        <td>
+        
+        {{ form_widget(form.justification,{"attr":{"class":"form-control"}} )}}
+        </td>
+        
+    </tr>
+{% endif %}
+
+  

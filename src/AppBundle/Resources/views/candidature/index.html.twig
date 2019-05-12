@@ -1,0 +1,34 @@
+{% extends '@App/base_template.html.twig' %}
+{% block content_title %} Liste des candidatures{%endblock%}
+{% block body %}
+   
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Candidat</th>
+                <th>Formation</th>
+                <th>Niveau Demandé</th>
+                <th>Accepté</th>
+                <th>Visa accepté</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidature in candidatures %}
+            <tr>
+                <td>{{ candidature.dossier.candidat }}</td>
+                <td>{{ candidature.formationDemandee }}</td>
+                <td>{{ candidature.niveauDemande }}</td>
+                <td>{% if candidature.accepte %}Accepté{% else %}Pas Enc{% endif %}</td>
+                <td>{% if candidature.visaAccepte %}Accepté{% else %}Pas Enc{% endif %}</td>
+                <td>
+                 <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">Voir Détails</a>
+                 <a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">Modifier</a>
+                      
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

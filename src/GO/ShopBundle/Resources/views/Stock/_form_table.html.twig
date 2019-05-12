@@ -1,0 +1,27 @@
+ {% if form is defined %}
+{{ form_errors(form)}}
+   <tr>
+        <td>
+             {#{ form_label(form.produit, "Produit à Inventer ")}#}
+       {{ form_widget(form.codeBar )}}
+        </td>
+        <td>
+             {#{ form_label(form.produit, "Produit à Inventer ")}#}
+       {{ form_widget(form.produit,{"attr":{"class":"form-control auto_com"}} )}}
+        </td>
+        <td>
+        {#{ form_label(form.stockReel, "Quantité")}#}
+        {{ form_widget(form.stockReel,{"attr":{"class":"form-control"}} )}}
+        </td>
+        <td>
+        {#{ form_label(form.prixAchat, "Prix Achat")}#}
+        {{ form_widget(form.prixAchat,{"attr":{"class":"form-control"}} )}}
+        </td>
+        <td>
+        {#{ form_label(form.prixVente, "Prix Vente")}#}
+        {{ form_widget(form.prixVente,{"attr":{"class":"form-control"}} )}}
+        </td>
+    </tr>
+{% endif %}
+
+  

@@ -1,0 +1,44 @@
+{% extends app.request.isXmlHttpRequest() ? "_no_makeup.html.twig" : "base.html.twig" %}
+{% block skin_color %}green {%endblock %}
+{% block title %}
+        <title>{% if title is defined %}{{ title}}{% else %}Golob One Caravane{% endif %}</title>
+    {%endblock title %}
+
+{% block menu %}
+             {{include('@GOCaravane/_menu.html.twig')}}
+{% endblock menu %}
+ {% block sidebar %}
+  {{render(controller('GOCaravaneBundle:Depart:etatDeparts'))}}
+ {%endblock sidebar %} 
+
+                   
+{% block content_body %}
+    <h2>Bienvenue dans l'application pour la gestion des Caravanes de Golob One V2</h2>
+    <h1>Consignes de sécurité et récommendations</h1>
+    <ul>
+        <li><h3>Ne pas ouvrir cette application aux yeux des clients ou tout autre endroit indiscret</h3></li>
+        <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise et y sauvegarder votre mot de passe</h3></li>
+        <li><h3>Ne pas communiquer votre mot de passe aux autres collègues ou toute personne étrangère</h3></li>
+
+    </ul>
+{% endblock content_body %}
+{% block javascripts %}
+    {{parent()}}
+<script src="{{asset("js/go_shop_functions.js")}}"></script>
+<script src="{{asset("js/golob_one_db_js.js")}}"></script>
+<script src="{{asset("js/golob_one_caravane.js")}}"></script>
+{% endblock javascripts %}
+{% block javascript_code %}
+<script type="text/javascript">
+            //alert('jjdjjd');
+            $('table').addClass('table table-hovered table-striped');
+            $('input[type=submit]').addClass('btn').addClass('btn-danger');
+            $('input[type!=submit],select,textarea').css('background-color', '#00b24d')
+           .css('color', 'white')
+           .css('font-size', '16px')
+           .css('font-weight', 'bold');
+           
+             $('label').css("color","#005927");
+             $('.row_entree').css("background-color","#92e5ab");
+            </script>
+    {% endblock javascript_code %}

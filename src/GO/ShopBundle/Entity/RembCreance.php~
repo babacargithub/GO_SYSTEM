@@ -1,0 +1,127 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * RembCreance
+ *
+ * @ORM\Table(name="remb_creance")
+ * repositoryClass="GO\ShopBundle\Entity\RembCreanceRepository")
+ */
+//==============Entité représentant les remboursements des créances 
+class RembCreance extends BaseClass
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\CreanceProduit", inversedBy="remboursements")
+     * @ORM\JoinColumns({@ORM\JoinColumn(name="creance", referencedColumnName="id", nullable=false)})
+     */
+    private $creance;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant", type="integer", nullable=false)
+     */
+    private $montant;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    public function __construct() {
+        $this->date=new \DateTime();
+    }
+
+    /**
+     * Set montant
+     *
+     * @param integer $montant
+     * @return RembCreance
+     */
+    public function setMontant($montant)
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    /**
+     * Get montant
+     *
+     * @return integer 
+     */
+    public function getMontant()
+    {
+        return $this->montant;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return RembCreance
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set creance
+     *
+     * @param \GO\ShopBundle\Entity\Creance $creance
+     * @return RembCreance
+     */
+    public function setCreance(\GO\ShopBundle\Entity\CreanceProduit $creance)
+    {
+        $this->creance = $creance;
+
+        return $this;
+    }
+
+    /**
+     * Get creance
+     *
+     * @return \GO\ShopBundle\Entity\Creance 
+     */
+    public function getCreance()
+    {
+        return $this->creance;
+    }
+}

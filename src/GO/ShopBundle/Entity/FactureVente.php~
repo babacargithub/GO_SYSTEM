@@ -1,0 +1,71 @@
+<?php
+
+namespace GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * FactureAchat
+ *
+ * @ORM\Table()
+ * repositoryClass="GO\ShopBundle\Entity\FactureVenteRepository")
+ */
+class FactureVente
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="num", type="integer")
+     */
+    private $num;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+     /**
+     * @var \GO\MainBundle\Entity\Client
+     *
+     * @ORM\ManyToOne(targetEntity="GO\MainBundle\Entity\Client", inversedBy="factures")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client", referencedColumnName="id",onDelete="CASCADE")
+     * })
+     */
+    private $client;
+
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="paye", type="boolean")
+     */
+    private $paye;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="avance", type="integer")
+     */
+    private $avance;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="livre", type="boolean")
+     */
+    private $livre;
+
+
+}

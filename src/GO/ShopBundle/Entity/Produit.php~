@@ -1,0 +1,257 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Produit
+ *
+ * @ORM\Table(name="produit", indexes={@ORM\Index(name="type", columns={"type"})})
+ * repositoryClass="GO\ShopBundle\Entity\ProduitRepository")
+ * @UniqueEntity(fields="nom", message="Un produit existe déjà avec ce nom.")
+ */
+class Produit
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @Assert\MinLength(2)
+     */
+    private $nom;
+
+   /**
+    *
+    * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\TypeProduit")
+    * @ORM\JoinColumns({@ORM\JoinColumn(name="type", referencedColumnName="id", nullable=false)})
+    */
+    private $type;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix_achat", type="integer", nullable=true)
+     */
+    private $prixAchat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix_vente", type="integer", nullable=true)
+     */
+    private $prixVente;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descrip", type="string", length=255, nullable=true)
+     */
+    private $descrip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var \GO\ShopBundle\Entity\Categorie
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\Categorie")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="categorie", referencedColumnName="id",onDelete="NO ACTION", nullable=true)
+     * })
+     */
+    private $categorie;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="actif", type="boolean", nullable=true)
+     */
+    private $actif=true;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Produit
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set prixAchat
+     *
+     * @param integer $prixAchat
+     * @return Produit
+     */
+    public function setPrixAchat($prixAchat)
+    {
+        $this->prixAchat = $prixAchat;
+
+        return $this;
+    }
+
+    /**
+     * Get prixAchat
+     *
+     * @return integer 
+     */
+    public function getPrixAchat()
+    {
+        return $this->prixAchat;
+    }
+
+    /**
+     * Set prixVente
+     *
+     * @param integer $prixVente
+     * @return Produit
+     */
+    public function setPrixVente($prixVente)
+    {
+        $this->prixVente = $prixVente;
+
+        return $this;
+    }
+
+    /**
+     * Get prixVente
+     *
+     * @return integer 
+     */
+    public function getPrixVente()
+    {
+        return $this->prixVente;
+    }
+
+    /**
+     * Set descrip
+     *
+     * @param string $descrip
+     * @return Produit
+     */
+    public function setDescrip($descrip)
+    {
+        $this->descrip = $descrip;
+
+        return $this;
+    }
+
+    /**
+     * Get descrip
+     *
+     * @return string 
+     */
+    public function getDescrip()
+    {
+        return $this->descrip;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Produit
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \GO\ShopBundle\Entity\TypeProduit $type
+     * @return Produit
+     */
+    public function setType(\GO\ShopBundle\Entity\TypeProduit $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \GO\ShopBundle\Entity\TypeProduit 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param \GO\ShopBundle\Entity\Categorie $categorie
+     * @return Produit
+     */
+    public function setCategorie(\GO\ShopBundle\Entity\Categorie $categorie = null)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return \GO\ShopBundle\Entity\Categorie 
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+}

@@ -1,0 +1,23 @@
+----- Etape 1 --------------
+Remettre tous les stocks code bar et non code barre à zero 0 pour ceux qui existaient avant l'inventaire
+----- Etape 2 ---------------
+Récupérer tous les produits inventaires qui n'ont pas de stock code barre et créer une facture fictive afin qu'il dispose
+d'un stock code barre grace à leur code barre par defaut dont on se servira
+----- Etape 3 ----------------
+Après avoir crée un stock code barre pour les produits qui n'en avaient pas au paravent pas au paravent, on les affecte à entrée dans l'inventaire
+Ce qui fait que dans l'inventaire, désormais tous les produits ont un stock code barre
+----- Etape 4 ---------------
+Modifier tous les stocks code barre avec leur vraie valeur dans l'inventaire
+----- Etape 5 ---------------
+Récupérer tous les achats après inventaire qui n'ont pas de code barre et leur attribuer un
+-----Etape 6
+récupérer toutes les ventes effectuées après inventaire et réduire leur stock respectif
+On devra vérifier si la vente porte sur un stock avant inventaire, si tel est le cas on réduit le stock
+Si elle porte sur un stock après inventaire, on laissera le stock non modiifé
+L'algorithme pour déterminer si un stock est ancien ou nouveau est le suivant
+On récupère d'abord le stock sur lequel a porté la vente, 
+on verifie si la date d'arrivé est avant inventaire (si le test est positif c'est un stock passé, sinon c'est nouveau)
+Si la vente porte sur un stock sans code barre, on récupère le produit et on se sert de son code barre par défaut pour récupérer le stock code bar
+Si un stock code barre existe, on réduit son stock code barre peu importe qu'il soit ancien ou nouveau on associe le stock code barre à la vente
+----- Etape 7 ------------
+

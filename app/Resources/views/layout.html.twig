@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!--IE Compatibility modes-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Mobile first-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    {% block title %}
+        <title>{% if title is defined %}{{ title}}{% else %}Golob One Système{% endif %}</title>
+    {%endblock title %}
+   
+     <link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">
+    <link rel="stylesheet" href="{{asset("css/jquery-ui.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("css/jquery-ui.theme.css")}}">
+    <link rel="stylesheet" href="{{asset("css/main.css")}}">
+    <link rel="stylesheet" href="{{asset("css/metisMenu.css")}}">
+    <!-- Css files -->
+    {% block styles %}
+<style type="text/css">
+    #loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index:99999;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+</style>
+{% endblock styles %}
+  </head>
+
+<body class="">
+    <div class="bg-blue dark" id="wrap">
+    <div id="top">
+        <!-- .navbar -->
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+     <!-- Brand and toggle get grouped for better mobile display -->
+                <header class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                        <a href="index.html" class="navbar-brand"><img  alt=""></a>
+                </header>
+      <div class="topnav">
+          <div class="btn-group">
+            <span>{% if app.user %} {{app.user.username}}{% endif %}</span>
+            <a href="{{path("go_main_app_selection")}}" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom">Changer Application</<a>
+            <a href="{{path("fos_user_security_logout")}}" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom"
+               class="btn btn-metis-1 btn-sm">
+                <i class="glyphicon glyphicon-log-out">Déconnexion</i>
+            </a>
+             </div>
+                <div class="btn-group">
+                    <a data-placement="bottom" data-original-title="Show / Hide Left" data-toggle="tooltip"
+                       class="btn btn-primary btn-sm toggle-left" id="menu-toggle">
+                        <i class="fa fa-bars"></i>
+                    </a>
+
+                </div>
+
+            </div>
+ <div class="collapse navbar-collapse navbar-ex1-collapse">
+  <!-- .nav -->
+        <ul class="nav navbar-nav" id="main-go-menu">
+            {% block menu %}
+             <li class="module" id="inscription"><a href="user_profile.golob">Gérer mon compte</a>
+            </li>
+            <li class="module" id="abonne"><a href="liste.golob">Listes Inscrits</a>
+            </li>
+            <li class="module" id="abonnement"><a href="depart.golob">Gestion Départs</a>
+            </li>
+            <li class="module" id="chiffre"><a href="chiffre.golob">Chiffres</a>
+            </li>
+            <li class="module" id="chiffre"><a href="c_kheweul.golob">Cartes Kheweul</a>
+            </li>
+            <li class="module" id="chiffre"><a href="caravane_client_index.golob">Clients</a>
+            </li>
+            </li>
+
+              <li class='dropdown '>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Plus<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="event.golob">Evènement</a></li>
+                    </ul>
+            </li>
+            {% endblock menu %}
+        </ul>
+        <!-- /.nav -->
+    </div>
+</div>
+<!-- /.container-fluid -->
+</nav>
+<!-- /.navbar -->                        <header class="head">
+        <div class="search-bar">
+            <form class="main-search" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Live Search ...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary btn-sm text-muted" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+            <!-- /.main-search -->                                </div>
+        <!-- /.search-bar -->
+    <div class="main-bar">
+        <h3>
+              <i class="fa fa-home"></i>&nbsp;
+           Golob One Système
+          </h3>
+                            </div>
+                            <!-- /.main-bar -->
+                        </header>
+                        <!-- /.head -->
+                </div>
+                <!-- /#top -->
+                    <div id="left">
+                     <!-- #menu -->
+                        <ul id="menu" class="bg-blue dker">
+                        <li class="nav-header">Liste Options</li>
+                                  <li id="etats" class="nav-divider"></li>
+                                  {% block options %}
+                                   {% endblock %}                                                                     
+                         </ul>
+                 <ul id="menu" class="bg-blue dker etat_departs">
+                        <li class="nav-header">Menus</li>
+                                  <li id="etats_depart" class="nav-divider"></li>
+                                  {% block menu_vertical %}
+                                  {% endblock %}
+                    </ul>
+                                                <!-- /#menu -->
+ </div>
+                    <!-- /#left -->
+                <div id="content">
+                    <div class="outer">
+                        <div id="loader" style="display: none;"></div>
+                        <div id="modal" style="display: none;"></div>
+                        <div class="inner bg-light lter">
+        <div class="col-lg-12">
+        <div class="row">
+                <div class="alert col-12  alert-success" style="border: 1px solid green; display: none"></div>
+ </div>
+
+                </div>
+        <div id="view_tabs" >
+
+
+  {% if error is defined %}
+    <div class="alert alert-danger" id="error_msg"> <strong>Erreur!</strong>{{error}}</div>
+
+{% elseif msg is defined %}
+ <div class="alert alert-success" id="success_msg">{{msg}}</div>'; 
+
+{% else %}
+<div style="display: none" class="alert alert-danger" id="error_msg"></div>
+<div style="display: none" class="alert alert-success" id="success_msg"></div>
+{% endif %}
+</div>
+<div id="search_result">
+</div>
+<div id="content_body">
+{% block content_body %}
+    <h2>Bienvenue dans l'application pour la gestion des services  de Golob One V2</h2>
+    <h1>Consignes de sécurité et récommendations</h1>
+    <ul>
+        <li><h3>Ne pas ouvrir cette application aux yeux des clients ou tout autre endroit indiscret</h3></li>
+        <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise et y sauvegarder votre mot de passe</h3></li>
+        <li><h3>Ne pas communiquer votre mot de passe aux autres collègues ou toute personne étrangère</h3></li>
+
+    </ul>
+         
+{% endblock %}
+
+    </div>
+    </div>
+
+        </div>
+        <!-- /.inner -->
+    </div>
+    <!-- /.outer -->
+</div>
+<!-- /#content -->
+            <!-- /#wrap -->
+
+            <!-- #helpModal -->
+           <!-- /.modal -->
+            <!-- /#helpModal -->
+            <!--jQuery -->
+            {% block javascripts %}
+                    <script src="{{asset("js/jquery.js")}}"></script>
+            <script src="{{asset("js/jquery-ui.min.js")}}"></script>
+            <script src="{{asset("js/bootstrap.js")}}"></script>
+            <script src="{{asset("js/go_shop_functions.js")}}"></script>
+            <script src="{{asset("js/golob_one_db_js.js")}}"></script>
+
+            {% endblock javascripts %}
+            <!-- Les codes javascript sont placés ici !-->
+            {% block javascript_code %}
+            {% endblock javascript_code %}
+        </body>
+
+</html>
+
+

@@ -1,0 +1,8 @@
+ 
+{% if form is defined %}
+    <form action="{{ path('go_shop_achat_search')}}" method="post" class="form-inline">
+           {{ form_widget(form)}}
+  <input type="submit" class="btn btn-primary" />
+</form>
+    {% endif %}
+ 

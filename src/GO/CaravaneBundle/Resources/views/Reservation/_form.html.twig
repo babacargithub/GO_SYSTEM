@@ -1,0 +1,54 @@
+
+ 
+        {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_caravane_reservation_ajouter')}}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+    <div>
+    {{ form_label(form.depart, "Départ")}}
+    <select class='form-control' name='{{form.vars.name}}[{{form.depart.vars.name}}]' id='{{form.vars.name}}_{{form.depart.vars.name}}'>
+   <option value="">Selectionnez Départ</option>
+    
+   {% for key, val in form.depart.vars.choices %}
+       <option trajet="{{val.data.trajet}}"value="{{val.value}}"/>{{val.label}}</option>
+   
+       
+       {% endfor %}</select>
+    </div>
+    
+    
+    <div>
+    {{ form_label(form.client.tel, "Téléphone client")}}
+    {{ form_widget(form.client.tel,{"attr":{"class":"form-control"}} )}}
+    </div>
+   
+    <div>
+    {{ form_label(form.pointDep, "Point de départ")}}
+    <select class='form-control' name='{{form.vars.name}}[{{form.pointDep.vars.name}}]' id='{{form.vars.name}}_{{form.pointDep.vars.name}}'>
+        <option value="">Selectionnez point depart</option>
+        {% for key, val in form.pointDep.vars.choices %}
+       <option trajet="{{val.data.trajet}}" value="{{val.value}}"/>{{val.label}}</option>
+   
+       
+       {% endfor %}</select>
+    </div>
+    <div>
+    {{ form_label(form.des, "Destination ?")}}
+    <select class='form-control' name='{{form.vars.name}}[{{form.des.vars.name}}]' id='{{form.vars.name}}_{{form.des.vars.name}}'>
+        <option value="">Selectionnez Destination</option>
+        {% for key, val in form.des.vars.choices %}
+       <option trajet="{{val.data.trajet}}" value="{{val.value}}"/>{{val.label}}</option>
+   {% endfor %}</select> </div>
+    <div id="{{form.paye.vars.id}}_div">
+    {{ form_label(form.des, "Le client a payé ")}}
+    {{ form_widget(form.paye)}}
+    </div>
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+
+  

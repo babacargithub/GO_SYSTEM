@@ -1,0 +1,815 @@
+<?php
+
+namespace GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\MaxDepth;
+/**
+ * Inventaire
+ *
+ * @ORM\Table(name="inventaire")
+ * @ORM\Entity(repositoryClass="GO\ShopBundle\Entity\InventaireRepository")
+ */
+class Inventaire extends BaseClass
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=255)
+     */
+    private $libelle;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_debut_periode", type="date")
+     */
+    private $dateDebutPeriode;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_fin_periode", type="date")
+     */
+    private $dateFinPeriode;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="caisse", type="integer", nullable=true)
+     */
+    private $caisse=0;
+    /**
+     * @var integer
+    * @ORM\Column(name="solde_banque", type="integer", nullable=true)
+     */
+    private $soldeBanque=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="vente", type="integer", nullable=true)
+     */
+    private $vente=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="benefice_vente", type="integer", nullable=true)
+     */
+    private $beneficeVente=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="benefice_service", type="integer", nullable=true)
+     */
+    private $beneficeService=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="depense_service", type="integer", nullable=true)
+     */
+    private $depenseService=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="depense", type="integer", nullable=true)
+     */
+    private $depense=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="creance_produit", type="integer", nullable=true)
+     */
+    private $creanceProduit=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dette_produit", type="integer", nullable=true)
+     */
+    private $detteProduit=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="capital", type="integer", nullable=true)
+     */
+    private $capital=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dette_liquide", type="integer", nullable=true)
+     */
+    private $detteLiquide=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="creance_liquide", type="integer", nullable=true)
+     */
+    private $creanceLiquide=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="stock_reel_precedent", type="integer", nullable=true)
+     */
+    private $stockReelPrecedent=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="stock_boutique_precedent", type="integer", nullable=true)
+     */
+    private $valeurBoutiquePrecedent=0;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="termine", type="boolean")
+     */
+    private $termine=false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="acteurs", type="string", length=255)
+     */
+    private $acteurs;
+    
+/**
+    * @ORM\OneToOne(targetEntity="GO\ShopBundle\Entity\Inventaire")
+    * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="inventaire_precedent", referencedColumnName="id", nullable=true)
+     * })
+   @MaxDepth(1)
+    */
+  private $inventairePrecedent;
+    
+/**
+    * @ORM\OneToMany(targetEntity="GO\ShopBundle\Entity\ProduitInventaire", mappedBy="inventaire", cascade={"persist"})
+ * @MaxDepth(1)
+    */
+  private $produits;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     * @return Inventaire
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string 
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Inventaire
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     * @return Inventaire
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set termine
+     *
+     * @param boolean $termine
+     * @return Inventaire
+     */
+    public function setTermine($termine)
+    {
+        $this->termine = $termine;
+
+        return $this;
+    }
+
+    /**
+     * Get termine
+     *
+     * @return boolean 
+     */
+    public function getTermine()
+    {
+        return $this->termine;
+    }
+
+    /**
+     * Set acteurs
+     *
+     * @param string $acteurs
+     * @return Inventaire
+     */
+    public function setActeurs($acteurs)
+    {
+        $this->acteurs = $acteurs;
+
+        return $this;
+    }
+
+    /**
+     * Get acteurs
+     *
+     * @return string 
+     */
+    public function getActeurs()
+    {
+        return $this->acteurs;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date=new \DateTime();
+    }
+
+    /**
+     * Add produits
+     *
+     * @param \GO\ShopBundle\Entity\ProduitInventaire $produits
+     * @return Inventaire
+     */
+    public function addProduit(\GO\ShopBundle\Entity\ProduitInventaire $produits)
+    {
+        $this->produits[] = $produits;
+
+        return $this;
+    }
+
+    /**
+     * Remove produits
+     *
+     * @param \GO\ShopBundle\Entity\ProduitInventaire $produits
+     */
+    public function removeProduit(\GO\ShopBundle\Entity\ProduitInventaire $produits)
+    {
+        $this->produits->removeElement($produits);
+    }
+
+    /**
+     * Get produits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+    public function __toString() {
+        return $this->libelle;
+    }
+    public function getValeurStockReel()
+    {
+         $total=0;
+        foreach($this->produits as $produit)
+        {
+            $tot=$produit->getStockReel()*$produit->getPrixAchat();
+            $total=$total+$tot;
+        }
+        return (int) $total;
+    }
+    public function getValeurStockReelVente()
+    {
+         $total=0;
+        foreach($this->produits as $produit)
+        {
+            $tot=$produit->getStockReel()*$produit->getPrixVente();
+            $total=$total+$tot;
+        }
+        return (int) $total;
+    }
+    public function getValeurStockVirtuel()
+    {
+         $total=0;
+        foreach($this->produits as $produit)
+        {
+            $tot=$produit->getStockVirtuel()*$produit->getPrixAchat();
+            $total=$total+$tot;
+        }
+        return (int) $total;
+    }
+    public function getTotalProduitsDeficit()
+    {
+         $total=0;
+        foreach($this->produits as $produit)
+        {
+            $stock_virt= (int) $produit->getStockVirtuel();
+            $stock_reel= (int)$produit->getStockReel();
+            $prix_u=$produit->getPrixAchat();
+           
+            if($stock_virt>$stock_reel)
+            {
+                $nombre_deficit=$stock_virt-$stock_reel;
+            $tot=$nombre_deficit*$prix_u;
+            $total=$total+$tot;
+            }
+        }
+        return (int) $total;
+    }
+    public function getTotalProduitsSurPlus()
+    {
+          $total=0;
+        foreach($this->produits as $produit)
+        {
+            $stock_virt= (int) $produit->getStockVirtuel();
+            $stock_reel= (int)$produit->getStockReel();
+            $prix_u=$produit->getPrixAchat();
+           
+            if($stock_virt<$stock_reel)
+            {
+                $nombre_sur_plus=$stock_reel-$stock_virt;
+                $tot=$nombre_sur_plus*$prix_u;
+                $total=$total+$tot;
+            }
+        }
+        return (int) $total;
+    }
+
+    /**
+     * Set caisse
+     *
+     * @param integer $caisse
+     * @return Inventaire
+     */
+    public function setCaisse($caisse)
+    {
+        $this->caisse = $caisse;
+
+        return $this;
+    }
+
+    /**
+     * Get caisse
+     *
+     * @return integer 
+     */
+    public function getCaisse()
+    {
+        return $this->caisse;
+    }
+
+    /**
+     * Set vente
+     *
+     * @param integer $vente
+     * @return Inventaire
+     */
+    public function setVente($vente)
+    {
+        $this->vente = $vente;
+
+        return $this;
+    }
+
+    /**
+     * Get vente
+     *
+     * @return integer 
+     */
+    public function getVente()
+    {
+        return $this->vente;
+    }
+
+    /**
+     * Set beneficeVente
+     *
+     * @param integer $beneficeVente
+     * @return Inventaire
+     */
+    public function setBeneficeVente($beneficeVente)
+    {
+        $this->beneficeVente = $beneficeVente;
+
+        return $this;
+    }
+
+    /**
+     * Get beneficeVente
+     *
+     * @return integer 
+     */
+    public function getBeneficeVente()
+    {
+        return $this->beneficeVente;
+    }
+
+    /**
+     * Set beneficeService
+     *
+     * @param integer $beneficeService
+     * @return Inventaire
+     */
+    public function setBeneficeService($beneficeService)
+    {
+        $this->beneficeService = $beneficeService;
+
+        return $this;
+    }
+
+    /**
+     * Get beneficeService
+     *
+     * @return integer 
+     */
+    public function getBeneficeService()
+    {
+        return $this->beneficeService;
+    }
+
+    /**
+     * Set depenseService
+     *
+     * @param integer $depenseService
+     * @return Inventaire
+     */
+    public function setDepenseService($depenseService)
+    {
+        $this->depenseService = $depenseService;
+
+        return $this;
+    }
+
+    /**
+     * Get depenseService
+     *
+     * @return integer 
+     */
+    public function getDepenseService()
+    {
+        return $this->depenseService;
+    }
+
+    /**
+     * Set depense
+     *
+     * @param integer $depense
+     * @return Inventaire
+     */
+    public function setDepense($depense)
+    {
+        $this->depense = $depense;
+
+        return $this;
+    }
+
+    /**
+     * Get depense
+     *
+     * @return integer 
+     */
+    public function getDepense()
+    {
+        return $this->depense;
+    }
+
+    /**
+     * Set creanceProduit
+     *
+     * @param integer $creanceProduit
+     * @return Inventaire
+     */
+    public function setCreanceProduit($creanceProduit)
+    {
+        $this->creanceProduit = $creanceProduit;
+
+        return $this;
+    }
+
+    /**
+     * Get creanceProduit
+     *
+     * @return integer 
+     */
+    public function getCreanceProduit()
+    {
+        return $this->creanceProduit;
+    }
+
+    /**
+     * Set detteProduit
+     *
+     * @param integer $detteProduit
+     * @return Inventaire
+     */
+    public function setDetteProduit($detteProduit)
+    {
+        $this->detteProduit = $detteProduit;
+
+        return $this;
+    }
+
+    /**
+     * Get detteProduit
+     *
+     * @return integer 
+     */
+    public function getDetteProduit()
+    {
+        return $this->detteProduit;
+    }
+
+    /**
+     * Set capital
+     *
+     * @param integer $capital
+     * @return Inventaire
+     */
+    public function setCapital($capital)
+    {
+        $this->capital = $capital;
+
+        return $this;
+    }
+
+    /**
+     * Get capital
+     *
+     * @return integer 
+     */
+    public function getCapital()
+    {
+        return $this->capital;
+    }
+
+    /**
+     * Set detteLiquide
+     *
+     * @param integer $detteLiquide
+     * @return Inventaire
+     */
+    public function setDetteLiquide($detteLiquide)
+    {
+        $this->detteLiquide = $detteLiquide;
+
+        return $this;
+    }
+
+    /**
+     * Get detteLiquide
+     *
+     * @return integer 
+     */
+    public function getDetteLiquide()
+    {
+        return $this->detteLiquide;
+    }
+
+    /**
+     * Set creanceLiquide
+     *
+     * @param integer $creanceLiquide
+     * @return Inventaire
+     */
+    public function setCreanceLiquide($creanceLiquide)
+    {
+        $this->creanceLiquide = $creanceLiquide;
+
+        return $this;
+    }
+
+    /**
+     * Get creanceLiquide
+     *
+     * @return integer 
+     */
+    public function getCreanceLiquide()
+    {
+        return $this->creanceLiquide;
+    }
+    
+    public function getValeurBoutique()
+    {
+        $valeur= $this->caisse+
+                $this->getValeurStockReel()
+                +$this->creanceLiquide
+                +$this->creanceProduit
+                +$this->soldeBanque;
+        return (int) $valeur;
+    }
+
+    /**
+     * Set stockReelPrecedent
+     *
+     * @param integer $stockReelPrecedent
+     * @return Inventaire
+     */
+    public function setStockReelPrecedent($stockReelPrecedent)
+    {
+        $this->stockReelPrecedent = $stockReelPrecedent;
+
+        return $this;
+    }
+
+    /**
+     * Get stockReelPrecedent
+     *
+     * @return integer 
+     */
+    public function getStockReelPrecedent()
+    {
+        return $this->stockReelPrecedent;
+    }
+
+    /**
+     * Set valeurBoutiquePrecedent
+     *
+     * @param integer $valeurBoutiquePrecedent
+     * @return Inventaire
+     */
+    public function setValeurBoutiquePrecedent($valeurBoutiquePrecedent)
+    {
+        $this->valeurBoutiquePrecedent = $valeurBoutiquePrecedent;
+
+        return $this;
+    }
+
+    /**
+     * Get valeurBoutiquePrecedent
+     *
+     * @return integer 
+     */
+    public function getValeurBoutiquePrecedent()
+    {
+        return $this->valeurBoutiquePrecedent;
+    }
+    public function getHausseValeurBoutique()
+    {
+        return (int) $this->getValeurBoutique()-$this->valeurBoutiquePrecedent;
+    }
+    
+    public function getBeneficeNet()
+    {
+       $netProfit= $this->getValeurBoutique()
+               //on y soustrait la valeur du capital de la boutique
+               -$this->capital;
+               
+               
+        return (int) $netProfit;
+        //return (int) $this->beneficeService+$this->beneficeVente-$this->depense;
+    }
+
+    
+
+   
+
+    /**
+     * Set dateDebutPeriode
+     *
+     * @param \DateTime $dateDebutPeriode
+     * @return Inventaire
+     */
+    public function setDateDebutPeriode($dateDebutPeriode)
+    {
+        $this->dateDebutPeriode = $dateDebutPeriode;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebutPeriode
+     *
+     * @return \DateTime 
+     */
+    public function getDateDebutPeriode()
+    {
+        return $this->dateDebutPeriode;
+    }
+
+    /**
+     * Set dateFinPeriode
+     *
+     * @param \DateTime $dateFinPeriode
+     * @return Inventaire
+     */
+    public function setDateFinPeriode($dateFinPeriode)
+    {
+        $this->dateFinPeriode = $dateFinPeriode;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFinPeriode
+     *
+     * @return \DateTime 
+     */
+    public function getDateFinPeriode()
+    {
+        return $this->dateFinPeriode;
+    }
+
+    /**
+     * Set inventairePrecedent
+     *
+     * @param \GO\ShopBundle\Entity\Inventaire $inventairePrecedent
+     * @return Inventaire
+     */
+    public function setInventairePrecedent(\GO\ShopBundle\Entity\Inventaire $inventairePrecedent)
+    {
+        $this->inventairePrecedent = $inventairePrecedent;
+
+        return $this;
+    }
+
+    /**
+     * Get inventairePrecedent
+     *
+     * @return \GO\ShopBundle\Entity\Inventaire 
+     */
+    public function getInventairePrecedent()
+    {
+        return $this->inventairePrecedent;
+    }
+    
+    /**
+     * Get soldeBanque
+     *
+     * @return \GO\ShopBundle\Entity\Inventaire 
+     */
+    public function getSoldeBanque() {
+        return $this->soldeBanque;
+    }
+
+    public function setSoldeBanque($soldeBanque) {
+        $this->soldeBanque = $soldeBanque;
+        return $this;
+    }
+
+
+}

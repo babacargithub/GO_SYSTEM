@@ -1,0 +1,39 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Modele
+ *
+ * @ORM\Table(name="modele")
+ * @ORM\Entity
+ */
+class Modele
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=100, nullable=true)
+     */
+    private $nom;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="marque", type="integer", nullable=false)
+     */
+    private $marque;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

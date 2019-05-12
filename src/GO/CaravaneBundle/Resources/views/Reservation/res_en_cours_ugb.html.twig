@@ -1,0 +1,21 @@
+ 
+        {% if res is defined and res is not null %}
+            
+            <h4>Le client s'est inscrit au départ suivant : {{ res.depart.libelle  }} à la date du {{ res.date.format('d-m-Y h:m')  }}</h4>
+            <table class="table table-bordered table-striped">
+                {% set liste=[res] %}
+                {% set depart=res.depart %}
+               {% if res.depart.trajet==1 %} <tr>
+                       {% include 'GOCaravaneBundle:Reservation:liste_ugb.html.twig' %}
+                      
+                   {% elseif res.depart.trajet==2 %}
+                       {% include 'GOCaravaneBundle:Reservation:liste_dakar.html.twig' %}
+                       
+                       {% endif %}
+                     
+                    
+            </table>
+            {% else %}
+                <span>Aucune réservation trouvée!</span>
+    {% endif %}
+ 

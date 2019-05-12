@@ -1,0 +1,6 @@
+{# empty Twig template #}
+{% extends "GOCaravaneBundle::layout.html.twig" %}
+{% block options %}
+    {{render(controller("GOCaravaneBundle:Client:menuVertical"))}}
+    {% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends "GOCaravaneBundle:Depart:depart_main_layout.html.twig" %}
+{% block content_body %}
+    
+
+    
+   
+{% if form is defined %}
+<form id="{{form.vars.name}}" action="{{path("update_heures_depart", {"id": depart.id })}}" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+    <h3>Régler les heures pour le  Depart <stong>{{ depart.libelle|title() }}</strong></h3>
+<div style="display: none">
+{{ form_label(form.libelle, "Libellé") }}
+{{ form_widget(form.libelle, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.date, "Date") }}
+{{ form_widget(form.date, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.trajet, "Trajet") }}
+{{ form_widget(form.trajet, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.event, "Event") }}
+{{ form_widget(form.event, {"attr":{"class": "form-control"}}) }}
+</div>
+    <div class="col-lg-6">
+ <table class="table table-condensed t" >
+    {% for heureDep in form.heuresDepart %}
+        <tr >
+            <td>{{ heureDep.vars.data.pointDep.nom}}</td>
+            <td>{{ form_widget(heureDep.heureDepart) }}</td>
+            <td>{{ form_widget(heureDep.depart,{"attr":{"hidden": "hidden"}}) }}</td>
+            <td>{{ form_widget(heureDep.arretBus) }}</td>
+        </tr>
+        {%endfor%}
+</table>
+    
+{{ form_row(form._token)}}
+<input type="submit" class="btn btn-primary" />
+    </div>
+</form>
+{% endif %}
+    {% endblock %}

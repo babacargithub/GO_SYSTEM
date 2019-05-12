@@ -1,0 +1,54 @@
+{#% extends '@GOClient/compte_client/_main_layout.html.twig' %#}
+
+{% block content_body %}
+    <div class="col-lg-7 border-l">
+    <h1>Détails d'un Compte Client</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ compteClient.id }}</td>
+            </tr>
+            <tr>
+                <th>Numéro Compte</th>
+                <td>{{ compteClient.number }}</td>
+            </tr>
+            <tr>
+                <th>Client</th>
+                <td>{{ compteClient.client.fullName }}<a title="Voir détails du client" href="{{path('client_show',{"id":compteClient.client.id})}}"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+            </tr>
+            <tr>
+                <th>Type de Compte</th>
+                <td>{{ compteClient.typeCompte }}</td>
+            </tr>
+            <tr>
+                <th>Crée le </th>
+                <td>{{ compteClient.createdAt.format('d-m-Y H\\h:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Etat </th>
+                <td>{{ compteClient.locked}}</td>
+            </tr>
+                <tr>
+                    <th>Crée par  </th>
+                    <td>{{ compteClient.createdBy.nomComplet}}</td>
+                </tr>
+        </tbody>
+    </table>
+
+    <ul class="nav nav-pills">
+        <li>
+            <a href="{{ path('compte_client_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('compte_client_edit', { 'id': compteClient.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-flat" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+    </div>
+{% endblock %}

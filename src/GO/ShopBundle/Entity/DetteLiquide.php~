@@ -1,0 +1,20 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Dette
+ *
+ * @ORM\Table(name="dette_liquide")
+ * repositoryClass="GO\ShopBundle\Entity\DetteLiquideRepository")
+ */
+class DetteLiquide extends Dette
+{
+     /**
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\Creancier")
+     * @ORM\JoinColumns({@ORM\JoinColumn(name="creancier", referencedColumnName="id")})
+     */
+    private $creancier;
+}

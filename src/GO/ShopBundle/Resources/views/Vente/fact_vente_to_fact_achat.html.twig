@@ -1,0 +1,20 @@
+  <div>
+{% if form is defined %}
+    <form action="{{ path('go_shop_fact_vente_transform',{"id": facture.id})}}" method="post">
+           {{ form_errors(form)}}
+    
+    <div>
+    {{ form_label(form.shop, "Boutique Destination")}}
+    {{ form_widget(form.shop,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.paye, "Facture Payé?")}}
+    {{ form_widget(form.paye,{"attr":{"class":"form-control datepicker"}} )}}
+    </div>
+    
+    {{ form_row(form._token) }}
+    <input type="submit" class="btn btn-primary" />
+</form>
+</div>
+    {% endif %}
+ 

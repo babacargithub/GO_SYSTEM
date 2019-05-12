@@ -1,0 +1,33 @@
+       {% extends "GOCaravaneBundle:Depart:depart_main_layout.html.twig" %}
+{% block content_body %}
+    <div class="row">
+        {% if totaux is defined %}
+            Nombre Inscrit En ligne: {{ nombre_online}}
+            <table class="table table-bordered table-striped">
+                <tr>
+                    
+                    <th>Point de Départ</th>
+                    <th>Nombre Inscrit</th>
+                    <th>Total</th>
+                    
+                </tr>
+                {% set total_all=0 %}
+                {% for total in totaux %}
+                    <tr>
+                        
+                        <td>{{ total.nom  }}</td>
+                        <td>{{ total.nombre_inscrit  }}</td>
+                        {% set total_all=total_all+total.nombre_inscrit %}
+                        <td>{{total_all}}</td>
+                    </tr>
+                    {%endfor %}
+            </table>
+            {% else %}
+                <span>Aucune donnée envoyée!</span>
+              
+           {% endif %}
+   
+</div>
+
+    
+    {% endblock %} 

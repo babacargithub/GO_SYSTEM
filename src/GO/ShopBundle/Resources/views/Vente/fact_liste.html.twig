@@ -1,0 +1,35 @@
+      
+        {% if liste_factures is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Num Facture</th>
+                    <th>Client</th>
+                    <th>Date Enregistrée</th>
+                    <th>Payé</th>
+                    <th>Avance</th>
+                    <th>Total</th>
+                    <th>Bénéfice</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for facture in liste_factures %}
+                    <tr id="row-{{ facture.id }}">
+                        <td><a href="{{path("go_shop_vente_show_produits_fact", {'id':facture.id})}}">{{facture.num}}</a></td>
+                        <td>{{facture.client.prenom~" "~facture.client.nom}}</td>
+                         <td>{{ facture.date.format('d-m-Y H:i')}}</td>
+                        <td>{{ facture.paye  }}</td>
+                        <td>{{ facture.avance|nombre()  }}</td>
+                        <td>{{ facture.total|nombre()  }}</td>
+                        <td>{{ facture.benefice|nombre()  }}</td>
+                        <td>
+                         <a class="update_action" id="{{ facture.id }}" href='update_facture-{{ facture.id }}.golob'>Modifier</a>
+                         {% if not facture.isValidated %}<a class="" id="{{ facture.id }}" href="{{ path('facture_vente_validate', {'id': facture.id}) }}">Valider</a>{%endif%}
+                         <a class="annuler_action" id="{{ facture.id }}" href="{{ path('delete_facture_vente', {'id': facture.id}) }}">Annuler</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+ 

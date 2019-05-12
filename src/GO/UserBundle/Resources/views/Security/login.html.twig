@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--IE Compatibility modes-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Mobile first-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Connexion</title>
+    
+    <meta name="description" content="Golob One SMS">
+    <meta name="author" content="">
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{asset("css/bootstrap.css")}}">
+    
+    <!-- Metis core stylesheet -->
+    <link rel="stylesheet" href="{{asset("css/main.css")}}">
+    
+    <!-- metisMenu stylesheet -->
+    <link rel="stylesheet" href="{{asset("metisMenu.css")}}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+
+body.login {
+background: #0264d6; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #0264d6 1%, #1c2b5a 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#0264d6), color-stop(100%,#1c2b5a)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #0264d6 1%,#1c2b5a 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #0264d6 1%,#1c2b5a 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0264d6', endColorstr='#1c2b5a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+height:calc(100vh);
+width:100%;
+}
+div.form-signin {
+    background: linear-gradient(to bottom right, #33ccff 36%, #ffffff 72%);
+
+}
+
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+</style>
+
+  
+</head>
+
+<body class="login">
+
+      <div class="form-signin">
+    <div class="text-center">
+        <img src="{{asset("images/logo_GolobOne-small.jpg")}}" alt="Logo Golob One">
+    </div>
+    <hr>
+    <div class="tab-content">
+        <div id="login" class="tab-pane active">
+                <h3 class="text-muted text-center">
+                    Entrez vos identifiants
+                </h3>
+                {% block fos_user_content %}
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error|trans()}}</div>
+                    {% endif %}
+
+                    <form action="{{ path("fos_user_security_check") }}" method="post">
+           
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    
+                    
+
+               <span class="fa fa-user">Nom d'Utilisateur</span><input type="text" placeholder="Nom d'uitlisateur" name='_username' value="{{ last_username }}" class="form-control " required="required">
+               <span class="fa fa-lock">Mot de Passe</span><input type="password" placeholder="Mot de passe" name='_password' class="form-control" required="required">
+                <div class="checkbox">
+		  <label>
+		    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                      Se souvenir de moi
+		  </label>
+		</div>
+                <input type="submit" id="_submit" name="_submit" value="Connexion"  class="btn btn-lg btn-primary btn-block">
+            </form>
+        </div>
+                {% endblock fos_user_content %}
+        
+    </div>
+    <hr>
+    <div class="text-center">
+        <ul class="list-inline">
+            <li><a class="text-muted" href="reset/{{ csrf_token }}" data-toggle="tab">Mot de passe oublié?</a></li>
+        </ul>
+    </div>
+  </div>
+</body>
+
+</html>
+
+

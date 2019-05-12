@@ -1,0 +1,29 @@
+  Liste des catégories séléctionnées
+        {% if categories is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Afficher</th>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Opérations</th>
+                </tr>
+                    {% for categorie in categories %}
+                        <tr id="row-{{ categorie.id }}">
+                            <td><a class="" href="{{ path('show_produits_categorie',{"id":categorie.id})}}">Afficher Produits</a></td>
+                            <td>{{categorie.nom}}</td>
+                            {% if categorie.typeProduit is not null %}
+                           <td>{{ categorie.typeProduit.nom}}</td>
+                           {% else %}
+                               <td></td>
+                           {% endif %}
+                           
+                       <td><a class="update_action" href="{{path("go_shop_categorie_update_form", {"id":categorie.id})}}">Modifier</a>
+                          <a class="annuler_action" id="{{ categorie.id }}" href="{{ path('go_shop_categorie_supprimer', {'id': categorie.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}

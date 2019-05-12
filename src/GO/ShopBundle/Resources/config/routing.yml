@@ -1,0 +1,72 @@
+go_produit:
+    resource: "@GOShopBundle/Resources/config/routing_produit.yml"
+    prefix:   /
+go_achat:
+    resource: "@GOShopBundle/Resources/config/routing_achat.yml"
+    prefix:   /
+go_shop_homepage:
+    pattern:  /
+    defaults: { _controller: GOShopBundle:Main:index }
+go_shop_logout:
+    pattern:  /change_shop
+    defaults: { _controller: GOShopBundle:Main:shopSelection }
+go_shop_selection:
+    pattern:  /select_shop
+    defaults: { _controller: GOShopBundle:Main:shopSelection }
+go_shop_access_authentication:
+    pattern:  /shop_access_authenticate-{id}
+    defaults: { _controller: GOShopBundle:Main:shopAccessAuthenticate }
+go_shop_vente_index:
+    pattern:  /vente.golob
+    defaults: { _controller: GOShopBundle:Vente:form }
+go_shop_vente_add:
+    pattern:  /vente_add.golob
+    defaults: { _controller: GOShopBundle:Vente:add }
+go_shop_vente_annuler:
+    pattern:  /vente_annuler-{id}.golob
+    defaults: { _controller: GOShopBundle:Vente:delete}
+go_shop_vente_show:
+    pattern:  /vente_show_today.golob
+    defaults: { _controller: GOShopBundle:Vente:showToday }
+go_shop_vente_recherche_index:
+    pattern:  /vente_search_index.golob
+    defaults: { _controller: GOShopBundle:Vente:showSearchIndex }
+go_shop_vente_search:
+    pattern:  /vente_search.golob
+    defaults: { _controller: GOShopBundle:Vente:search }
+go_shop_vente_service_index:
+    pattern:  /vente_service_index.golob
+    defaults: { _controller: GOShopBundle:Vente:serviceForm }
+go_shop_vente_service_add:
+    pattern:  /vente_service_add.golob
+    defaults: { _controller: GOShopBundle:Vente:serviceAdd }
+go_shop_vente_service_annuler:
+    pattern:  /vente_service_annuler-{id}.golob
+    defaults: { _controller: GOShopBundle:Vente:serviceDelete }
+go_shop_vente_service_show:
+    pattern:  /vente_service_show_today.golob
+    defaults: { _controller: GOShopBundle:Vente:serviceShowToday }
+go_shop_caisse_sortie_index:
+    pattern:  /caisse_index.golob
+    defaults: { _controller: GOShopBundle:Vente:sortieForm }
+go_shop_caisse_sortie_add:
+    pattern:  /caisse_sortie_add.golob
+    defaults: { _controller: GOShopBundle:Vente:sortieAdd }
+go_shop_caisse_sortie_delete:
+    pattern:  /caisse_sortie_annuler-{id}.golob
+    defaults: { _controller: GOShopBundle:Vente:sortieDelete }
+go_shop_caisse_sortie_show:
+    pattern:  /caisse_sortie_show.golob
+    defaults: { _controller: GOShopBundle:Vente:sortieShow }
+go_shop_caisse_entree_index:
+    pattern:  /caisse_index.golob
+    defaults: { _controller: GOShopBundle:Vente:entreeForm }
+go_shop_caisse_entree_add:
+    pattern:  /caisse_entree_add.golob
+    defaults: { _controller: GOShopBundle:Vente:entreeAdd }
+go_shop_caisse_entree_delete:
+    pattern:  /caisse_entree_annuler-{id}.golob
+    defaults: { _controller: GOShopBundle:Vente:entreeDelete }
+go_shop_caisse_entree_liste:
+    pattern:  /caisse_entree_show.golob
+    defaults: { _controller: GOShopBundle:Vente:entreeShow }

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]> ><! <![endif]-->
+<html lang="fr"><!-- <![endif] --><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- start: Meta -->
+<meta charset="utf-8">
+<title>CLT Groupe Consulting</title>
+<link rel="icon" type="image/png" href="{{asset('bundles/app/images/favicon.png')}}">
+
+
+<link rel="mask-icon" href="https://paydunya.com/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end: Meta -->
+<!-- start: Mobile Specific -->
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!-- end: Mobile Specific -->
+<!-- start: CSS -->
+<link href="{{asset('bundles/app/css/css.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{asset('bundles/app/css/dashboard-231638c727.css')}}">
+<!-- end: CSS -->
+
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style></head>
+<body>
+<!--[if lte IE 8]>
+  <p class="browsehappy">
+    You are using an <strong>outdated</strong> browser. Please
+    <a href="http://browsehappy.com/">upgrade your browser</a>
+    to improve your experience.
+  </p>
+<![endif]--><!-- start: Page container -->
+<div class="fade in page-sidebar-fixed page-header-fixed" id="page-container">
+<!-- start: Header -->
+<div class="header navbar navbar-default navbar-fixed-top" id="header">
+<div class="container-fluid">
+<!-- start: Mobile sidebar expand / collapse button -->
+<div class="navbar-header">
+<a class="navbar-brand" href="https://paydunya.com/">
+<img alt="GO Consulting Lo" src="{{asset('bundles/app/images/logo_blue.png')}}">
+</a>
+<button class="navbar-toggle" data-click="sidebar-toggled" type="button">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+</div>
+<!-- end: Mobile sidebar expand / collapse button -->
+<!-- Not confirmed Account -->
+<!-- Suspended Account -->
+
+<!-- start: Header navigation right -->
+<ul class="nav navbar-nav navbar-left">
+
+<li class="dropdown">
+<a class="dropdown-toggle f-s-14" href="{{path("candidat_index")}}"> Candidats</a>
+</li><li class="dropdown">
+<a class="dropdown-toggle f-s-14" href="{{path("dossier_index")}}"> Dossiers</a>
+</li><li class="dropdown">
+<a class="dropdown-toggle f-s-14" href="{{path("candidature_index")}}"> Candidatures</a>
+</li><li class="dropdown">
+<a class="dropdown-toggle f-s-14" href="{{path("paiement_index")}}"> Comptabilité</a>
+</li><li class="dropdown">
+</li><li class="dropdown">
+<a class="dropdown-toggle f-s-14" href="{{path("easyadmin")}}"> Utilisateurs</a>
+</li><li class="dropdown">
+</li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li class="dropdown navbar-user">
+<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+<img alt="Avatar de l'utilisateur" src="{{asset('bundles/app/images/avatar.jpg')}}">
+<span class="hidden-xs">
+{{app.user.prenom~" "~app.user.nom}}
+</span>
+<b class="caret"></b>
+</a>
+<ul class="dropdown-menu animated fadeInLeft">
+<li class="arrow"></li>
+<li>
+<a href="{{path('fos_user_profile_show')}}">Profil</a>
+</li>
+<li>
+<a href="{{path('fos_user_profile_edit')}}">Editer Profile</a>
+</li>
+<li>
+<a href="{{path('fos_user_change_password')}}">Modifier Mot de Passe</a>
+</li>
+<li class="divider"></li>
+<li>
+<a href="{{path('fos_user_security_logout')}}">Déconnexion</a>
+</li>
+</ul>
+</li>
+</ul>
+<!-- end: Header navigation right -->
+</div>
+</div>
+<!-- start: Sidebar -->
+<div class="sidebar" id="sidebar">
+<!-- start: sidebar scrollbar -->
+<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;"><div data-height="100%" data-scrollbar="true" style="overflow: hidden; width: auto; height: 100%;">
+<!-- start: sidebar application -->
+<ul class="nav">
+<li class="nav-profile">
+<div class="info">
+Menu vertical
+<br>
+
+</div>
+</li>
+</ul>
+<!-- end: sidebar application -->
+<!-- start: sidebar nav -->
+<ul class="nav">
+{% block  menu_vertical %}
+
+{% endblock menu_vertical %}
+</ul>
+</li>
+<li style="background-color: #232a2f; height: 10px; margin:  1em 0;"></li>
+
+</ul>
+<!-- end: sidebar nav -->
+</div><div class="slimScrollBar ui-draggable" style="background: rgb(0, 0, 0) none repeat scroll 0% 0%; width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 549px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51) none repeat scroll 0% 0%; opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+<!-- end: sidebar scrollbar -->
+</div>
+
+<!-- end: Sidebar -->
+
+<!-- Flash messages -->
+<div class="content" id="content">
+
+<div class="row">
+  <div class="col-md-12 ui-sortable">
+      </div>
+</div>
+
+<div class="row">
+    <div class="col-md-11  ui-sortable">
+        <div class="panel panel-success">
+         <div class="panel-heading">
+             {% block content_title %}TITRE DU CONTENU {%endblock content_title %}
+             
+         </div>
+	<div class="panel-body">
+            {% block body %}
+                <h3> Bienvenue dans l'application GO Consulting v1.0.0(septembre, 2018).</h3>
+                <h4> Application pour la gestion des démarches de préinscription au Sénégal.</h4>
+                <h5>Powered by Golob One Software</h5>
+                {% endblock body %}
+	<hr>
+	
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<!-- end content -->
+<!-- start: scroll to top btn -->
+<a class="btn btn-icon btn-circle btn-inverse btn-scroll-to-top fade" data-click="scroll-top" href="javascript:;">
+<i class="fa fa-angle-up"></i>
+</a>
+<!-- end: scroll to top btn -->
+</div>
+<!--end main div wrapper -->
+<!-- start: JavaScript -->
+{% block javascripts %}
+<script src="{{asset('bundles/app/js/dashboard.js')}}"></script>
+{%endblock javascripts %}
+<!-- end: JavaScript -->
+<script type="text/javascript">
+    $('*[flooz-withdraw]').on('click', function(e){
+        swal({
+            title: "Maintenance",
+            text: "Ce service est actuellement en maintenance. Il sera rétabli dans de brefs délais. \nNous nous excusons pour ce désagrément!",
+            type: "success",
+        },
+        function(){
+    
+        });
+    });
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,74 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Abonnement
+ *
+ * @ORM\Table(name="abonnement", uniqueConstraints={@ORM\UniqueConstraint(name="id_client_abnmnt_2", columns={"client"})}, indexes={@ORM\Index(name="type_abnmnt", columns={"formule"}), @ORM\Index(name="challenger_id", columns={"challenger"})})
+ * @ORM\Entity
+ */
+class Abonnement
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="client", type="integer", nullable=false)
+     */
+    private $client;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_expir", type="date", nullable=true)
+     */
+    private $dateExpir;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="formule", type="integer", nullable=false)
+     */
+    private $formule;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="etat", type="boolean", nullable=false)
+     */
+    private $etat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user", type="integer", nullable=true)
+     */
+    private $user;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="challenger", type="integer", nullable=true)
+     */
+    private $challenger;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

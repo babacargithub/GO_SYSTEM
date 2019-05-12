@@ -1,0 +1,27 @@
+{# empty Twig template #}
+<div class="row">
+    <ul class="nav nav-pills">
+
+</ul>
+    </div>
+<table class="table table-bordered">
+    <tr>
+        <th>Type produit</th>
+        <th>Nombre produit</th>
+        <th>Valeur Stock</th>
+    </tr>
+    {% if stocks is defined %}
+        {% set total=0 %}
+        {% for stock in stocks %}
+    <tr>
+        <td>{{stock[0].produit.type.nom}}</td>
+        <td>{{stock[0].quantite}}</td>
+        <td>{{stock.total_stock|nombre()}}{% set total=total+stock.total_stock %}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <th>Total</th>
+        <th class="text-center" colspan="2"><h2><span class="text-bold text-success text-center">{{total|nombre()}}</span></h2></th>
+    </tr>
+    {% endif %}
+</table>

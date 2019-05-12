@@ -1,0 +1,49 @@
+{% extends "GOShopBundle:Produit:produit_main_layout.html.twig" %}
+{% block content_body %}
+    {% if inventaire is defined and inventaire is not null and produits_inventaire is defined %} 
+Liste des produits recencés pour l'inventaire: {{inventaire.libelle}} du {{inventaire.date.format('m-d-Y')}} 
+        <a href="{{path('inventaire_add_single_product',{"id":inventaire.id})}}">Ajouter des produits</a>
+                       
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Ordre</th>
+                    <th>Produit</th>
+                    <th>Code Barre</th>
+                    <th>Stock Réel</th>
+                    <th>Prix Achat</th>
+                    <th>Prix Vente</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                    
+                    
+                </tr>
+                {% set rang=produits_inventaire|length+1%}
+                {% set totalStock=0 %}
+                {% for produit_inventaire in produits_inventaire %}
+                    {% set rang=rang-1%}
+                    <tr id="row-{{ produit_inventaire.id }}">
+                        <th>{{rang}}</th>
+                        <td>{{produit_inventaire.produit}}</td>
+                        <td>{% if produit_inventaire.codeBar is not null %}{{produit_inventaire.codeBar.codeBar}}{%endif%}</td>
+                        <td>{{produit_inventaire.stockReel}}</td>
+                        <td>{{produit_inventaire.prixAchat|nombre()}}</td>
+                        <td>{{produit_inventaire.prixVente|nombre()}}</td>
+                        <td>{% set totalStock=totalStock+(produit_inventaire.stockReel*produit_inventaire.prixAchat)%}
+                            {{(produit_inventaire.stockReel*produit_inventaire.prixAchat)|nombre()}}</td>
+                        <td>
+                            <a  class="" href="{{path("produit_inventaire_update", {id:produit_inventaire.id})}}">Modifier</a>
+                            <a  class="annuler_action" href="{{path("produit_inventaire_delete", {id:produit_inventaire.id})}}">Supprimer</a>
+                        </td>
+                        
+                          </tr>
+                     {%endfor%}
+                     <tr><th>Total</th><th colspan="3">{{totalStock|nombre()}}</th></tr>
+            </table>
+
+{% block javascript_code %}
+   
+{%endblock%}                
+    
+ {% endif %}
+ {%endblock%}

@@ -1,0 +1,127 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block content_title %} Dossier du Candidat {{dossier.candidat}}{%endblock %}
+{% block body %}
+
+    {# empty Twig template #}
+    <ul class="nav  nav-pills" style="border-bottom: 1px ridge blue;background-color: #E7EEE1">
+        <li><a href="#dossier"  data-toggle="tab" id="tes"><span class="glyphicon glyphicon-info-sign"></span>Infos du Dossier</a></li>
+        <li><a href="#candidatures"  data-toggle="tab" id="tes">Candidatures</a></li>
+        <li><a href="#coordonnees"  data-toggle="tab" id="tes">Coordonnées Candidat</a></li>
+        <li><a href="#compta"  data-toggle="tab" id="tes">Comptabilités</a></li>
+        <li><a href="#suivi"  data-toggle="tab" id="tes">Documents</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="dossier" class="tab-pane">
+            <div class='col-lg-6'>
+                <table class='table table-bordered'>
+                    <tbody>
+                       
+                        <tr>
+                            <th>Numéro Dossier</th>
+                            <td>{{ dossier.num }}</td>
+                        </tr>
+                        <tr>
+                            <th>Crée le</th>
+                            <td>{% if dossier.createdAt %}{{ dossier.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Etat du Dossier</th>
+                            <td>{% if dossier.etat %}Ouvert{% else %}Fermé{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Commentaires</th>
+                            <td>{{ dossier.comments }}</td>
+                        </tr>
+                        <tr>
+                            <th>Crée par </th>
+                            <td>{{ dossier.user.nomComplet }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <ul>
+                   
+                    <li>
+                        <a href="{{ path('dossier_edit', { 'id': dossier.id }) }}">Modifer</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('dossier_print', { 'id': dossier.id })  }}"target="_blank">Imprimer Récapitulatif</a>
+                    </li>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <input type="submit" class="btn btn-bg" value="Supprimer">
+                        {{ form_end(delete_form) }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="candidatures" class="tab-pane">
+            <div class="col-lg-4"> 
+                <div class='panel panel-success'>
+                    <div class='panel-heading'>
+                <span class="text-bold text-uppercase">Créer Nouvelle Candidature</span>
+                    </div>
+                    <div class='panel-body'>
+                <hr>
+                 {% spaceless %}
+                     {{ render(controller('AppBundle:Candidature:new',{"id":dossier}))}}
+                 {%endspaceless %}
+                </div>
+                </div>
+            </div>
+                <div class='col-lg-1' style="border: 1px solid black; height: inherit;">
+                </div>
+            <div class="col-lg-7"> 
+               
+                <div class='panel panel-success'>
+                    <div class='panel-heading'>
+                <span class="text-bold text-uppercase">Liste des Candidatures</span>
+                    </div>
+                    <div class='panel-body'>
+                <hr>{% include "@App/candidature/candidatures_dossier.html.twig" with {"candidatures":dossier.candidatures} %}
+          
+                </div>
+                </div>
+            
+                
+          </div>
+    </div>
+    <div id="coordonnees" class="tab-pane">
+        <div class="col-lg-6 col-sm-12">
+            Les Coordonnées du Candidat
+        {% include '@App/candidat/show.html.twig' with {'candidat': dossier.candidat} %}
+        </div>
+    </div>
+    <div id="compta" class="tab-pane">
+        <div class="col-lg-4">
+             <div class='panel panel-success'>
+                    <div class='panel-heading'>
+                <span class="text-bold text-uppercase">Ajouter Un Paiement</span>
+                    </div>
+                    <div class='panel-body'>
+                <hr>{{ render(controller('AppBundle:Paiement:new',{"id": dossier.id}))}}
+   
+                </div>
+                </div>
+            
+             </div>
+        <div class="col-lg-8">
+             <div class='panel panel-success'>
+                    <div class='panel-heading'>
+                <span class="text-bold text-uppercase">Les Encaissements Dans le Dossier</span>
+                    </div>
+                    <div class='panel-body'>
+                <hr> {% include '@App/paiement/paiements_dossier.html.twig' with {'paiements': dossier.paiements} %}
+ 
+                </div>
+                </div>
+            
+                </div>
+</div>
+<div id="suivi" class="tab-pane">
+    Suivi
+</div>
+</div>
+{% endblock %}

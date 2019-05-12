@@ -1,0 +1,73 @@
+        {% if liste is defined %}
+            <h2>Bilan des Départs</h2>
+            {% set total_benef, total_dep, total_gain, total_loc =0,0,0,0%}
+            <table class="table table-bordered table-striped">
+                <tr>
+                    
+                    <th>Libellé</th>
+                    <th>Date</th>
+                    <th>Chauffeur</th>
+                    <th>Revenus</th>
+                    <th>Location</th>
+                    <th>Dépense</th>
+                    <th>Bénéfice</th>
+                    <th>Géré par</th>
+                    <th>Action</th>
+                    
+                </tr>
+                {% for depart in liste %}
+                    <tr>
+                       <td>{{ depart.libelle  }}</td>
+                        <td>{{ depart.date.format('d/m/Y')}}</td>
+                        {% if depart.bilan is not null %}
+                        <td>
+                            {{ depart.bilan.chauffeur}}
+                        </td>
+                        <td>
+                            {{ depart.bilan.encaisse|nombre()}}
+                            
+                            {% set total_gain=total_gain+depart.bilan.encaisse%}
+                        </td>
+                        <td>
+                            {{ depart.bilan.location|nombre()}}
+                            
+                            {% set total_loc=total_loc+depart.bilan.location%}
+                        </td>
+                        <td>
+                            {{ depart.bilan.totalDepense|nombre()}}
+                         
+                            {% set total_dep=total_dep+depart.bilan.totalDepense%}
+                        </td>
+                        <td>
+                            {{ depart.bilan.benefice|nombre()}}
+                            {% set total_benef=total_benef+depart.bilan.benefice%}
+                        </td>
+                        <td>
+                            {{ depart.bilan.agent.prenom}}
+                        </td>
+                        <td>
+                            <a href="{{path("bilan_depart_show",{"id":depart.id})}}">Voir Bilan</a>
+                        </td>
+                    </tr>
+                    {%else%}
+                        <td colspan='3'>Bilan Non Disponible</td>
+                        {%endif%}
+                    {% endfor %}
+                    {% if is_granted('ROLE_SUPER_ADMIN')%}
+                 <tr>
+                    <th>Libellé</th>
+                    <th>Date</th>
+                    <th>Chauffeur</th>
+                    <th>{{total_gain|nombre()}}</th>
+                    <th>{{total_loc|nombre()}}</th>
+                    <th>{{total_dep|nombre()}}</th>
+                    <th>{{total_benef|nombre()}}</th>
+                    <th>Géré par</th>
+                    </tr>
+                    {%endif %}
+            </table>
+            {% else %}
+                <span>Aucune donnée envoyée!</span>
+               
+           {% endif %}
+   

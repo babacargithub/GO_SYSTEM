@@ -1,0 +1,36 @@
+{% extends "@GOShop/Achat/achat_main_layout.html.twig" %}
+{% block content_body %}
+        {% if liste_factures is defined %}
+            <table class="table table-striped">
+                <tr >
+                        
+                    <th>Num Facture</th>
+                    <th>Fournisseur</th>
+                    <th>Date Facture</th>
+                    <th>Date Enregistrée</th>
+                    <th>Payé</th>
+                    <th>Avance</th>
+                    <th>Total</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for facture in liste_factures %}
+                    <tr id="row-{{ facture.id }}">
+                        <td><a href="{{path("go_shop_achat_fact_show", {'id':facture.id})}}">{{facture.num}}</a></td>
+                        <td>{{facture.fournisseur.nom}}</td>
+                        <td>{{ facture.dateFacture.format('d-m-Y H:i')}}</td>
+                        <td>{{ facture.date.format('d-m-Y H:i')}}</td>
+                        <td>{{ facture.paye  }}</td>
+                        <td>{{ facture.avance|nombre()  }}</td>
+                        <td>{{ facture.total|nombre()  }}</td>
+                        <td>
+                            <a class="update_action" id="{{ facture.id }}" href='update_facture-{{ facture.id }}.golob'>Modifier</a>
+                           {% if facture.paye %}{%else%} <a class="" id="{{ facture.id }}" href="{{ path('regler_facture_achat', {'id': facture.id}) }}">Régler</a>{%endif%}
+                            <a class="annuler_action" id="{{ facture.id }}" href="{{ path('delete_facture_achat', {'id': facture.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+    {% endblock %}

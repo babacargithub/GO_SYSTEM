@@ -1,0 +1,13 @@
+{# empty Twig template #}
+{% if caisse is defined %}
+    <table class="table">
+        <tr>
+            <th>Solde disponible</th>
+            <td><h1 class="text-bold text-justify text-info">{{caisse.solde|nombre()}}</h1></td>
+        </tr>
+        <tr>
+            <th>Dernière mise à jr</th>
+            <td><h5 class="text-bold text-danger">{{caisse.lastUpdate.format('d/m/Y H:s:i')}}</h5></td>
+        </tr>
+        </table>
+  {% endif %}

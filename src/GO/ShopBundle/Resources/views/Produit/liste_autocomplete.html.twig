@@ -1,0 +1,6 @@
+{# empty Twig template #}
+{% if produits is defined %}
+    {% for produit in produits %}
+        {{produit.nom}},
+        {%endfor%}
+        {%endif %}

@@ -1,0 +1,18 @@
+{% extends "GOCaravaneBundle::layout.html.twig" %}
+{% block sidebar %}
+    {{ render(controller('GOCaravaneBundle:Reservation:menuVertical')) }}
+     
+    {% endblock %}
+{% block content_body %}
+    <div class="row" id="liste_content">
+        {% if depart is defined %}
+            {% if depart.trajet==1 %}
+            {% include "GOCaravaneBundle:Reservation:liste_ugb.html.twig" %}
+            {% elseif depart.trajet==2 %}
+                {% include "GOCaravaneBundle:Reservation:liste_dakar.html.twig" %}
+                {% endif %}
+           {% else %}
+               <h3>Veuillez sélectionner un départ</h3>
+         {% endif %}
+        
+    {% endblock %}

@@ -1,0 +1,8 @@
+{% set menuItems=[
+{"href":path("go_shop_vente_index"), "libelle":"Ventes"},
+{"href":path("go_shop_achat_index"), "libelle":"Achats"},
+{"href":path("go_shop_produit_index"), "libelle":"Produits"}, 
+{"href":path("creance_index"), "libelle":"Créances"},
+{"href":path("shop_client_index"), "libelle":"Clients"}
+] %}
+{% include "_menu_design.html.twig" with {"menuItems": menuItems} %}

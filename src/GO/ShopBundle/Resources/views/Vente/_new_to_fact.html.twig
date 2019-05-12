@@ -1,0 +1,112 @@
+{% extends "GOShopBundle:Vente:vente_main_layout.html.twig" %}
+ {% block content_body %}
+  {% if form is defined and formCodeBar is defined %}
+ <h4>Facture Num {{facture.num}} du client {{facture.client.prenom~" "~facture.client.nom}}, date du {{facture.date.format('d-m-Y')}}</h4>
+ <h3 >Total Actuel <span id="total_actuel" class="bg-red">{{facture.total|nombre()}}</span> FCFA||
+Numero {{facture.num}}<a href="{{path("go_shop_achat_fact_show", {'id':facture.id})}}">Afficher Les Produits</a>
+ </h3>
+ <div class="col-lg-6" id="vente_code_bar">
+      <div class="col-lg-12 panel panel-default" >
+                <div class="panel-heading">
+                       <h3 class="panel-title">Vente Simple</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="{{form.vars.name}}" action="{{path("facture_vente_add_produit",{"id":facture.id})}}" class="form-horizontal" method="post" {{form_enctype(form)}}>
+                    {{ form_widget(form)}}
+                    <input type="submit" class="btn btn-primary" value="Enregistrer les modifications?"/>
+                    </form>
+                  </div>
+  </div>
+</div>
+    <div class="col-lg-6" id="vente_code_bar">
+      <div class="col-lg-12 panel panel-default" >
+                <div class="panel-heading">
+                       <h3 class="panel-title">Effectuer Vente Code Bar</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="{{formCodeBar.vars.name}}" action="{{path("facture_vente_add_produit_code_bar",{"id":facture.id})}}" class="form-horizontal" method="post" >
+                    {{ form_widget(formCodeBar)}}
+                    <input type="submit" class="btn btn-primary" value="Ajouter Produit"/>
+                    </form>
+                </div>
+                    </div>
+                    <div id="codeBarNotFound" class="alert alert-danger"></div>
+  </div>
+
+    {% endif %}
+    
+{% endblock content_body %}
+ {% block javascript_code %}
+        <script>
+          //var url=Routing.generate('details_facture_vente', {id:{{facture.id}}});
+            //alert(url);
+           
+            $(document).on("keypress", "form#go_shopbundle_ventecodebartype", function(event) { 
+            return event.keyCode != 13;
+        });
+            $(document).ready(function(){
+                // ========== permettre de soumettre le formulaire quand on clique sur la touche espace 
+                $("form#go_shopbundle_ventecodebartype").on('keyup',function(e)
+                   {
+                       if(e.keyCode==32)
+                            {
+                                e.preventDefault();
+                                $("form#go_shopbundle_ventecodebartype").trigger('submit');
+                                
+                            }
+                    });
+                   
+            // d�tecter la touche "Entr�e" et trouver le prduit � vendre en fonction du code barre renseign�. 
+                $("input#go_shopbundle_ventecodebartype_codeBar").on('keyup', function(e){
+                   if(e.keyCode==13) 
+                   { 
+                       e.preventDefault();
+                       var results = [];
+                        var searchField = "codeBar";
+                        var searchVal = $(this).val();
+                        var has_match=false;
+                        for (var i=0 ; i < produits.length ; i++)
+                        {
+                            if (produits[i][searchField] == searchVal) {
+                                has_match=true;
+                            results.push(produits[i]);
+                            $("span#notFoundMessage").hide();
+                             $("input#go_shopbundle_ventecodebartype_codeBar").closest('div').removeClass('has-error');
+                         
+                            $("input#go_shopbundle_ventecodebartype_quantite").val("1");
+                            $("input#go_shopbundle_ventecodebartype_prixUnit").val(produits[i].prixAchat);
+                             }
+                        }
+                        if(has_match==false)
+                        {
+                            $("input#go_shopbundle_ventecodebartype_codeBar").closest('div').addClass('has-error');
+                            $("input#go_shopbundle_ventecodebartype_codeBar").after('<span id="notFoundMessage" class="help-block">    <ul class="list-unstyled"><li><span class="glyphicon glyphicon-exclamation-sign"></span> Aucun Produit n\'existe avec ce code barre </li></ul></span>' );
+                            
+                        }
+                    
+                   }
+                   
+            }   );
+            
+            //=====================Augementer le total de la facture à chaque fois qu'une vente a été effectuée
+          
+                    /*  setInterval(function(){       
+                    $.ajax({
+                        global:false,
+                        url:url,
+                        method:"GET",
+                        success:function(response){
+                                        var jsonFacture=JSON.parse(response);$("#total_actuel").text(jsonFacture.total.toLocaleString());
+                                        },
+                       error:function(e){}
+                            });
+                                          }, 100000);  
+                            */
+                                    
+            });
+            
+        </script>
+        {% endblock %}
+    
+
+  {# empty Twig template #}

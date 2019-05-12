@@ -1,0 +1,39 @@
+{% extends "@GOShop/Produit/produit_main_layout.html.twig" %}
+{% block content_body %}
+{% if inventaires is defined and inventaires is not null %} 
+Liste des inventaires: 
+        
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Action</th>
+                    <th>Libellé</th>
+                    <th>Produits</th>
+                    <th>Ajouter</th>
+                    <th>Opérations</th>
+                    
+                    
+                </tr>
+                {% for inventaire in inventaires %}
+                    <tr id="row-{{ inventaire.id }}">
+                        {% if inventaire.termine==false %}
+                        <td><a href="{{path('stock_inventaire_process',{"id":inventaire.id})}}">Soumettre les données</a></td>
+                        {%else %}
+                        <td><a href="{{path('stock_inventaire_resultat',{"id":inventaire.id})}}">Afficher Le Résultat</a>
+                        {% if is_granted('ROLE_SUPER_ADMIN')%}<a href="{{path('stock_inventaire_reset',{"id":inventaire.id})}}">Réinitialiser Stock</a>{%endif%}</td>
+                        {%endif%}
+                        <td>{{inventaire.libelle}} du {{inventaire.dateFinPeriode.format('d-m-Y')}}</td>
+                        <td><a href="{{path('inventaire_add_single_product',{"id":inventaire.id})}}">Ajouter des produits</a></td>
+                        <td><a href="{{path('stock_inventaire_liste_produits',{"id":inventaire.id})}}">Afficher les des produits</a></td>
+                        <td><a href="{{path('inventaire_update',{"id":inventaire.id})}}">Modifier</a></td>
+                       
+                          </tr>
+                     {%endfor%}
+                    
+            </table>
+            
+                
+    
+ {% endif %}
+ 
+ {%endblock content_body %}

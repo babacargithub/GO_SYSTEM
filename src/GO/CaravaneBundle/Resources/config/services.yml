@@ -1,0 +1,15 @@
+parameters:
+#    go_caravane.example.class: GO\CaravaneBundle\Example
+
+services:
+    gocar.custom_validator:
+        class: GO\CaravaneBundle\Utils\CustomValidator
+    go_main.twig_extension:
+        class: GO\MainBundle\Twig\GOMainTwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+    go_user.form.registration:
+        class: GO\UserBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: go_user_registration }

@@ -1,0 +1,6 @@
+gosms_homepage:
+    pattern:  /sms/
+    defaults: { _controller: GOSMSBundle:Main:index }
+go_sms_client_details:
+    pattern:  /details_client-{tel}.golob
+    defaults: { _controller: GOCaravaneBundle:Client:getDetails }

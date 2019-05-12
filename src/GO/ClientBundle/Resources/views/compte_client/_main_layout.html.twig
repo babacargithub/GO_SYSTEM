@@ -1,0 +1,6 @@
+{# empty Twig template #}
+{% extends "@GOClient/layout.html.twig" %}
+{% block sidebar %}
+    {{render(controller("GOClientBundle:CompteClient:menuVertical"))}}
+    {% endblock %}
+

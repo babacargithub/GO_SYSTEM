@@ -1,0 +1,179 @@
+{# empty Twig template #}
+{% extends "@GOShop/Produit/produit_main_layout.html.twig" %}
+{% block content_body %}
+    <div class="alert alert-info"><h5>Vous êtes sur la page pour ajouter des produits dans l'inventaire avec intitulé {{inventaire.libelle}}</h5></div>
+    <p><a href="{{path("stock_inventaire_liste_produits",{id:inventaire.id})}}">Afficher les produits de l'inventaire</a>
+    <div class="panel panel-primary col-lg-4">
+        <div class="panel-heading">Ajouter des produits sans coder barre</div>
+<form id="formSimple" action="{{path("inventaire_add_single_product", {"id":inventaire.id})}}" method="post">
+    {{ form_widget(formSimple)}}
+    
+    <input type="submit" class="btn btn-success" value="Ajouter le Produit"/>
+</form>
+    </div>
+<div class="panel panel-primary col-lg-8">
+    <div class="panel-heading">Ajouter des produits avec coder barre</div>
+<form class="col-lg-6" id="formCodeBar" action="{{path("inventaire_add_single_product_code_bar", {"id":inventaire.id})}}" method="post">
+    {{ form_widget(form)}}
+    
+    <input type="submit" class="btn btn-success" value="Ajouter le Produit"/>
+</form>
+    <div id="listOfFoundProductsDIV" class="col-lg-12" style="display: none">
+        <h4>Il existe plusieurs produits avec ce même code barre</h4>
+      <table class="table table-bordered" id="foundProduct"></table> 
+ </div>
+</div>
+   
+  
+    {%endblock%}
+    {% block javascripts %}
+        {{parent()}}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+        {%endblock%}
+    {% block javascript_code %}
+        <script type="text/javascript">
+     $(document).ready(function(){
+         // on déclare au début toutes les variables dont on aura besoin pour bien traiter les formulaires
+         var formCodeBarId="formCodeBar";
+         var formSimpleId="formSimple";
+         var fieldProductNameId="{{formSimple.produit.vars.id}}";
+         var fieldCodeBarId="{{form.codeBar.vars.id}}";
+         var fieldPrixAchatId="{{form.prixAchat.vars.id}}";
+         var fieldPrixVenteId="{{form.prixVente.vars.id}}";
+         var listOfFoundProductsDIV= $("#listOfFoundProductsDIV");
+         var inventaireId={{inventaire.id}};
+         
+         //on récupère les produis qui serviront de suggestions pour le formulaire sans code barre
+         var donnees1=produits_autocomplete.split(",");
+             
+                 $("#"+formSimpleId+" #"+fieldProductNameId).removeClass("auto_com").autocomplete({
+                  source: function(request, response) {
+                 var results = $.ui.autocomplete.filter(donnees1, request.term);
+                response(results.slice(0, 10));
+                },
+        //à la selection d'une valeur dans la liste de suggestions  de l'autocomplete, on remplit les valeurs du Produit
+        //prix achat et prix vente
+                select: function(event, ui){
+                    $.getJSON(Routing.generate("produit_details_all",{nom:ui.item.value}), function(response){
+                    $("#"+formSimpleId+" #"+fieldPrixAchatId).val(response.data.prix_achat);
+                    $("#"+formSimpleId+" #"+fieldPrixVenteId).val(response.data.prix_vente);
+                });
+                }
+                });
+     //On gère la soumission du formulaire sans code barre ou code barre, avec un traitement unifié
+         $("#"+formSimpleId+", #"+formCodeBarId).on('submit',function(e){
+             e.preventDefault();
+           
+             var data=$(this).serialize();
+             var url=$(this).attr('action');
+             var formId=$(this).attr('id');
+             
+             $.ajax({
+                    url:url,
+                    type:"POST",
+                    data: data,
+                    dataType: "json",
+                    
+                    success: function(response, data,qxrHR)
+              {
+                  if(response.type==="error")
+                  {
+                      alert("Une erreur s'est produite. La requete n'a pas abouti! \n Explication: "+response.message);
+                      return;
+                  }else if(response.type==="success")
+                  {
+                      showAlert(response.message);
+                      resetForm(formId);
+                  
+                  }else if(response.type==="redirect")
+                  {
+                      //On effectue une rédirection comme demandé par la réponse
+                      $("window").attr('location',response.redirectUrl);
+                  }
+              },error: function(response){ alert('Erreur. Les données ne sont pas transmises');
+              }
+          });
+          });
+     
+//traitement spécifique au formulaire code barre
+/*Lors de la saisie d'un code barre, on réagit en cherchant si le code barre est associé à plusieurs codes barre
+Si tel est le cas on affiche tous les produits qui sont associiés au produit,
+ si tel n'est pas le cas on remplit le formulaire en fonction des informations du produit associé au code barre*/ 
+$(document).on("keypress", "form#"+formCodeBarId, function(event) { 
+ 
+            return event.keyCode != 13;
+        });
+ $("#"+fieldCodeBarId).on('keyup', function(e){
+    if(e.keyCode==13) 
+                   { 
+                       e.preventDefault();
+                       var searchVal = $(this).val();
+                        
+                     $.getJSON(Routing.generate('code_bar_details_all',{codeBar:searchVal}),null,function(response,data2,qxrHR){
+    //on vérifie d'abord si le code barre est associé à plusieurs produits
+        if(typeof response.data!== "undefined")
+        {
+        if(response.data.length!=="undefined"&&response.data.length>0)
+    {
+        //on affiche le div qui permet de lister la liste des produits trouvés
+        listOfFoundProductsDIV.show();
+        $("#foundProduct").html("<tr><th>Produit</th><th>Prix Achat</th><th>Restant Stock</th><th>Action</th></tr>");
+    //On affiche les produits trouvés un par un sous forme de tableau
+        for(i=0; i<response.data.length;i++)
+        {
+            $("#foundProduct").append("<tr><td>"+response.data[i].produit.nom+", acheté le "+response.data[i].facture.date_facture+
+                "</td><td>"+response.data[i].prix_unit+"</td><td>"+response.data[i].quantite_restant+"</td><td><a id='"+response.data[i].id+"' class='product_list' \n\
+                code_bar='"+response.data[i].code_bar+" ' prix_achat='"+response.data[i].prix_unit+
+                " ' prix_vente='"+response.data[i].prix_vente+
+                "'href='#' >Ajouter à l'inventaire</a></td></tr>");
+        }
+     //si le code barr est associé uniquement à un seul produit, on remplit le formulaire avec les informations du produit
+    if(response.data.length!=="undefined"&&response.data.length==1)
+    {
+        //listOfFoundProductsDIV.hide();
+       $('#formCodeBar').attr('action', Routing.generate("inventaire_add_single_product_code_bar_with_achat",{id:inventaireId, id_achat: response.data[0].prix_unit.id}));
+      
+          $('#'+formCodeBarId+' #'+fieldPrixAchatId).val(response.data[0].prix_unit);
+        $('#formCodeBar #'+fieldPrixVenteId).val(response.data[0].prix_vente);
+    }
+    }   }else
+        {
+            listOfFoundProductsDIV.hide();
+            alert("Code Barre Introuvable");
+        }
+    
+    });
+                   }
+                   
+            });
+    
+    //préparer le formulaire code barre pour l'ajout de nouveaux articles dans l'inventaire
+    $('body').on('click','.product_list', function(e){
+       e.preventDefault();
+       //$("#"+formCodeBarId).dialog();
+       var href=$(this).attr('href');
+       if (typeof href !== typeof undefined && href !== false) 
+       {
+           
+       var id =$(this).attr('id');
+       var codeBar=$(this).attr('code_bar');
+       var prixAchat=$(this).attr('prix_achat');
+             // alert(prixAchat);
+       var prixVente=$(this).attr('prix_vente');
+      
+       $('#formCodeBar').attr('action', Routing.generate("inventaire_add_single_product_code_bar_with_achat",{id:{{inventaire.id}}, id_achat:id}));
+        $('#'+fieldCodeBarId).val(codeBar);
+          $('#'+formCodeBarId+' #'+fieldPrixAchatId).val(prixAchat);
+        $('#formCodeBar #'+fieldPrixVenteId).val(prixVente);
+        
+        }else
+       {
+          
+       }
+    });
+                }
+            );
+            </script>
+        {%endblock %}

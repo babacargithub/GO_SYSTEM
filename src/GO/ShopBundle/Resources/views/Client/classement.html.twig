@@ -1,0 +1,64 @@
+{# empty Twig template #}
+{% extends "@GOShop/Client/main_layout.html.twig"%}
+{%block content_body %}
+{% if classements is defined and classements is not null %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li class='active'><a href="#details_compte" data-toggle="tab">Total Acheté</a></li>
+            <li><a href="#historique_achats" data-toggle="tab">Nombre d'achats</a></li>
+            <li><a href="#resume" data-toggle="tab">Résumé</a></li>
+        </ul>
+        <div class="tab-content">
+              <div id="details_compte" class="tab-pane ">
+        
+              </div>
+    
+    <div id="historique_achats" class="tab-pane active">
+        {% if classements is defined %}
+            <table class="table table-hover table-striped"><tr>
+                    <th>Rang</th>
+                    <th>Client</th>
+                    <th>Compte</th>
+                    <th>Nombre de fois </th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Bénéfice</th>
+                    
+                </tr>
+           {% for key,classement in classements %}
+                <tr>
+                    <td>{{ key+1 }}</td>
+                    <td>{{ classements[key][0].compteClient.client.fullName}}</td>
+                    <td>{{ classements[key][0].compteClient.number}} <a href="{{path("shop_historique_compte_client",{"id":classements[key][0].compteClient.id})}}">Voir le Compte</a></td>
+                    <td>{{ classement.nombreAchete|nombre() }}</td>
+                    <td>{{ classement.quantiteAchete|nombre() }}</td>
+                    <td>{{ classement.totalAchete|nombre() }}</td>
+                    <td>{{ classement.totalBenefice|nombre() }}</td>
+                    
+                    
+                <tr>
+        {% endfor %}
+           
+                  {%else%}
+                      <h3> Aucune vente enregistrée dans ce compte</h3>
+            {%endif%}
+   
+        
+        </table>
+    </div>
+            <div id="resume" class="tab-pane">
+                {% if totaux is defined %}
+                    <table class="table table-bordered">
+            <tr><th>Total Vendu Au Client<h3>{{totaux.totalVente|nombre()}}</h3></th>
+                <th> Bénéfice gagné <h3>{{totaux.totalBenefice|nombre()}}</h3></th>
+                <th>Nombre de fois <h3>{{totaux.totalNombreVente|nombre()}}</h3></th>
+            </tr>
+                    </table>
+            {%endif%} 
+            </div>
+
+ </div>
+ </div>
+
+    {%endif%}
+    {%endblock%}

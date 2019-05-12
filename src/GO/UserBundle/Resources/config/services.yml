@@ -1,0 +1,6 @@
+services:
+   acme_user.registration.form.type:
+        class: GO\UserBundle\Form\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: go_user_registration }

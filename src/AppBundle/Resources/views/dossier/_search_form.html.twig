@@ -1,0 +1,16 @@
+
+    <h1>Rechercher un dossier</h1>
+    {% if notFound is defined and notFound is not null %}
+<h5 class="alert alert-danger alert-box">{{notFound}}</h5>
+{%endif%}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Ouvrir le Dossier" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('candidat_index') }}">Créer Un Dossier</a>
+        </li>
+    </ul>
+

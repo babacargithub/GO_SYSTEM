@@ -1,0 +1,66 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Payer
+ *
+ * @ORM\Table(name="payer", uniqueConstraints={@ORM\UniqueConstraint(name="recu_pay", columns={"code_recu"})}, indexes={@ORM\Index(name="id_agent", columns={"agent"}), @ORM\Index(name="id_res", columns={"res"})})
+ * @ORM\Entity
+ */
+class Payer
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant", type="integer", nullable=false)
+     */
+    private $montant;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="code_recu", type="integer", nullable=false)
+     */
+    private $codeRecu;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+      * @var \GO\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="GO\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="agent", referencedColumnName="id")
+     * })
+     */
+    private $agent;
+
+    /**
+      * @var \\GO\MainBundle\Entity\Reservation
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\Reservation")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="res", referencedColumnName="id")
+     * })
+     */
+    private $res;
+
+
+}

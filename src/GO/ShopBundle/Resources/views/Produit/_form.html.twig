@@ -1,0 +1,41 @@
+{% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_shop_produit_add')}}" class="form-horizontal col-lg-4 col-md-6 col-xs-12" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+</div>
+    
+    
+    <div>
+    {{ form_label(form.nom, "Libellé")}}
+    {{ form_widget(form.nom,{"attr":{"class":"form-control auto_com auto-com"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.type, "Type de produit")}}
+    {{ form_widget(form.type,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.prixAchat, "Prix Achat")}}
+    {{ form_widget(form.prixAchat,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.prixVente, "Prix Vente")}}
+    {{ form_widget(form.prixVente,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.descrip, "Description")}}
+    {{ form_widget(form.descrip,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.categorie, "Catégorie Produit")}}
+    {{ form_widget(form.categorie,{"attr":{"class":"form-control"}} )}}
+    </div>
+   
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+
+  

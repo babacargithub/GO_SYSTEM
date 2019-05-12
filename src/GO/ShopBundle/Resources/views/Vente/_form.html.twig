@@ -1,0 +1,14 @@
+
+ 
+        {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_shop_vente_add')}}" class="form-horizontal" method="post">
+     {{ form_widget(form)}}
+    {{ form_rest(form)}}
+  
+    <input type="submit" class="btn btn-success" value="Enregistrer"/>
+</form>
+
+
+    {% endif %}
+
+  

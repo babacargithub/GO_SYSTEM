@@ -1,0 +1,73 @@
+{% extends '@GOShop/Admin/layout.html.twig' %}
+{% block main %}{# empty Twig template #}
+    {% set tot_vente_exo, tot_benef_exo, tot_benef_net_exo=0,0,0 %}
+    {% for shop in shops %}
+        <h1>{{shop.shop}}</h1>
+        {% set fields = [ 
+                {'chiffre': shop.capitalExercice|nombre(), 'label':'Capital','background':  'bg-aqua'}, 
+                {'chiffre': shop.valeurStock|nombre(), 'label':'Valeur Stock','background':  'bg-success'}, 
+                {'chiffre': shop.soldeCaisse|nombre(), 'label':'Solde Caisse','background':  'bg-orange'}, 
+                {'chiffre': shop.totalVenteExercice|nombre(), 'label':'Vente Exercice','background':  'bg-gray-active'}, 
+                {'chiffre': shop.totalAchatExercice|nombre(), 'label':'Achat Exercice','background':  'bg-yellow'}, 
+                {'chiffre': shop.totalDepenseExercice|nombre(), 'label':'DépenseS','background':  'bg-purple'}, 
+                {'chiffre': shop.totalBeneficeExercice|nombre(), 'label':'Bénéfice Brut','background':  'bg-green'}, 
+                {'chiffre': shop.soldeBanque|nombre(), 'label':'Solde Banque','background':  'bg-purple'}, 
+                {'chiffre': shop.beneficeNet|nombre(), 'label':'Bénéfice Net','background':  'bg-aqua-gradient'}, 
+                {'chiffre': shop.TotalDetteFacture|nombre(), 'label':'Dettes','background':  'bg-navy'}, 
+                 {'chiffre': shop.totalCreanceProduitExercice|nombre(), 'label':'Créance Clients','background':  'bg-maroon'}, 
+                 {'chiffre': shop.totalCreanceLiquide|nombre(), 'label':'Créance Liquide','background':  'bg-green'}, 
+                {'chiffre': shop.valeurBoutique|nombre(), 'label':'Valeur Boutique','background':  'bg-red-active'}, 
+                {'chiffre': shop.tauxProgressCapital|nombre()~"%", 'label':'Progression Capital','background':  'bg-gray'}, 
+                
+                ] %}
+                {% set tot_vente_exo=tot_vente_exo+shop.totalVenteExercice %}
+                {% set tot_benef_exo=tot_benef_exo+shop.totalBeneficeExercice %}
+                {% set tot_benef_exo=tot_benef_exo+shop.beneficeNet %}
+                <span class="bg-re"></span>
+ <div class="row">
+
+ {% for data in fields %}
+      <!-- /. this will be displayed as column -->
+      {{ include ('@GOShop/Admin/_chiffre_column_large.html.twig',
+                    {chiffre:data.chiffre,
+                        label:data.label,
+                        background:data.background})}}
+ {%endfor %}
+ 
+</div>
+ <div class="row">
+     <table class="table table-bordered">
+         <tr>
+             <th>Vente</th>
+             <th>Bénéfice</th>
+             <th>Bénéfice Net</th>
+         </tr>
+         <tr>
+             <td>{{tot_vente_exo|nombre()}}</td>
+             <td>{{tot_benef_exo|nombre()}}</td>
+             <td>{{tot_benef_net_exo|nombre()}}</td>
+         </tr>
+     </table>
+ </div>
+<!-- parcourir les mois passés pour afficher leur données respectives !-->
+<div class="row">
+    {%- block temp_table %}
+        
+        {%endblock temp_table %}
+{% for moisReport in shop.monthlyReports %}
+    
+    {{ include ('@GOShop/Admin/_chiffre_column_collapse.html.twig',
+                    {title:moisReport.moisLibelle,
+                        content:'<table class="table table-striped">
+                    <tr><td>Vente</td><td>'~moisReport.venteMois|nombre()~'</td>
+                    </tr><tr><td>Bénéfice</td><td>'~moisReport.beneficeMois|nombre()~'</td></tr>
+                    <tr><td>Dépenses</td><td>'~moisReport.depenseMois|nombre()~'</td></tr>
+                    <tr><td>Achats Réglés</td><td>'~moisReport.achatMoisPaye|nombre()~'</td></tr>
+                </table>',
+})}}
+            
+        {% endfor %}
+
+</div>     
+        {%endfor %}
+{%endblock %}

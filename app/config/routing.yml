@@ -1,0 +1,62 @@
+go_client_client:
+    resource: "@GOClientBundle/Controller/"
+    type:     annotation
+    prefix: /customer/
+go_api:
+    resource: "@GOApiBundle/Controller/"
+    type:     annotation
+caisse:
+    resource: "@GOCaisseBundle/Controller/"
+    type:     annotation
+    prefix:   /caisse_pro/
+
+go_main_base_controller:
+    resource: "@GOMainBundle/Resources/config/routing.yml"
+    prefix: /
+go_caravane_controller:
+    resource: "@GOCaravaneBundle/Controller/"
+    prefix:   /caravane/
+
+go_caravane_yml:
+    resource: "@GOCaravaneBundle/Resources/config/routing.yml" 
+    prefix:   /caravane/
+go_shop_controller:
+    resource: "@GOShopBundle/Controller/"
+    prefix:   /shop/
+go_shop_yaml:
+    resource: "@GOShopBundle/Resources/config/routing.yml"
+    prefix:   /shop/
+go_sms:
+    resource: "@GOSMSBundle/Controller/"
+    prefix:   /sms/
+go_sms_yaml:
+    resource: "@GOSMSBundle/Resources/config/routing.yml"
+    prefix:   /sms/
+go_main_controller:
+    resource: "@GOMainBundle/Controller/"
+    prefix: /main/
+go_cons:
+    resource: "@AppBundle/Controller"
+    prefix:   /consulting/
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /dashboard/
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+fos_user_profile:
+   resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+   prefix: /profile
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"

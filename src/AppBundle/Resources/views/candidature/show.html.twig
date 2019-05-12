@@ -1,0 +1,62 @@
+{% extends '@App/base_template.html.twig' %}
+{% block content_title %}Les informations sur la candidature du {{candidature.dossier }} {%endblock%}
+{% block body %}
+    <h1>Les informations de la Candidature</h1>
+<div class="col-lg-8 col-sm-12">
+    <table class="table table-bordered table-hovered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ candidature.id }}</td>
+            </tr>
+            <tr>
+                <th>Formation Demandée</th>
+                <td>{{ candidature.formationDemandee }}</td>
+            </tr>
+            <tr>
+                <th>Niveau Demandée</th>
+                <td>{{ candidature.niveauDemande }}</td>
+            </tr>
+            <tr>
+                <th>Préinscription Acceptée</th>
+                <td>{% if candidature.accepte %}Oui{% else %}Pas Encore{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Visa accepté</th>
+                <td>{% if candidature.visaAccepte %}Yes{% else %}PASENC{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ville ciblée</th>
+                <td>{{ candidature.villeCible }}</td>
+            </tr>
+            <tr>
+                <th>Deuxieme choix</th>
+                <td>{{ candidature.deuxiemeChoix }}</td>
+            </tr>
+            <tr>
+                <th>Troisieme choix</th>
+                <td>{{ candidature.troisiemeChoix }}</td>
+            </tr>
+            <tr>
+                <th>Commentaires</th>
+                <td>{{ candidature.comments }}</td>
+            </tr> 
+            <tr>
+                <th>Crée le</th>
+                <td>{% if candidature.createdAt %}{{ candidature.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="nav nav-pills">
+       <li>
+ <a class="btn btn-warning" href="{{ path('candidature_edit', { 'id': candidature.id }) }}">Modifer</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-danger" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+</div>
+{% endblock %}

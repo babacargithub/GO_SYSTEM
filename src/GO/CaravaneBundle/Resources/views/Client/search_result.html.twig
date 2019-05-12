@@ -1,0 +1,31 @@
+{% extends 'GOCaravaneBundle:Client:_main_layout.html.twig' %}
+{% block content_body %}
+    <div class="col-lg-11">
+{% if liste is defined and liste is not null %}
+    Résultat: <strong>{{liste|length}}</strong> entrées trouvées
+   <table class="table table-bordered table-hover">
+       <tr><th>Num Client</th>
+       <th>Prénom</th>
+       <th>Nom</th>
+       <th>Tél</th>
+       <th>Adresse</th>
+       <th>Ufr</th>
+       <th>Section</th>
+       <th>Promo</th>
+       </tr>
+       {% for client in liste %}
+           
+       <tr>
+           <td>{{client.id}}</td>
+           <td>{{client.prenom}}</td>
+           <td>{{client.nom}}</td>
+           <td>{{client.tel|slice(-9,9)}}</td>
+           <td>{{client.adresse}}</td>
+           <td>{{client.ufr}}</td>
+           <td>{{client.section}}</td>
+           <td>{{client.promo}}</td>
+       </tr>
+           {% endfor %}
+   </table>
+</div>
+    {% endif %}    {% endblock %}

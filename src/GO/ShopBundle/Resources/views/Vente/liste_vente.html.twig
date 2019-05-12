@@ -1,0 +1,12 @@
+{% extends "@GOShop/Vente/vente_main_layout.html.twig" %}
+{% block content_body %}
+      Ventes journée
+        {% if total_ventes is defined and total_ventes is not null  %}
+            <h2>Total des ventes: {{total_ventes|nombre()}}</h2> 
+            {% if is_granted("ROLE_SUP_BOUT")%}
+        <h2>Prime sur bénéfice: {% if benefice is defined %}{{(benefice*0.1)|nombre()}}{%endif%}, Taux 10%</h2>
+            {%endif%}
+            {%endif%}
+    {% include "@GOShop/Vente/liste.html.twig" %}
+    {% endblock %}
+ 

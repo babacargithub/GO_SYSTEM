@@ -1,0 +1,40 @@
+{% extends "::layout.html.twig" %}
+{% block title %}
+        <title>{% if title is defined %}{{ title}}{% else %}Golob One SMS{% endif %}</title>
+    {%endblock title %}
+{% block menu %}
+    <li class="module" id="inscription"><a href="{{path("abonnement_index")}}">Abonnement</a>
+            </li>
+             </li>
+            <li class="module" id="abonnement"><a href="{{path("abonnement_chiffre")}}">Mes encaissements</a>
+            </li>
+            <li class="module" id="chiffre"><a href="{{path("creance_index")}}">Clients</a>
+            </li>
+             <li class='dropdown '>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Plus<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="event.golob">Clients</a></li>
+                    <li><a href="/">Promos</a></li>
+                </ul>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="module" id="admin"><a href="admin">Admin</a>
+            </li>{% endif %}
+            {% endblock menu %}
+        {% block options %}
+         {% endblock %}                                                                     
+      {% block content_body %}
+        <h2>Bienvenue dans l'application pour la gestion des caravanes de Golob One V2</h2>
+        <h1>Consignes de sécurité et récommendations</h1>
+        <ul>
+            <li><h3>Ne pas ouvrir cette application aux yeux des clients</h3></li>
+            <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise</h3></li>
+            <li><h3>Ne pas communiquer votre mot de passe aux autres collègues</h3></li>
+
+            <li><h3>Ne pas ouvrir cette application aux yeux des clients</h3></li>
+            <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise</h3></li>
+            <li><h3>Ne pas communiquer votre mot de passe aux autres collègues</h3></li>
+        </ul>
+    {% endblock %}

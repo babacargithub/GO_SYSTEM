@@ -1,0 +1,29 @@
+{% extends "@GOShop/Vente/vente_main_layout.html.twig" %}
+{% block content_body %}
+    {% if total_ventes is defined %} <h2>Total des ventes {{total_ventes|nombre()}}{% endif %}</h2>
+        {% if ventes is defined %}
+            <table class="table table-striped">
+                <tr >
+                        
+                    <th>Service</th>
+                    <th>Montant</th>
+                    <th>Date</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for vente in ventes %}
+                    <tr id="row-{{ vente.id }}">
+                        <td>{{vente.service.nom}}</td>
+                        <td>{{ vente.montant|nombre()  }}</td>
+                        <td>{{ vente.date.format('d-m-Y H:i')}}</td>
+                         <td>
+                            <a class="update_action" id="{{ vente.id }}" href='update_vente_service-{{ vente.id }}.golob'>Modifier</a>
+                            <a class="annuler_action" id="{{ vente.id }}" href="{{ path('go_shop_vente_service_annuler', {'id': vente.id}) }}">Annuler</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+    {% endblock %}
+ 

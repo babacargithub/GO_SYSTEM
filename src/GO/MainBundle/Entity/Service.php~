@@ -1,0 +1,32 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Service
+ *
+ * @ORM\Table(name="service", indexes={@ORM\Index(name="nom_service", columns={"nom_service"})})
+ * @ORM\Entity
+ */
+class Service
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_service", type="string", length=50, nullable=true)
+     */
+    private $nomService;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_service", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idService;
+
+
+}

@@ -1,0 +1,26 @@
+  
+Liste des produits séléctionnés
+        {% if produits is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Produit</th>
+                    <th>Quantite</th>
+                    <th>Dernier mis à jr</th>
+                    {% if is_granted('ROLE_SUP_BOUT') %}
+                    <th>Opérations</th>{%endif%}
+                </tr>
+                {% for stock in produits %}
+                    <tr id="row-{{ stock.id }}">
+                        <td>{{stock.produit.nom}}</td>
+                        <td>{{ stock.quantite}}</td>
+                        <td>{{stock.lastUpdate.format('d/m/Y H:i:s')}}</td>
+                       <td>{% if is_granted('ROLE_SUP_BOUT') %}
+                           <a class="update_action" id="{{stock.id}}" href="{{path("stock_update_form", {"id":stock.id})}}">Modifier</a>
+                          {%endif%}</td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}

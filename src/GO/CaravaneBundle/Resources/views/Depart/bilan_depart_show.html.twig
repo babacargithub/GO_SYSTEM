@@ -1,0 +1,79 @@
+{% extends "GOCaravaneBundle:Depart:depart_main_layout.html.twig" %}
+{% block content_body %}
+    <div class="row">
+       {% if bilan is defined %}
+           <h1>Bilan du Départ: {{ bilan.depart}}</h1>
+           <div class="col-lg-11 alert-success">Benefice: <span class="text-center text-bold text-capitalize">{{bilan.benefice|nombre()}}</span></div>
+           <h3><a href="{{path("bilan_depart_update",{"id":bilan.depart.id})}}">Modifier les données</a></h3>
+           <div class="col-lg-6">
+               <div class="col-lg-12 panel panel-primary" >
+                <div class="panel-heading">
+                       <h3 class="panel-title">Details du Bus</h3>
+                </div>
+                <div class="panel-body">
+                    
+           <table class="table table-bordered">
+            
+                    <tr><th>Bus</th><td>{{bilan.bus}}</td></tr>
+                    <tr><th>Chauffeur</th><td>{{bilan.chauffeur}}</td></tr>
+                    <tr><th>Encaissé</th><td>{{bilan.encaisse|nombre()}}</td></tr>
+                    <tr><th>Location</th><td>{{bilan.location|nombre()}}</td></tr>
+                    <tr><th>Nombre Inscrit</th><td>{{bilan.nombreInscrit}}</td></tr>
+                    <tr><th>Nombre Présent</th><td>{{bilan.nombrePresent}}</td></tr>
+                    <tr><th>Nombre Absent</th><td>{{bilan.nombreAbsent}}</td></tr>
+                    <tr><th>Agent Bus</th><td>{{bilan.agent.prenom}}</td></tr>
+                    <tr><th>Commentaires</th><td style="height:auto ">{{bilan.commentaires}}</td></tr>
+                    <tr><th>Total Dépense</th><td>{{bilan.totalDepense|nombre()}}</td></tr>
+             
+           </table>
+               </div>
+           </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="col-lg-12 panel panel-primary" >
+                <div class="panel-heading">
+                       <h3 class="panel-title">Les Dépenses</h3>
+                </div>
+                <div class="panel-body">
+                    
+           <table class="table table-bordered">
+               <tr>
+                   <th>Dépense</th>
+                   <th>Montant</th>
+                   <th>Justification</th>
+                   <th>Action</th>
+               </tr>
+              
+               {% for depense in bilan.depenses %}
+                    <tr>
+                   <td>{{depense.depense}}</td>
+                    <td>{{depense.montant|nombre()}}</td>
+                    <td>{{depense.justification}}</td>
+                    <td><a href="{{path("depense_depart_delete",{"id":depense.id})}}"><span class="depense_delete glyphicon glyphicon-remove btn-danger"></span>Supprimer</a></td>
+                    </tr>
+                    {%endfor%}
+                    <tr>
+                        <td colspan="2">Total</td>
+                        <th>{{bilan.totalDepense|nombre()}}</th>
+                    </tr>
+             
+           </table>
+               </div>
+           </div>
+           </div>
+           {%endif%}
+</div>
+
+    
+    {% endblock %}
+{% block javascript_code %}
+    <script type="text/javascript">
+    
+$(document).ready(function() {
+   $('body').on('click','.depense_delete',function(e){
+       e.preventDefault();
+       var confirm=confirm("Voulez-vous vraiment supprimer cette entrée?");
+   }) ;
+});
+</script>
+    {% endblock javascript_code %}

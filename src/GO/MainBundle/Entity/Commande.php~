@@ -1,0 +1,67 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Commande
+ *
+ * @ORM\Table(name="commande", indexes={@ORM\Index(name="Fk_id_produit", columns={"id_produit"}), @ORM\Index(name="fk_client", columns={"id_client"})})
+ * @ORM\Entity
+ */
+class Commande
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_produit", type="integer", nullable=true)
+     */
+    private $idProduit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_model", type="integer", nullable=true)
+     */
+    private $idModel;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_client", type="integer", nullable=false)
+     */
+    private $idClient;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_commande", type="datetime", nullable=true)
+     */
+    private $dateCommande;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="paye", type="boolean", nullable=true)
+     */
+    private $paye;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="livre", type="boolean", nullable=true)
+     */
+    private $livre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_commande", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idCommande;
+
+
+}

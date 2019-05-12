@@ -1,0 +1,25 @@
+{% extends '@App/base_template.html.twig' %}
+{% block  content_title %} Les Chiffres de Exercice Actuel{% endblock content_title%}
+{% block body %}
+<div class='tab-pane' style="padding: 0; margin: 0;">
+<div id="summary" class="tab-pane fade in active">
+<div class="row chart-summary">
+        <div class="col-lg-4 ui-sortable"  >
+            <h4>Nombre Dossiers</h4>
+            <h2>{{exercice.nombreDossiers}}</h2>
+    </div>
+        <div class="col-lg-4 ui-sortable"  >
+            <h4>Total Encaissé</h4>
+            <h2>{{exercice.totalPaiements|number_format()}}<span> FCFA</span></h2>
+    </div>
+        <div class="col-lg-4 ui-sortable"  >
+            <h4>Nombre Candidatures</h4>
+            <h2>{{exercice.totalCandidatures}}</h2>
+          
+    </div>
+    
+</div>
+</div>
+</div>
+    
+{% endblock %}

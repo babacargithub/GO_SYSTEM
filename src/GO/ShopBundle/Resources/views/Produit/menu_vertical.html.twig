@@ -1,0 +1,15 @@
+
+{% for menu in menu_vertical %}
+<li><a class="vente_v_menu" href="{{  menu.href }}">{{
+menu.libelle }}</a>
+{% if menu.dropdown is defined %}
+    <ul class="dropdown-menu">
+    {% for menu in menu.dropdown %}
+<li><a class="vente_v_menu" href="{{  menu.href }}">{{
+menu.libelle }}</a>
+{%endfor %}
+    </ul>
+{% endif %}
+</li>
+{% endfor %}
+

@@ -1,0 +1,44 @@
+
+go_shop_produit_add:
+    pattern:  /produit_add.golob
+    defaults: { _controller: GOShopBundle:Produit:add }
+go_shop_produit_update_form:
+    pattern:  /produit_update_form-{id}.golob
+    defaults: { _controller: GOShopBundle:Produit:updateForm }
+go_shop_produit_update:
+    pattern:  /produit_update.golob
+    defaults: { _controller: GOShopBundle:Produit:update }
+go_shop_produit_supprimer:
+    pattern:  /produit_delete-{id}.golob
+    defaults: { _controller: GOShopBundle:Produit:delete}
+go_shop_produit_show:
+    pattern:  /produit_show_today.golob
+    defaults: { _controller: GOShopBundle:Produit:showToday }
+go_shop_produit_recherche_index:
+    pattern:  /produit_search_index.golob
+    defaults: { _controller: GOShopBundle:Produit:showSearchIndex }
+go_shop_produit_search:
+    pattern:  /produit_search.golob
+    defaults: { _controller: GOShopBundle:Produit:search }
+go_shop_produit_details:
+    pattern:  /produit_details.golob
+    defaults: { _controller: GOShopBundle:Produit:getDetails}
+go_shop_produit_categorie_form:
+    pattern:  /produit_cat_index.golob
+    defaults: { _controller: GOShopBundle:Produit:categForm}
+go_shop_produit_categorie_add:
+    pattern:  /produit_cat_add.golob
+    defaults: { _controller: GOShopBundle:Produit:categAdd}
+go_shop_produit_categorie_show:
+    pattern:  /produit_cat_show.golob
+    defaults: { _controller: GOShopBundle:Produit:categShow}
+go_shop_categorie_supprimer:
+    pattern:  /produit_cat_delete-[id}.golob
+    defaults: { _controller: GOShopBundle:Produit:categDelete}
+go_shop_categorie_update_form:
+    pattern:  /produit_cat_update-[id}.golob
+    defaults: { _controller: GOShopBundle:Produit:categUpdateForm}
+go_shop_categorie_top_10:
+    pattern:  /produit_top10.golob
+    defaults: { _controller: GOShopBundle:Produit:getTop10}
+

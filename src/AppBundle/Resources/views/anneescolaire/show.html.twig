@@ -1,0 +1,40 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block body %}
+    <h1>Anneescolaire</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ anneeScolaire.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ anneeScolaire.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Datestart</th>
+                <td>{% if anneeScolaire.dateStart %}{{ anneeScolaire.dateStart|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateend</th>
+                <td>{% if anneeScolaire.dateEnd %}{{ anneeScolaire.dateEnd|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annee_scolaire_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('annee_scolaire_edit', { 'id': anneeScolaire.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

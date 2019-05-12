@@ -1,0 +1,137 @@
+{% extends "@GOShop/Stock/main_layout.html.twig" %}
+{% block content_body %}
+    <div class="row-border">
+        <h3>Historique et détails des produits associés avec le code barre: <i>{{codeBar}}</i> </h3>
+    </div>
+{% if sorties is defined %}
+    <ul class="nav nav-pills" style="border-bottom: 3px ridge blue;background-color: #E7EEE7">
+        <li class="active"><a href="#sorties" data-toggle="tab">Les sorties Stock</a></li>
+        <li class=""><a href="#entrees" data-toggle="tab">Les entrées Stock</a></li>
+        <li class=""><a href="#resume" data-toggle="tab">Résumé</a></li>
+    </ul>
+        
+    <div class="tab-content">
+        <div class="tab-pane active" id="sorties">
+        <table class="table table-bordered">
+            <tr>
+            <th>Id Vente</th>
+            <th>Produit</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+            <th>Date</th>
+            <th>Num Facture</th>
+            <th>Fournisseur</th>
+            <th>Client</th>
+            <th>Par</th>
+            </tr>
+    {%for vente in sorties %}
+        
+        <tr>
+            <td>{{vente.id}}</td>
+            <td>{{vente.produit}}</td>
+            <td>{{vente.quantite}}</td>
+            <td>{{vente.prixUnit}}</td>
+            <td>{{vente.date.format('d/m/Y à H\\h:i:s')}}</td>
+            <td>{{vente.codeBar.facture.num}}</td>
+            <td>{{vente.codeBar.facture.fournisseur}}</td>
+            <td>{% if vente.facture is not null %}{{vente.facture.client}}{%endif%}</td>
+            <td>{{vente.user.prenom}}</td>
+           
+        </tr>
+        {% endfor %}
+        
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <th>Nombre de fois </th>
+                <th>Total Quantité</th>
+                <th>Valeur Totale Sortie</th>
+            </tr>
+            <tr>
+                <th>{{totauxSortie.totalNombre}} </th>
+                <th>{{totauxSortie.totalQuantite}} </th>
+                <th>{{totauxSortie.totalValeurSortie|nombre()}} </th>
+              
+                
+            </tr>
+        </table>
+ 
+{%endif%}
+    </div>
+<div class="tab-pane" id="entrees">
+{% if entrees is defined %}
+   <table class="table table-bordered">  
+        
+       
+            <tr>
+                <th>Id Stock </th>
+                <th>Produit </th>
+                <th>Quantité</th>
+                <th>Prix Achat</th>
+                <th>Restant</th>
+                <th>Facture</th>
+                <th>Fournssieur</th>
+                <th>Date</th>
+            </tr>
+            {%for entree in entrees %}
+            <tr>
+                <td>{{entree.id}} </td>
+                <td>{{entree.produit}} </td>
+                <td>{{entree.quantite}} </td>
+                <td>{{entree.prixUnit|nombre()}} </td>
+                <td>{{entree.quantiteRestant}} </td>
+                <td>{{entree.facture.num}} </td>
+                <td>{{entree.facture.fournisseur}} </td>
+                <td>{{entree.facture.date.format('d/m/Y à H\\h:i:s')}} </td>
+              
+                
+            </tr>
+            {% endfor %}
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <th>Nombre de fois </th>
+                <th>Total Quantité</th>
+                <th>Valeur Totale Sortie</th>
+            </tr>
+            <tr>
+                <td>{{totauxEntree.totalNombre}} </td>
+                <td>{{totauxEntree.totalQuantite}} </td>
+                <td>{{totauxEntree.totalValeurEntree|nombre()}} </td>
+              
+                
+            </tr>
+        </table>
+       
+{%endif%}
+</div>
+<div class="tab-pane" id="resume">
+    <table class="table table-hovered">
+    <tr>
+                <th> </th>
+                <th>Nombre de fois </th>
+                <th>Quantité Totale</th>
+                <th>Valeur Totale </th>
+    </tr>
+    <tr>
+                <th>Entrées</th>
+                <th>{{totauxEntree.totalNombre}} </th>
+                <th>{{totauxEntree.totalQuantite}} </th>
+                <th>{{totauxEntree.totalValeurEntree|nombre()}} </th>
+     </tr>
+    <tr>
+                <th>Sorties </th>
+                <th>{{totauxSortie.totalNombre}} </th>
+                <th>{{totauxSortie.totalQuantite}} </th>
+                <th>{{totauxSortie.totalValeurSortie|nombre()}} </th>
+    </tr>
+    
+     <tr>
+         <td colspan="2">Reste</td>
+         <td>{{totauxEntree.totalQuantite-totauxSortie.totalQuantite}}</td>
+     </tr>
+    </table>         
+            
+</div>
+</div>
+{%endblock %}

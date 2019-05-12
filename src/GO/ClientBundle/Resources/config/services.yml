@@ -1,0 +1,16 @@
+services:
+    go_crm.type.client_selector:
+        class: GO\ClientBundle\Form\ClientSelectorType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: crm_client_selector }
+    go_crm.type.compte_client_transformer:
+        class: GO\ClientBundle\Form\CompteClientTransformerType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: crm_compte_client_transformer }
+    go_crm.type.tel_to_compte_client_transformer:
+        class: GO\ClientBundle\Form\TelephoneToCompteClientTransformerType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: crm_tel_to_compte_client_transformer }

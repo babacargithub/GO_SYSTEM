@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Séléctionner Application{%endblock page_title %}
+{% block menu %}
+{% endblock menu %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block content_body %}
+ <div class='container'>   
+{%block content_title %}
+        Sélectionner une application
+ {% endblock content_title %}
+
+<div class="row">
+
+        <h1 class="text-center text-bold">Sélectionnez l'application à accéder</h1>
+        <div class='row text-bold'>
+            <div class='col-lg-4 text-center bg-aqua glyphicon glyphicon-shopping-cart text-bold'>
+            <h3><a href="{{path("go_main_app_authentication",{"app":"shop"})}}">SHOP</a></h3>
+            </div>
+             <div class='col-lg-4 bg-fuchsia glyphicon glyphicon-road text-bold'>
+        <h3><a href="{{path("go_main_app_authentication",{"app":"caravane"})}}">CARAVANE</h3></a>
+             </div>
+              <div class='col-lg-4 bg-success glyphicon glyphicon-envelope text-bold'>
+        <h3><a href="{{path("go_main_app_authentication",{"app":"sms"})}}">SMS</a></h3> 
+              </div>
+         <div class='col-lg-4 bg-lime glyphicon glyphicon-briefcase text-bold'>
+             <h3><a href="{{path("go_main_app_authentication",{"app":"cons"})}}">CONSULTING</h3></a>
+         </div>
+         <div class='col-lg-4 bg-yellow  glyphicon glyphicon-dashboard text-bold'>
+             <h3><a href="{{path("go_main_app_authentication",{"app":"caisse_pro"})}}">Caisse Pro</h3></a>
+         </div>
+         <div class='col-lg-4 bg-yellow  glyphicon glyphicon-dashboard text-bold'>
+             <h3><a href="{{path("go_main_app_authentication",{"app":"admin"})}}">Admin</h3></a>
+         </div>
+         <div class='col-lg-4 bg-maroon  glyphicon glyphicon-log-out text-bold'>
+             <h3><a href="{{path("fos_user_security_logout")}}">Déconnexion</h3></a>
+         </div>
+        </div>
+
+        </div>
+
+</div>
+{% endblock content_body %}
+
+	

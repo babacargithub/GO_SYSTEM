@@ -1,0 +1,209 @@
+{% extends "::layout.html.twig"%}
+
+{% block title %}
+        <title>{% if title is defined %}{{ title}}{% else %}Golob One Shop{% endif %}</title>
+    {%endblock title %}
+   {% block styles %} 
+       {{parent()}}
+ <style type="text/css">
+    
+.bs-example{
+	font-family: sans-serif;
+	position: relative;
+	margin-bottom: 0px;
+}
+.typeahead, .tt-query, .tt-hint {
+	border: 2px solid #CCCCCC;
+	border-radius: 8px;
+	font-size: 18px;
+	height: 30px;
+	line-height: 20px;
+	outline: medium none;
+	padding: 8px 12px;
+	width: 396px;
+}
+.typeahead {
+	background-color: #FFFFFF;
+}
+.typeahead:focus {
+	border: 2px solid #0097CF;
+}
+.tt-query {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+	color: #999999;
+}
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 12px;
+	padding: 8px 0;
+	width: 396px;
+}
+.tt-suggestion {
+	font-size: 24px;
+	line-height: 24px;
+	padding: 3px 20px;
+}
+.tt-suggestion.tt-is-under-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+}
+.tt-suggestion p {
+	margin: 0;
+}
+</style>
+{% endblock styles %}
+{% block menu %}
+             <li class="module" id="inscription"><a href="vente.golob">Ventes</a>
+            </li>
+            <li class="module" id="abonne"><a href="achat.golob">Achats</a>
+            </li>
+            <li class="module" id="abonnement"><a href="produit.golob">Produits</a>
+            </li>
+            <li class="module" id="chiffre"><a href="{{path("creance_index")}}">Créances</a>
+            </li>
+            <li class="module" id="chiffre"><a href="{{path("dette_index")}}">Dettes</a>
+            <li class="module" id="chiffre"><a href="{{path("dette_index")}}">Clients</a>
+            </li>
+            </li>
+           
+
+              <li class='dropdown '>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Plus<b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="client_index">Clients</a></li>
+                    <li><a href="/">Promos</a></li>
+                    
+                </ul>
+            </li>
+            {% if is_granted('ROLE_ADMINI') %}
+            <li class="module" id="admin"><a href="{{path('admin_index')}}">Admin</a>
+            </li>{% endif %}
+            <span class="pull-right bg-light">Caisse <span id="caisse">{{render(controller('GOShopBundle:Caisse:showCaisse'))}}</span></span>
+          
+            {% endblock menu %}
+                       
+           
+                                  {% block options %}
+                                   {% endblock %}                                                                     
+ 
+        
+    {% block content_body %}
+        <h2>Bienvenue dans l'application pour la gestion des Boutiques de Golob One V2</h2>
+        <h1>Consignes de sécurité et récommendations</h1>
+        <ul>
+            <li><h3>Ne pas ouvrir cette application aux yeux des clients</h3></li>
+            <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise</h3></li>
+            <li><h3>Ne pas communiquer votre mot de passe aux autres collègues</h3></li>
+            <li><h3>Ne pas oubliez de vous déconnecter à chaque fois que vous quittez votre poste de travail</h3></li>
+
+            
+        </ul>
+{% endblock %}
+
+
+ {% block javascripts %}
+                    <script src="{{asset("js/jquery.js")}}"></script>
+            <script src="{{asset("js/jquery-ui.min.js")}}"></script>
+            <script src="{{asset("js/bootstrap.js")}}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/0.9.3/typeahead.min.js"></script>
+            <script src="{{asset("js/go_shop_functions.js")}}"></script>
+            <script src="{{asset("js/golob_one_db_js.js")}}"></script>
+            <script src="{{asset("js/golob_one_shop.js")}}"></script>
+
+            {% endblock javascripts %}
+
+{% block javascript_code %}
+<script type="text/javascript">
+    
+$(document).ready(function() {
+    
+// On récupère la balise <div> en question qui contientl'attribut « data-prototype » qui nous intéresse.
+//var $container = $('div#produits,table#go_shopbundle_inventairetype_produits');
+
+ $(function() {
+        //do your stuff here
+   
+var $container = $('table#produits,div#produits,table#go_shopbundle_inventairetype_produits');
+//alert($container); exit();
+// On ajoute un lien pour ajouter une nouvelle catégorie
+var $lienAjout = $('<a href="#" id="ajout_categorie"class="btn">Ajouter une ligne </a>');
+$container.append($lienAjout);
+// On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+$lienAjout.click(function(e) {
+ajouterCategorie($container,$lienAjout);
+e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+return false;
+});
+// On définit un compteur unique pour nommer les champs qu'on vaajouter dynamiquement
+var index = $container.find(':input').length;
+// On ajoute un premier champ directement s'il n'en existe pasdéjà un (cas d'un nouvel article par exemple).
+if (index == 0) {
+ajouterCategorie($container,$lienAjout);
+} else {
+// Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+$container.children('tr').each(function() {
+ajouterLienSuppression($(this));
+});
+} // La fonction qui ajoute un formulaire Categorie
+function ajouterCategorie($container, $lienAjout) {
+// Dans le contenu de l'attribut « data-prototype », onremplace :
+// - le texte "__name__label__" qu'il contient par le label duchamp
+// - le texte "__name__" qu'il contient par le numéro du champ
+var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Ligne n°' + (index+1)).replace(/__name__/g, index));
+// On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+ajouterLienSuppression($prototype);
+// On ajoute le prototype modifié à la fin de la balise <div>
+$container.append($lienAjout);
+// On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+$lienAjout.click(function(e) {
+ajouterCategorie($container);
+e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+return false;
+});
+$prototype.append($lienAjout)
+$("#produits_table").append($prototype);
+// Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+index++;
+} // La fonction qui ajoute un lien de suppression d'une catégorie
+function ajouterLienSuppression($prototype) {
+// Création du lien
+$lienSuppression = $('<a href="#"><span class="glyphicon glyphicon-remove btn-danger"></span></a>');
+// Ajout du lien
+$prototype.append($lienSuppression);
+// Ajout du listener sur le clic du lien
+$lienSuppression.click(function(e) {
+$prototype.remove();
+e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+return false;
+});
+
+}
+$("#produits_table").on('keyup','input[type=number]',function(e){
+    var total=$('#input_total').val();
+       total2=0; 
+     if($(this).val()!="")
+     {
+         if(total!="")
+         {
+             total=parseInt(total);
+         }
+         total2=parseInt(total)+parseInt($(this).val());
+     }else
+     {
+    $('#total').text(total2);
+    $('#input_total').val(total2); 
+     }
+});
+});
+ //alert('run me');
+});
+
+</script>
+    {% endblock javascript_code %}

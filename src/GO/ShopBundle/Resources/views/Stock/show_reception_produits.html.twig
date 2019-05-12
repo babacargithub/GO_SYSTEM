@@ -1,0 +1,18 @@
+{# empty Twig template #}
+{% extends "GOShopBundle:Produit:produit_main_layout.html.twig" %}
+{% block content_body %}
+{% if produit_transferes is defined %}
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Produit</th>
+            <th>Quantite</th>
+        </tr>
+        {% for produit_transfere in produit_transferes %}
+            <tr>
+                <td>{{produit_transfere.produit.nom}}</td>
+                <td>{{produit_transfere.quantite}}</td>
+            </tr>
+            {%endfor%}
+    </table>
+    {%endif%}
+    {% endblock %}

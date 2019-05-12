@@ -1,0 +1,14 @@
+new in 2.1.0
+*  Le bundle ClientBundle est fonctionnelle dans cette version
+** Integration du bundle ClientBundle dans le bundle ShopBundle
+
+====**** Nouvelles fonctionnalités ajoutées ***===
+-Intégration des fonctionnalités CRM dans le bundle Shop (possibilité de visualiser l'historique 
+du compte client dans la boutique et ses achats ainsi que le nombre de passages et le bénéfice généré par le client
+- Généralisation de la fonctionnalité code barre sur tous les produits, les produits sans code barre au paravent ont désormais un code barre par défaut
+-Attribution automatique d'un code barre par défaut à tout nouveau produit
+-Possiblité de visualiser l'historique d'un code barre ainsi que les entrées et sorties stock qu'il a connus
+-Possibilter d'enregistrer chaque vente dans un compte client
+
+====**** Bug fixes *****==============
+Correction de la réinitisation de stock

@@ -1,0 +1,23 @@
+{% extends '@GOClient/compte_client/_main_layout.html.twig' %}
+{% block content_body %}
+   
+    
+<div class='col-lg-6 border-right' style='border: 1px solid blue'>
+   <h2>Création d'un nouveau compte client</h2> 
+   {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success pull-right" value="Créer le Compte " />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            Type de Compte non trouvé dans la liste? 
+            <a href="{{ path('type_compte_new') }}">Cliquez ici </a> pour le créer.
+        </li>
+        <li>
+            Si le Client n'existe pas
+            <a href="{{ path('client_new') }} " target='_blank'>Cliquez ici </a> pour le créer.
+        </li>
+    </ul>
+   </div>
+{% endblock %}

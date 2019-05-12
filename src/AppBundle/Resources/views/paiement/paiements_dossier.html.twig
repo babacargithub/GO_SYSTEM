@@ -1,0 +1,23 @@
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Numéro Facture</th>
+                <th>Montant</th>
+                <th>Effectué</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for paiement in paiements %}
+            <tr>
+                <td><a href="{{ path('paiement_show', { 'id': paiement.id }) }}">{{ paiement.numFacture}}</a></td>
+                <td>{{ paiement.montant }}</td>
+                <td>{{ paiement.user.nomComplet }}</td>
+                <td>
+                  <a href="{{ path('paiement_show', { 'id': paiement.id }) }}">Details</a>
+                  ||<a href="{{ path('paiement_edit', { 'id': paiement.id }) }}">Modifier</a>
+                     
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

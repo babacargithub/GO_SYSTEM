@@ -1,0 +1,21 @@
+{# empty Twig template #}
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>Boutique Emetrice</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Effectué par</th>
+        <th>Opération</th>
+    </tr>
+    {% for reception in pendings %}
+    <tr>
+        
+            <td>{{reception.transfertProduit.shop.libelle}}</td>
+            <td>{{reception.transfertProduit.date.format('d-m-Y H:i;s')}}</td>
+            <td>{{reception.transfertProduit.total|nombre()}} </td>
+            <td>{{reception.transfertProduit.user.prenom}}</td>
+            <td><a href="{{path("show_produit_reception",{"id":reception.id})}}">Afficher Produits</a>
+                <a href="{{path("go_shop_valider_reception",{"id":reception.id})}}">Valider</a></td>
+            
+    </tr>{% endfor%}
+</table>

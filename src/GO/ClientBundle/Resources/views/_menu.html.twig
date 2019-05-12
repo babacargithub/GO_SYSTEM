@@ -1,0 +1,8 @@
+{% set menuItems=[
+{"href":path("crm_client_index"), "libelle":"Clients"},
+{"href":path("compte_client_index"), "libelle":"Comptes"},
+{"href":path("type_compte_index"), "libelle":"Types Compte"}, 
+{"href":path("categorie_client_index"), "libelle":"Catégories Client"},
+{"href":"test", "libelle":"Plus"}
+] %}
+{% include "_menu_design.html.twig" with {"menuItems": menuItems} %}

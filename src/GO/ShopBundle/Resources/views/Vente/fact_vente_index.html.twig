@@ -1,0 +1,113 @@
+{# empty Twig template #}
+{% extends "GOShopBundle:Vente:vente_main_layout.html.twig" %}
+{% block content_body %}
+     <div class="col-lg-12">
+    <form id="{{form.vars.name}}"action="{{path('go_shop_vente_fact_add')}}" class="form-inline col-lg-12 col-md-12 col-xs-12" method="post" {{ form_enctype(form) }}>
+<table class="table table-striped table-bordered" > {% if form is defined %}<div>
+    {{ form_errors(form)}}
+     <div>
+         <tr>
+             <th colspan="5" class="text-center bg-blue">Informations de la facture</th>
+         </tr>
+             <tr class="bg-info">
+                
+                 <td>{{ form_label(form.client, "Client")}}</td>
+                 <td>{{ form_label(form.date, "Date Délivrance")}}
+                 <td id="avance">{{ form_label(form.avance, "Avance")}}</td>
+                 <td>{{ form_label(form.livre, "Marchandises livrées?")}}</td>
+                <td>{{ form_label(form.paye, "Facture Payée")}}</td>
+             </tr>
+             <tr>
+                <td>{{ form_widget(form.client, {"attr":{"class":"form-control"}})}}</td>
+                <td>{{ form_widget(form.date,{"attr":{"class":"form-control"}})}}
+                 <td id="avance">{{ form_widget(form.avance, {"attr":{"class":"form-control"}})}}</td>
+                 <td>{{ form_widget(form.livre, {"attr":{"class":"form-control"}})}}</td>
+                <td>{{ form_widget(form.paye, {"attr":{"class":"form-control"}})}}</td>
+            
+    {{ form_row(form._token) }}
+             </tr>
+             </table>
+        <table class="table table-bordered">
+        <div id="ventes" data-prototype="
+         {% filter escape %}
+             {{ include('GOShopBundle:Vente:_form_table.html.twig', { 'form': form.ventes.vars.prototype }) }}
+         {% endfilter %}">
+            {% for vente in form.ventes %}
+         <tr>
+            <td>{{ form_label(vente.produit, "Produit")}}</td>
+            <td>{{ form_widget(vente.produit, {"attr":{"class":"form-control typeahead"}})}}</td>
+            <td>{{ form_label(vente.quantite, "Quantité")}}</td>
+            <td>{{ form_widget(vente.quantite, {"attr":{"class":"form-control"}})}}</td>
+            <td> {{ form_label(vente.prixUnit, "Prix Achat")}}</td>
+            <td>{{ form_widget(vente.prixUnit, {"attr":{"class":"form-control"}})}}</td>
+          </tr>
+        {%endfor %}
+    </table>
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" value="Enregistrer la facture" />
+</form>
+</div>
+    {% endif %}
+
+     </div>
+    
+    {% endblock %}
+    {% block javascript_code %}
+        
+<script type="text/javascript">
+  $(document).ready(function() {
+    
+// On récupère la balise <div> en question qui contientl'attribut « data-prototype » qui nous intéresse.
+//var $container = $('div#produits,table#go_shopbundle_inventairetype_produits');
+
+ $(function() { 
+// On récupère la balise <div> en question qui contientl'attribut « data-prototype » qui nous intéresse.
+var $container = $('div#ventes,table#go_shopbundle_factureventetype_ventes');
+// On ajoute un lien pour ajouter une nouvelle catégorie
+var $lienAjout = $('<a href="#" id="ajout_categorie"class="btn">Ajouter une ligne </a>');
+$container.append($lienAjout);
+// On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+$lienAjout.click(function(e) {
+ajouterCategorie($container);
+e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+return false;
+});
+// On définit un compteur unique pour nommer les champs qu'on vaajouter dynamiquement
+var index = $container.find(':input').length;
+// On ajoute un premier champ directement s'il n'en existe pasdéjà un (cas d'un nouvel article par exemple).
+if (index == 0) {
+ajouterCategorie($container);
+} else {
+// Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+$container.children('div').each(function() {
+ajouterLienSuppression($(this));
+});
+} // La fonction qui ajoute un formulaire Categorie
+function ajouterCategorie($container) {
+// Dans le contenu de l'attribut « data-prototype », onremplace :
+// - le texte "__name__label__" qu'il contient par le label duchamp
+// - le texte "__name__" qu'il contient par le numéro du champ
+var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Ligne n°' + (index+1)).replace(/__name__/g, index));
+// On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+ajouterLienSuppression($prototype);
+// On ajoute le prototype modifié à la fin de la balise <div>
+$container.append($prototype);
+// Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+index++;
+} // La fonction qui ajoute un lien de suppression d'une catégorie
+function ajouterLienSuppression($prototype) {
+// Création du lien
+$lienSuppression = $('<a href="#" class="btn btndanger">Supprimer la ligne</a>');
+// Ajout du lien
+$prototype.append($lienSuppression);
+// Ajout du listener sur le clic du lien
+$lienSuppression.click(function(e) {
+$prototype.remove();
+e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+return false;
+});
+}
+ });
+  });
+</script>
+{%endblock %}

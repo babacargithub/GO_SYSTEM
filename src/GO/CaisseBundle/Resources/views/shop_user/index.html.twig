@@ -1,0 +1,49 @@
+{% extends '@GOCaisse/layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Shopusers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Disabled</th>
+                <th>Disabledat</th>
+                <th>Locked</th>
+                <th>Lockedat</th>
+                <th>Lockeduntil</th>
+                <th>Lastlogin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for shopUser in shopUsers %}
+            <tr>
+                <td><a href="{{ path('shop_user_show', { 'id': shopUser.id }) }}">{{ shopUser.id }}</a></td>
+                <td>{% if shopUser.disabled %}Yes{% else %}No{% endif %}</td>
+                <td>{% if shopUser.disabledAt %}{{ shopUser.disabledAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if shopUser.locked %}Yes{% else %}No{% endif %}</td>
+                <td>{% if shopUser.lockedAt %}{{ shopUser.lockedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if shopUser.lockedUntil %}{{ shopUser.lockedUntil|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if shopUser.lastLogin %}{{ shopUser.lastLogin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('shop_user_show', { 'id': shopUser.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('shop_user_edit', { 'id': shopUser.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('shop_user_new') }}">Create a new shopUser</a>
+        </li>
+    </ul>
+{% endblock %}

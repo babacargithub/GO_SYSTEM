@@ -1,0 +1,10 @@
+ <form method="post" action="{{path("candidature_new",{"id": dossier.id})}}">
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-danger" value="Enregistrer" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('candidature_index') }}">Retour</a>
+        </li>
+    </ul>

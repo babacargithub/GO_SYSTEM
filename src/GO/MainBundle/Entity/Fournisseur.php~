@@ -1,0 +1,46 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Fournisseur
+ *
+ * @ORM\Table(name="fournisseur")
+ * @ORM\Entity
+ */
+class Fournisseur
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_fournisseur", type="string", length=255, nullable=true)
+     */
+    private $nomFournisseur;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tel", type="integer", nullable=true)
+     */
+    private $tel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     */
+    private $ville;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_fournisseur", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idFournisseur;
+
+
+}

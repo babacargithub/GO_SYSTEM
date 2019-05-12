@@ -1,0 +1,39 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block body %}
+    <h1>Niveaus list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for niveau in niveaus %}
+            <tr>
+                <td><a href="{{ path('niveau_show', { 'id': niveau.id }) }}">{{ niveau.id }}</a></td>
+                <td>{{ niveau.libelle }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('niveau_show', { 'id': niveau.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('niveau_edit', { 'id': niveau.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('niveau_new') }}">Create a new niveau</a>
+        </li>
+    </ul>
+{% endblock %}

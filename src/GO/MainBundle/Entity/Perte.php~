@@ -1,0 +1,46 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Perte
+ *
+ * @ORM\Table(name="perte")
+ * @ORM\Entity
+ */
+class Perte
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant", type="integer", nullable=false)
+     */
+    private $montant;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cause", type="string", length=255, nullable=true)
+     */
+    private $cause;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="extra", type="string", length=255, nullable=true)
+     */
+    private $extra;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

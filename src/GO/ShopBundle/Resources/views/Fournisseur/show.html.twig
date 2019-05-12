@@ -1,0 +1,42 @@
+{# empty Twig template #}
+{% extends  '@GOShop/layout.html.twig'%}
+{% block content_body %}
+{{fournisseur.nom}}
+<div class="col-lg-12">
+   
+<ul class="nav  nav-pills" style="border-bottom: 2px ridge blue; background-color: #E7EEE7" >
+            <li class="active"><a href="#info"  data-toggle="tab" id="tes">Coordonnées du Fournisseur
+                </a></li>
+            <li><a href="#factures_non_payes"  data-toggle="tab" id="tes">Dettes</a></li>
+            <li><a href="#factures_payes"  data-toggle="tab" id="tes">Factures Payées</a></li>
+            <li><a href="#chiffres"  data-toggle="tab" id="tes">Chiffres</a></li>
+            <li><a href="#echeances_passees"  data-toggle="tab" id="tes">Echéances Passées</a></li>
+            
+        </ul>
+</div>
+<div class="col-lg-12">
+    <div class="tab-content">
+        <div id="info" class="tab-pane active">
+        {{ fournisseur.nom }}
+       </div>
+        <div id="factures_non_payes" class="tab-pane">
+        {{ include ('@GOShop/Achat/fact_liste.html.twig',{"liste_factures":factures_non_payes})}}
+       </div>
+        <div id="factures_payes" class="tab-pane">
+       {{ include ('@GOShop/Achat/fact_liste.html.twig',{"liste_factures":factures_payes})}}
+        </div>
+        <div id="chiffres" class="tab-pane">
+            <div class="row">
+            {% set total_fact_paye,total_fact_non_paye=0,0%}
+        {%for facture in factures_payes%}{% set total_fact_paye=total_fact_paye+facture.total %}{%endfor%}
+        {%for facture in factures_non_payes%}{% set total_fact_non_paye=total_fact_non_paye+facture.total %}{%endfor%}
+       {{include ('@GOShop/Admin/_chiffre_column_large.html.twig',{"label": "Total Facture Payé","chiffre":total_fact_paye|nombre, "background":"bg-red-gradient"})}}
+       {{include ('@GOShop/Admin/_chiffre_column_large.html.twig',{"label": "Total Dette","chiffre":total_fact_non_paye|nombre, "background":"bg-red-gradient"})}}
+        
+            </div>
+        </div>
+        <div id="echeances_passees" class="tab-pane">
+        </div>
+    </div>
+</div>
+{%endblock content_body %}

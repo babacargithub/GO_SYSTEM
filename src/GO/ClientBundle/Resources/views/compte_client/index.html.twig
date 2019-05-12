@@ -1,0 +1,42 @@
+{% extends '@GOClient/compte_client/_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Liste des des comptes</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                
+                <th>Client</th>
+                <th>Type de compte</th>
+                <th>Crée le</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compteClient in compteClients %}
+            <tr>
+                <td><a href="{{ path('compte_client_show', { 'id': compteClient.id }) }}">{{ compteClient.id }}</a></td>
+                <td>{{ compteClient.client.fullName}}</a></td>
+                <td>{{ compteClient.typeCompte}}</a></td>
+                <td>{{ compteClient.createdAt.format('d-m-Y')}}</a></td>
+                <td>
+                   
+                            <a href="{{ path('compte_client_show', { 'id': compteClient.id }) }}">Détails</a>
+                        
+                            <a href="{{ path('compte_client_edit', { 'id': compteClient.id }) }}">Modififer</a>
+                        
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('compte_client_new') }}">Créer Nouveau Compte</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends '@App/dossier/main_layout.html.twig' %}
+{% block content_title %}Liste des dossiers pour l'exercice en cours {%endblock %}
+{% block body %}
+    
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Numéro</th>
+                <th>Candidat</th>
+                <th>Etat</th>
+                <th>Crée le</th>
+                <th>Crée Par</th>
+               <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dossier in dossiers %}
+            <tr>
+                <td><a href="{{ path('dossier_show', { 'id': dossier.id }) }}">Ouvrir</a></td>
+                <td>{{ dossier.num }}</td>
+                <td>{{ dossier.candidat }}</td>
+                  <td>{% if dossier.etat %}Ouvert{% else %}Fermé{% endif %}</td>
+               <td>{% if dossier.createdAt %}{{ dossier.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+               <td>{{dossier.user.nomComplet}} </td>
+               
+                  <td>
+                    <a href="{{ path('dossier_show', { 'id': dossier.id }) }}">Détails</a>
+                    <a href="{{ path('dossier_edit', { 'id': dossier.id }) }}">Modifier</a>
+                        
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

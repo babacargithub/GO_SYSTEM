@@ -1,0 +1,32 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TypeProduit
+ *
+ * @ORM\Table(name="type_produit", uniqueConstraints={@ORM\UniqueConstraint(name="nom_type_produit", columns={"nom_type_produit"})})
+ * @ORM\Entity
+ */
+class TypeProduit
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom_type_produit", type="string", length=50, nullable=true)
+     */
+    private $nomTypeProduit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_type_produit", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idTypeProduit;
+
+
+}

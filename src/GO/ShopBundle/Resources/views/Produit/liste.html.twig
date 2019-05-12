@@ -1,0 +1,37 @@
+{% extends "GOShopBundle:Produit:produit_main_layout.html.twig" %}
+{% block content_body %}    
+Liste des produits séléctionnés
+        {% if produits is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Produit</th>
+                    <th>Prix Achat</th>
+                    <th>Prix Vente</th>
+                    <th>Type</th>
+                    <th>Catégorie</th>
+                    <th>Rayon</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for produit in produits %}
+                    <tr id="row-{{ produit.id }}">
+                        <td>{{produit.nom}}</td>
+                        <td>{{ produit.prixAchat|nombre()}}</td>
+                        <td>{{ produit.prixVente|nombre()  }}</td>
+                        <td>{{ produit.type.nom}}</td>
+                        {% if produit.categorie is not null %}
+                            <td>{{produit.categorie.nom}}</td>
+                            {%else%}
+                                <td></td>
+                            {% endif %}
+                        <td></td>
+                       <td><a class="update_action" href="{{path("go_shop_produit_update_form", {"id":produit.id})}}">Modifier</a>
+                          <a class="annuler_action" id="{{ produit.id }}" href="{{ path('go_shop_produit_supprimer', {'id': produit.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+    {% endblock %}

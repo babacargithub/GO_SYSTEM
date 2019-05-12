@@ -1,0 +1,58 @@
+.title
+{
+	text-align: center;
+	font-size: 14px;
+	font-family: Arial;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.montant
+{
+	font-size: 10px;
+	font-family: Arial;
+	text-align: lefter;
+	font-weight: bold;
+}
+.total
+{
+	font-size: 12px;
+	font-family: Arial;
+	text-align: right;
+	font-weight: bold;
+}
+.footer
+{
+	font-size: 8px;
+	font-family: Arial;	
+}
+
+
+.label
+{
+	text-align: left;
+	font-size: 12px;
+	font-family: Arial;
+	font-weight: bold;
+}
+
+td
+{
+	font-size: 12px;
+	font-family: Arial;
+	text-align: left;
+}
+
+th
+{
+	font-size: 12px;
+	font-family: Arial;
+	font-weight: bold;
+	text-align: left;
+}
+
+legend
+{
+	font-size: 16px;
+	font-family: Arial;
+}

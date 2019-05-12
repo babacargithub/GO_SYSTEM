@@ -1,0 +1,17 @@
+{% if app.session.flashbag.peekAll|length > 0 %}
+            {% for type, messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <div class="{{ type ? type : '' }}">
+                        {{ message|trans({}, domain|default('messages')) }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+{% endif %}
+{% if msg is defined  and msg is not null %}
+    {% set data={"code":1,"message":msg} %}
+    {{ data|json_encode() }}
+{% elseif errorMsg is defined and errorMsg is not null %}
+    {% set data={"code":0,"message":errorMsg} %}
+    {{ data|json_encode() }}
+    
+    {% endif %}

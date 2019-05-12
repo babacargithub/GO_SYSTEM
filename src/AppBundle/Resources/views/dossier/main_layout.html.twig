@@ -1,0 +1,9 @@
+{% extends '@App/base_template.html.twig' %}
+{% block content_title %}Menu Dossier{% endblock %}
+{% block  menu_vertical %}
+
+{{render(controller('AppBundle:Dossier:menuVertical'))}}
+
+{% endblock menu_vertical %}
+{% block body %}
+{% endblock %}

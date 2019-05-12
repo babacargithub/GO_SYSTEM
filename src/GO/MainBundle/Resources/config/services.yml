@@ -1,0 +1,15 @@
+parameters:
+services:
+    go_shop.type.client_selector:
+        class: GO\MainBundle\Form\ClientSelectorType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: client_selector }
+    go.authenticator_listener:
+        class: GO\MainBundle\AppAuthenticator\Authenticator
+        arguments: [@security.context]
+        tags:
+        - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    go.security.access_denied_handler:
+        class: GO\MainBundle\Security\GOAccessDeniedHandler
+        

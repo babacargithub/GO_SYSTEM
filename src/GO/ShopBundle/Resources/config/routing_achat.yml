@@ -1,0 +1,33 @@
+go_shop_achat_index:
+    pattern:  /achat.golob
+    defaults: { _controller: GOShopBundle:Achat:form }
+go_shop_achat_add:
+    pattern:  /achat_add.golob
+    defaults: { _controller: GOShopBundle:Achat:add }
+go_shop_achat_annuler:
+    pattern:  /achat_delete-{id}.golob
+    defaults: { _controller: GOShopBundle:Achat:delete}
+go_shop_achat_show_today:
+    pattern:  /achat_show_today.golob
+    defaults: { _controller: GOShopBundle:Achat:showToday }
+go_shop_achat_recherche_index:
+    pattern:  /achat_search_index.golob
+    defaults: { _controller: GOShopBundle:Achat:showSearchIndex }
+go_shop_achat_search:
+    pattern:  /achat_search.golob
+    defaults: { _controller: GOShopBundle:Achat:search }
+go_shop_achat_fact_index:
+    pattern:  /achat_fact_index.golob
+    defaults: { _controller: GOShopBundle:Achat:formFacture }
+go_shop_achat_fact_add:
+    pattern:  /achat_fact_add.golob
+    defaults: { _controller: GOShopBundle:Achat:factureAdd }
+go_shop_achat_fact_show_liste:
+    pattern:  /achat_fact_show.golob
+    defaults: { _controller: GOShopBundle:Achat:factureShowListe }
+go_shop_achat_fact_show:
+    pattern:  /achat_fact_show-{id}.golob
+    defaults: { _controller: GOShopBundle:Achat:factureShow }
+go_shop_facture_annuler:
+    pattern:  /achat_fact_annuler-{id}.golob
+    defaults: { _controller: GOShopBundle:Achat:factureShow }

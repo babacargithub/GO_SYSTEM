@@ -1,0 +1,254 @@
+{% extends "GOShopBundle:Produit:produit_main_layout.html.twig" %}
+{% block content_body %}
+    <div>
+    <ul class="nav  nav-pills" style="border-bottom: 6px ridge blue;background-color: #E7EEE7">
+            <li><a href="#resume_div"  data-toggle="tab" id="tes">Résumé
+                </a></li>
+            <li><a href="#deficit_div"  data-toggle="tab" id="tes">Produits Manquants</a></li>
+            <li><a href="#surplus_div"  data-toggle="tab" id="tes">Produits Sur Plus</a></li>
+            <li><a href="#absents_div"  data-toggle="tab" id="tes">Produits Absents</a></li>
+        </ul>
+     <div class="tab-content">
+        <div id="resume_div" class="tab-pane">
+         
+        
+    {% if inventaire is defined and inventaire is not null %} 
+        <div class="panel panel-primary col-lg-8">
+<div class="panel-heading">
+    <h2 class="panel-title">Résultat de l'inventaire: {{ inventaire.libelle }}</h2>
+</div>
+<div class="panel-body">
+        <h1>TOTAUX</h1>
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Valeur Stock Réel</th>
+                    <th>Valeur Stock Virtuel</th>
+                    <th>Valeur Deficit Virtuel</th>
+                    <th>Valeur Sur PLus Virtuel</th>
+                    
+                </tr>
+                
+                    <tr id="row-{{ inventaire.id }}">
+                        <td>{{inventaire.valeurStockReel|nombre()}}</td>
+                        <td>{{inventaire.valeurStockVirtuel|nombre()}}</td>
+                        <td>{{inventaire.totalProduitsDeficit|nombre()}}</td>
+                        <td>{{inventaire.totalProduitsSurPLus|nombre()}}</td>
+                     </tr>
+            </table>
+                     <h1 style="font-family: 'Arial Black'; font-size: 14pt; background-color: #EEEEEE;text-align: center" >CHIFFRES EN DETAILS</h1>
+           <table class="table table-bordered table-striped">
+                    <tr id="row-{{ inventaire.id }}">
+                        <th>Capital</th>
+                        <td>{{inventaire.capital|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Valeur Boutique</th>
+                        <td>{{inventaire.valeurBoutique|nombre()}}</td>
+                     </tr>
+                     <tr>
+                        <th>Caisse</th>
+                        <td>{{inventaire.caisse|nombre()}}</td>
+                     </tr>
+                     <tr>
+                        <th>Solde Banque</th>
+                        <td>{{inventaire.soldeBanque|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Total des Ventes</th>
+                        <td>{{inventaire.vente|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Bénéfice Vente Brut</th>
+                        <td>{{inventaire.beneficeVente|nombre()}}</td>
+                     </tr>
+                    
+                    <tr>
+                        <th>Dépenses</th>
+                        <td>{{inventaire.depense|nombre()}}</td>
+                     </tr>
+                     <tr>
+                        <th>Bénéfice Vente Net</th>
+                        <td>{% set benefNet=(inventaire.beneficeVente-inventaire.depense)%}{{benefNet|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Créances Liquides</th>
+                        <td>{{inventaire.creanceLiquide|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Créances Produits</th>
+                        <td>{{inventaire.creanceProduit|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Dettes Vers Fournisseur</th>
+                        <td>{{inventaire.detteProduit|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Dettes en Liquides</th>
+                        <td>{{inventaire.detteLiquide|nombre()}}</td>
+                     </tr>
+                    
+                    <tr>
+                        <th>Valeur AZ Zakaat</th>
+                        <td>{{(inventaire.valeurBoutique*0.025)|nombre()}}</td>
+                     </tr>
+                    <tr>
+                        <th>Taux de Croissance</th>
+                        <td>{{(((inventaire.valeurBoutique-inventaire.valeurBoutiquePrecedent)/inventaire.valeurBoutiquePrecedent)*100)|nombre()}}%</td>
+                     </tr>
+                    
+            </table>
+                     <h1 style="font-family: 'Arial Black'; font-size: 14pt; background-color: #EEEEEE;text-align: center" >RESUME</h1>
+        
+                     
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Bénéfice Net Réalisé</th>
+                    <th>Bénéfice Net Dû</th>
+                    <th>Hausse Valeur Boutique</th>
+                    <th>Taux de Croissance</th>
+                    <th>Valeur Deficit Virtuel</th>
+                    <th>Valeur Sur PLus Virtuel</th>
+                    
+                </tr>
+                
+                    <tr id="row-{{ inventaire.id }}">
+                        {% if inventaire.BeneficeNet>0%}
+                            <td style="font-family: 'Arial Black'; font-size: 14pt;color: #009933; background-color: #EEEEEE">
+                                {%else%}
+                           <td style="font-family: 'Arial Black'; font-size: 14pt;color: #ee0000; background-color: #EEEEEE">
+                               {%endif%}
+                                {{inventaire.BeneficeNet|nombre()}}</td>
+                        <td> {{benefNet|nombre()}}</td>
+                        <td>{{inventaire.hausseValeurBoutique|nombre()}}</td>
+                        <td>{{(((inventaire.valeurBoutique-inventaire.valeurBoutiquePrecedent)/inventaire.valeurBoutiquePrecedent)*100)|nombre()}}%</td>
+                        <td>{{inventaire.totalProduitsDeficit|nombre()}}</td>
+                        <td>{{inventaire.totalProduitsSurPLus|nombre()}}</td>
+                     </tr>
+            </table>
+        </div>
+        </div>
+            {% else %}
+                
+   
+ {% endif %}
+ </div>
+        <div id="deficit_div" class="tab-pane">
+            <h1>Liste des Produits Déficitaires</h1>
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Historique</th>
+                    <th>Produit</th>
+                    <th>Stock Réel</th>
+                    <th>Stock Virtuel</th>
+                    <th>Manquant</th>
+                    <th>Prix Achat</th>
+                    <th>Valeur Déficit</th>
+                    
+                    
+                </tr>
+                {% if produits_deficit is defined %}
+                {% for produit_inventaire in produits_deficit %}
+                    <tr id="row-{{ produit_inventaire.id }}">
+                        <td>{% if produit_inventaire.codeBar is not null %}
+                            <a href="{{path("historique_stock_code_bar",{"codeBar":produit_inventaire.codeBar.codeBar})}}">Historique</a>{%endif%}</td>
+                        <td>{{produit_inventaire.produit}}</td>
+                        <td>{{produit_inventaire.stockReel}}</td>
+                        <td>{{produit_inventaire.stockVirtuel}}</td>
+                        <td>{% set extraQuantity=produit_inventaire.stockVirtuel-produit_inventaire.stockReel%}{{extraQuantity}}</td>
+                        <td>{{produit_inventaire.prixAchat|nombre()}}</td>
+                        <td>{{(produit_inventaire.prixAchat*extraQuantity)|nombre()}}</td>
+                        
+                        
+                          </tr>
+                     {%endfor%}
+                     <tr><th>Total</th><th colspan='4' class="text-center">{{inventaire.totalProduitsDeficit|nombre}}</th></tr>
+              
+                {%endif%}
+                    
+            </table>
+            
+        </div>
+        <div id="surplus_div" class="tab-pane">
+            <h1>Liste des Produits Exétendaires</h1>
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Historique</th>
+                    <th>Produit</th>
+                    <th>Stock Réel</th>
+                    <th>Stock Virtuel</th>
+                    <th>Nombre SurPlus</th>
+                    <th>Valeur Surplus</th>
+                    
+                    
+                </tr>
+                {% if produits_surplus is defined %}
+                {% for produit_inventaire in produits_surplus %}
+                    <tr id="row-{{ produit_inventaire.id }}">
+                        <td>{% if produit_inventaire.codeBar is not null%} <a href="{{path("historique_stock_code_bar",{"codeBar":produit_inventaire.codeBar.codeBar})}}">Historique</a>{%endif%}</td>
+                    
+                        <td>{{produit_inventaire.produit}}</td>
+                        <td>{{produit_inventaire.stockReel}}</td>
+                        <td>{{produit_inventaire.stockVirtuel}}</td>
+                        <td>{% set extraQuantity=produit_inventaire.stockReel-produit_inventaire.stockVirtuel%}{{extraQuantity}}</td>
+                        <td>{{(produit_inventaire.prixAchat*extraQuantity)|nombre()}}</td>
+                        
+                          </tr>
+                     {%endfor%}
+                     <tr><th>Total</th><th colspan='4' class="text-center">{{inventaire.totalProduitsSurPlus|nombre}}</th></tr>
+                 {%endif%}
+                    
+            </table>
+        </div>
+    
+        <div id="absents_div" class="tab-pane">
+            <h1>Liste des Produits Non recensés</h1>
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Produit</th>
+                    <th>Stock Virtuel</th>
+                    <th>Prix Achat</th>
+                    <th>Total</th>
+                    
+                    
+                </tr>
+                {% if produits_absents is defined %}
+                {% for stock in produits_absents %}
+                    <tr id="row-{{ stock.produit.id }}">
+                        <td>{{stock.produit}}</td>
+                        <td>{{stock.quantite}}</td>
+                        {% set deficitQuantity=stock.quantite%}
+                        <td>{{stock.produit.prixAchat}}</td>
+                         <td>{{(stock.produit.prixAchat*deficitQuantity)|nombre()}}</td>
+                        
+                          </tr>
+                     {%endfor%}
+                     <tr><th>Total</th><th colspan='4' class="text-center">{{inventaire.totalProduitsSurPlus|nombre}}</th></tr>
+                 {%endif%}
+                <tr>t<th>Produits avec code barre</th></tr>
+                {% if produits_absentsCodeBar is defined %}
+                {% for achat in produits_absentsCodeBar %}
+                    <tr id="row-{{ achat.id }}">
+                        <td>{{achat.produit}}</td>
+                        <td>{{achat.CodeBar}}</td>
+                        <td>{{achat.quantiteRestant}}</td>
+                        {% set deficitQuantity=achat.quantiteRestant%}
+                        <td>{{achat.prixUnit}}</td>
+                         <td>{{(achat.prixUnit*deficitQuantity)|nombre()}}</td>
+                        
+                          </tr>
+                     {%endfor%}
+                     <tr><th>Total</th><th colspan='4' class="text-center">{{inventaire.totalProduitsSurPlus|nombre}}</th></tr>
+                 {%endif%}
+                    
+            </table>
+        </div>
+    </div>
+    </div>
+    
+ {% endblock%}
+        

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block content_body %}
+    <h1>Typecomptes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Comments</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeCompte in typeComptes %}
+            <tr>
+                <td><a href="{{ path('type_compte_show', { 'id': typeCompte.id }) }}">{{ typeCompte.id }}</a></td>
+                <td>{{ typeCompte.name }}</td>
+                <td>{{ typeCompte.comments }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_compte_show', { 'id': typeCompte.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_compte_edit', { 'id': typeCompte.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_compte_new') }}">Create a new typeCompte</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,92 @@
+{# empty Twig template #}
+{% extends "@GOShop/Vente/vente_main_layout.html.twig" %}
+{% block content_body %}
+<div class="col-lg-6" id="vente_code_bar">
+      <div class="col-lg-12 panel panel-primary" >
+                <div class="panel-heading">
+                       <h3 class="panel-title">Vente Simple</h3>
+                </div>
+                <div class="panel-body">
+                    {{ include ('GOShopBundle:Vente:_form.html.twig') }}</div>
+                    </div>
+  </div>
+    <div class="col-lg-6" id="vente_code_bar">
+      <div class="col-lg-12 panel panel-primary" >
+                <div class="panel-heading">
+                       <h3 class="panel-title">Effectuer Vente Code Bar</h3>
+                </div>
+                <div class="panel-body">
+                    {% include ('GOShopBundle:Vente:_code_bar_form.html.twig')%}</div>
+                    </div>
+                    <div id="codeBarNotFound" class="alert alert-danger"></div>
+                    
+                    <input type="number" name="_tel" id="_tel_to_account"/>
+  </div>
+    {% endblock %}
+    {% block javascripts %}
+        {{parent()}}
+        <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+        {%endblock%}
+    {% block javascript_code %}
+        <script>
+            $(document).on("keypress", "form#go_shopbundle_ventecodebartype", function(event) { 
+            return event.keyCode != 13;
+        });
+            $(document).ready(function(){
+                // ========== permettre de soumettre le formulaire quand on clique sur la touche espace 
+                $("form#go_shopbundle_ventecodebartype").on('keyup',function(e)
+                   {
+                       if(e.keyCode==32)
+                            {
+                                e.preventDefault();
+                                $("form#go_shopbundle_ventecodebartype").trigger('submit');
+                            }
+                    });
+                   
+            // détecter la touche "Entrée" et trouver le prduit à vendre en fonction du code barre renseigné. 
+                $("input#go_shopbundle_ventecodebartype_codeBar").on('keyup', function(e){
+                   if(e.keyCode==13) 
+                   {
+                       e.preventDefault();
+                       var results = [];
+                        var searchField = "codeBar";
+                        var searchVal = $(this).val();
+                        var has_match=false;
+                        for (var i=0 ; i < produits.length ; i++)
+                        {
+                            if (produits[i][searchField] == searchVal) {
+                                has_match=true;
+                            results.push(produits[i]);
+                            $("span#notFoundMessage").hide();
+                             $("input#go_shopbundle_ventecodebartype_codeBar").closest('div').removeClass('has-error');
+                         
+                            $("input#go_shopbundle_ventecodebartype_quantite").val("1");
+                            $("input#go_shopbundle_ventecodebartype_prixUnit").val(produits[i].prixVente);
+                             }
+                        }
+                        if(has_match==false)
+                        {
+                            $("input#go_shopbundle_ventecodebartype_codeBar").closest('div').addClass('has-error');
+                            $("input#go_shopbundle_ventecodebartype_codeBar").after('<span id="notFoundMessage" class="help-block">    <ul class="list-unstyled"><li><span class="glyphicon glyphicon-exclamation-sign"></span> Aucun Produit n\'existe avec ce code barre </li></ul></span>' );
+                            
+                        }
+                    
+                   }
+                   
+            }   );
+            
+              $("input#_tel_to_account").on('keyup', function(e){
+              var tel=$(this).val();
+              if(tel.length===9)
+              {
+                  $.getJSON(Routing.generate('get_details_by_client_tel',{tel:tel}), "", function(data){
+                      $('#{% if form_ is defined%}{{form_.compteClient.vars.id}}{%endif%}').val(data.compte.number);
+                  });
+              }
+              });
+            });
+        </script>
+        {% endblock %}
+ 

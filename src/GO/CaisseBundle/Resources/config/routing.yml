@@ -1,0 +1,3 @@
+go_caisse_homepage:
+    path:     /
+    defaults: { _controller: GOCaisseBundle:Default:index }

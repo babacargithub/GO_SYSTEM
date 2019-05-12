@@ -1,0 +1,46 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Formule
+ *
+ * @ORM\Table(name="formule", uniqueConstraints={@ORM\UniqueConstraint(name="libelle_abnmnt", columns={"libelle"})}, indexes={@ORM\Index(name="prix_abnmnt", columns={"prix"}), @ORM\Index(name="abrv", columns={"abrv"})})
+ * @ORM\Entity
+ */
+class Formule
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=100, nullable=false)
+     */
+    private $libelle;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix", type="integer", nullable=false)
+     */
+    private $prix;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="abrv", type="string", length=20, nullable=true)
+     */
+    private $abrv;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+        <tr>
+            <th>Depart</th>
+            <th>Nombre Thies</th>
+            <th>Nombre DAKAR</th>
+            <th>Total Encaissé</th>
+        </tr>
+         {% set total=0 %}
+     {% if chiffres is defined %}
+         
+         {% for chiffre in chiffres %}
+            <tr><td>{{chiffre.depart.libelle}}</td>
+            <td>{{chiffre.nombre_thies}}</td>
+            <td>{{chiffre.nombre_dakar}}</td>
+            <td>{{chiffre.total|nombre}}</td>
+             </tr>
+              {% set total =total+chiffre.total %}
+             {% endfor %}
+        
+             <tr style="border: 3px black; font-weight: bold">
+            <td colspan="3" style="text-align: center;">
+            Total</td><td>{{total|nombre}}</td>
+            </tr>
+             
+         {% endif %}
+    </table>

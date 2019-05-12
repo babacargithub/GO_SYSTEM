@@ -1,0 +1,52 @@
+{% extends '@GOShop/Admin/layout.html.twig' %}
+{% block main %}{# empty Twig template #}
+    {% set mois_list=["Janvier","Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août","Septembre","Octobre","Novembre","Décembre"] %}
+
+    <h1>Rapport du mois: {{mois_list[app.request.get('mois')-1]~" "~app.request.get('annee')}}</h1>
+    {% set total_benef, total_benef_net,total_vente=0,0,0%}
+    {% for shop in shops %}
+        <h1>{{shop.shop}}</h1>
+        {% set fields = [ 
+                {'chiffre': shop.venteMois|nombre(), 'label':'Vente Mois','background':  'bg-gray-active'}, 
+                {'chiffre': shop.AchatMoisPaye|nombre(), 'label':'Achat Mois','background':  'bg-yellow'}, 
+                {'chiffre': shop.DepenseMois|nombre(), 'label':'DépenseS','background':  'bg-purple'}, 
+                {'chiffre': shop.BeneficeMois|nombre(), 'label':'Bénéfice Brut','background':  'bg-green'}, 
+                {'chiffre': (shop.BeneficeMois-shop.depenseMois)|nombre(), 'label':'Bénéfice Net','background':  'bg-aqua-gradient'}, 
+                {'chiffre': shop.DetteFactureMois|nombre(), 'label':'Dettes','background':  'bg-navy'}, 
+                 {'chiffre': shop.CreanceProduitMois|nombre(), 'label':'Créance Clients','background':  'bg-maroon'}, 
+                 
+                ] %}
+                {% set total_benef=total_benef+shop.BeneficeMois %}
+                {% set total_benef_net=total_benef_net+(shop.BeneficeMois-shop.depenseMois) %}
+                {% set total_vente=total_vente+shop.venteMois %}
+                <span class="bg-re"></span>
+ <div class="row">
+
+ {% for data in fields %}
+      <!-- /. this will be displayed as column -->
+      {{ include ('@GOShop/Admin/_chiffre_column_large.html.twig',
+                    {chiffre:data.chiffre,
+                        label:data.label,
+                        background:data.background})}}
+ {%endfor %}
+ 
+</div>
+ {%endfor %}
+ <h2>Total Vente Mois {{total_vente|nombre()}}</h2>
+   <h2>Total Bénéfice Mois {{total_benef|nombre()}}</h2>
+   <h2>Total Bénéfice NET {{total_benef_net|nombre()}}</h2>
+ <!-- parcourir les mois passés pour afficher leur données respectives !-->
+ <h2>Afficher les autres mois </h2>
+ <table class='table table-bordered bg-green'>
+     <tr>
+  {% for index,mois  in mois_list %}
+      <td><a href="{{path('admin_shop_month_summary',{"mois":index+1, "annee":app.request.get('annee')})}}"><span class='fa fa-chevron-right'></span>{{mois_list[index]}}</a><td>
+
+   
+        {%endfor %}
+     </tr>
+ </table>
+ <a href="{{path('admin_shop_month_summary',{"mois":1, "annee":app.request.get('annee')-1})}}"> <i class="fa fa-angle-double-left pull-left bg-green-gradient"></i>Voir Année {{app.request.get('annee')-1}}</a>
+  <span class="pull-right bg-green-gradient"><a href="{{path('admin_shop_month_summary',{"mois":1, "annee":app.request.get('annee')+1})}}">Voir Année {{app.request.get('annee')+1}} </a><i class="fa fa-angle-double-right "></i></span>
+                            
+{%endblock %}

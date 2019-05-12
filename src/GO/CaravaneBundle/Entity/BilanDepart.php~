@@ -1,0 +1,157 @@
+<?php
+
+namespace GO\CaravaneBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * BilanDepart
+ *
+ * @ORM\Table(name="bilan_depart")
+ * @ORM\Entity(repositoryClass="GO\CaravaneBundle\Entity\BilanDepartRepository")
+ */
+class BilanDepart
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="location", type="integer")
+     */
+    private $location;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="Encaisse", type="integer")
+     */
+    private $encaisse;
+
+     /**
+     * @var \GO\CaravaneBundle\Entity\Depart
+     *
+     * @ORM\ManyToOne(targetEntity="GO\CaravaneBundle\Entity\Depart")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="depart", referencedColumnName="id",nullable=false)
+     * })
+     */
+    private $depart;
+
+    /**
+     * @var \GO\CaravaneBundle\Entity\Chauffeur
+     *
+     * @ORM\ManyToOne(targetEntity="GO\CaravaneBundle\Entity\Chauffeur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="chauffeur", referencedColumnName="id",nullable=false)
+     * })
+     */
+    private $chauffeur;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombreInscrit", type="integer")
+     */
+    private $nombreInscrit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombrePresent", type="integer")
+     */
+    private $nombrePresent;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombreAbsent", type="integer")
+     */
+    private $nombreAbsent;
+
+    /**
+     * @var \GO\GOMainBundle\Entity\Employe
+     *
+     * @ORM\ManyToOne(targetEntity="GO\GOMainBundle\Entity\Employe")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="agent", referencedColumnName="id",nullable=false)
+     * })
+     */
+    private $agent;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="savedAt", type="datetime")
+     */
+    private $savedAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="lastUpdate", type="datetime")
+     */
+    private $lastUpdate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="termine", type="boolean")
+     */
+    private $termine=false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="commentaires", type="text",nullable=true)
+     */
+    private $commentaires;
+
+    /**
+     * @var \GO\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="GO\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id",nullable=false)
+     * })
+     */
+    private $user;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="bus", type="string")
+     */
+    private $bus;
+
+    /**
+     * @var \GO\CaravaneBundle\Entity\DepenseDepart
+     *
+     * @ORM\OneToMany(targetEntity="GO\CaravaneBundle\Entity\DepenseDepart", mappedBy="bilanDepart",cascade={"persist"})
+    */
+    private $depenses;
+    
+
+    
+    public function getTotalDepense()
+    {
+        $total=0;
+         foreach($this->depenses as $depense)
+         {
+             $total=$total+$depense->getMontant();
+         }
+         return (int) $total;
+        
+    }
+    public function getBenefice()
+    {
+        
+    }
+}

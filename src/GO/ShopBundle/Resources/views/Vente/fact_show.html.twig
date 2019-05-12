@@ -1,0 +1,44 @@
+      {% extends "GOShopBundle:Vente:vente_main_layout.html.twig" %}
+      {% block content_body %}
+        {% if facture is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Num Facture</th>
+                    <th>Client</th>
+                    <th>Date Facture</th>
+                    
+                    <th>Payé</th>
+                    <th>Avance</th>
+                    <th>Total Facture</th>
+                    <th>Opérations</th>
+                </tr>
+                
+                    <tr id="row-{{ facture.id }}">
+                        <td>{{facture.num}}</td>
+                        <td>{{facture.client.nom}}</td>
+                         <td>{{ facture.date.format('d-m-Y H:i')}}</td>
+                        <td>{{ facture.paye  }}</td>
+                        <td>{{ facture.avance|nombre()  }}</td>
+                        <td>{{ facture.total|nombre()  }}</td>
+                        {%if is_granted('ROLE_SUP_BOUT')%}
+                         
+                        <td>
+                            <a class="update_fact_achat" id="{{ facture.id }}" href='{{path("facture_achat_update",{"id": facture.id })}}'>Modifier</a>
+                            <a class="annuler_action" id="{{ facture.id }}" href="{{ path('delete_achat', {'id': facture.id}) }}">Supprimer</a>
+                            <a class="update_action" id="{{ facture.id }}" href="{{ path('fact_vente_transform_index', {'id': facture.id}) }}">Convertir</a>
+                            <a class="" id="{{ facture.id }}" href="{{ path('go_shop_fact_vente_export', {'id': facture.id, 'format':'pdf'}) }}">Imprimer</a>
+                      
+                        </td>{%else%}<td><a class="" id="{{ facture.id }}" href="{{ path('go_shop_fact_vente_export', {'id': facture.id,'format':'pdf'}) }}">Imprimer</a>
+                      </td>
+                        
+                        {%endif%}
+                    </tr>
+                   
+            </table>
+                        <a href="{{path("facture_vente_add_produit",{"id":facture.id}) }}">Ajouter Des Produit</a>
+                        {% set ventes=facture.ventes %}
+                       {% include'GOShopBundle:Vente:liste.html.twig' %}
+                
+    {% endif %}
+    {% endblock %}

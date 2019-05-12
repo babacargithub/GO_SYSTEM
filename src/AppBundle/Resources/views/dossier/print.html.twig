@@ -1,0 +1,160 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% set agence_name="Golob One Consulting" %}
+{% set candidat=dossier.candidat %}
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Reçu Dossier</title> 
+<link rel="StyleSheet" href="{{asset('bundles/app/css/recu.css')}}" type="text/css">
+</head>
+<body>
+<fieldset style="width: 90%;">
+<legend style="font-weight:bold">Golob One Consulting</legend>
+<div class="title" align="center">Récapitulatif de Dossier</div>
+<legend>Agence</legend>
+<table width="100%">
+	<tbody><tr>
+		<td>Golob One Consulting</td>
+		<td>Contact : 77 330 08 53</td>
+		<td>Email : goloboneconsulting@gmail.com, Site Web www.goloboneconsulting.com</td>
+	
+		
+		<td>Adresse :Campus 1 entre village E et F </td>
+		
+	</tr>
+</tbody></table>
+
+<fieldset style="width: 90%"><legend><H4>Candidat</H4></legend>
+<table width="100%">
+
+	<tbody><tr>
+		
+		<th>Téléphone:</th>
+		<td>{{candidat.tel}}</td>
+		<th>Prénom</th>
+		<td>{{candidat.prenom}}</td>
+		<th>Nom</th>
+		<td>{{candidat.nom}}</td>
+	</tr>
+	
+	<tr>
+		<th>Numéro CNI:</th>
+		<td>{{candidat.numCni}}</td>
+		<th>Email</th>
+		<td>{{candidat.email}}</td>
+		<th>Date de Naissance:</th>
+                <td>{{candidat.dateNaiss|date('d-m-Y')}}</td>
+		<th>Lieu de Naissance:</th>
+		<td>{{candidat.lieuNaiss}}</td>
+	</tr>
+	
+</tbody></table>
+</fieldset>
+<fieldset style="width: 90%"><legend><h4>Dossier</h4></legend>
+<table width="100%">
+
+	<tbody><tr>
+		<th>Numéro:</th>
+		<td>{{dossier.num}}</td>
+		<th>Crée le:</th>
+		<td>{{dossier.createdAt|date('d-m-Y')}}</td>
+		<th>Frais</th>
+                <td>{{dossier.frais|number_format()}}</td>
+		<th>Ouvert Par:</th>
+		<td>{{dossier.user.nomComplet}}</td>
+	</tr>
+	
+</tbody></table>
+</fieldset>
+<fieldset style="width: 90%"><legend><h4>Candidature</h4></legend>
+<table width="100%">
+
+    <tbody>
+        {% for candidature in dossier.candidatures|slice(0,1) %}<tr>
+		<th>Pays demandé:</th>
+		<td>{{candidature.paysDemande}}</td>
+		<th>Formation demandée:</th>
+		<td>{{candidature.formationDemandee}}</td>
+		<th>Niveau Demandé:</th>
+		<td>{{candidature.niveauDemande}}</td>
+            </tr>
+                {%else%}
+                 <tr>
+                     Ce dossier ne contient aucune candidature!
+                </tr>
+                {%endfor%}
+	
+	
+</tbody></table>
+</fieldset>
+
+<fieldset style="width: 90%"><legend><h4>Paiement</h4></legend>
+<table width="100%">
+
+    <tbody>
+        {% for paiement in dossier.paiements%}
+	<tr><td style="border-bottom: 1px solid black">Paiement N°{{loop.index}}</td></tr>
+	<tr>
+	<th>Montant:</th>
+	<td class="montant">{{paiement.montant}} <span>CFA</span></td>
+		<th>N° Facture</th>
+		<td>{{paiement.numFacture}}</td>
+		<th>Date</th>
+		<td>{{paiement.date|date('d-m-Y')}}</td>
+
+	</tr>
+	<tr>
+		<th>Motif :</th>
+		<td>{{paiement.motif}}</td>
+		<th>Encaissé Par :</th>
+		<td>{{paiement.user.nomComplet}}</td>
+	</tr>
+        {%else%}
+                 <tr>
+                     Aucun paiement n'est enregistré dans le dossier!
+                </tr>
+	{%endfor%}
+		
+	
+	<tr>
+		<th>Total :</th>
+                <td class="montant">{{dossier.totalPaiements|number_format()}}</td>
+	</tr>
+	
+	
+	
+</tbody></table>
+</fieldset>
+
+<fieldset style="width: 90%"><legend>Règles et Conditions </legend>
+<table width="100%">
+
+    <tbody><tr>
+      <td style="font-size: 9px">
+		Avant de signer ce présent document, vous attestez avoir lu les conditions suivantes
+	    <ul>
+		<li>En contrepartie des frais d'ouverture de dossier, {{agence_name}} s'engange à gérer les démarches de "demande de préinscription" pour le candidat {{candidat}} jusqu'à l'obtention d'une réponse (positive ou négative) des établissements d'enseignement du pays demandé par le candidat</li>
+		<li>L'étude, le traitement et l'appréciation du dossier étant laissés à la libre appréciation de l'établissement auquel le dossier est adressé, {{agence_name}} ne peut pas assurer au candidat {{candidat}} l'obtention d'une réponse favorable.
+		<li>Les frais d'ouverture de dossier versés à l'agence {{agence_name}} ne sont pas remboursables; même en cas de désistement du candidat ou de non obtention d'une préinscription</li>
+		<li>Les frais d'entretien de Campus France sont à la charge du candidat</li>
+		<li>Les frais d'ouverture de dossier n'incluent pas les frais des démarches pour le visa; lesquelles nécessitent des honoraires différents au moment d'entamer les démarches visa </li>
+            </ul>
+		</td>
+		</tr>
+	
+</tbody></table>
+</fieldset>
+</fieldset>
+<table style="height: 75px" width="80%">
+	<tbody><tr>
+		<td width="15%" valign="top" align="left"><span style="font-weight: bold; text-decoration: underline">Le Conseiller</span></td>
+		<td width="45%" valign="top"></td>
+		<td width="40%" valign="top" align="right"><span style="font-weight: bold; text-decoration: underline">Client  </span><span style=" font-style: italic"> (Précédé de la mention lu et approuvé)</span></td>
+	</tr>
+</tbody></table>
+
+<div class="footer" style="width: 100%">
+Développé par Golob One Software </div>
+
+
+</body></html>

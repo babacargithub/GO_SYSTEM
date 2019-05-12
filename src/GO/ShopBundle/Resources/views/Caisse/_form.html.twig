@@ -1,0 +1,31 @@
+
+ 
+        {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_shop_vente_add')}}" class="form-horizontal col-lg-4 col-md-6 col-xs-12" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+    
+    
+    
+    <div>
+    {{ form_label(form.produit, "Téléphone client")}}
+    {{ form_widget(form.produit,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.quantite, "Quantité")}}
+    {{ form_widget(form.quantite,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.prixUnit, "Prix Unitaire")}}
+    {{ form_widget(form.prixUnit,{"attr":{"class":"form-control"}} )}}
+    </div>
+   
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+
+  

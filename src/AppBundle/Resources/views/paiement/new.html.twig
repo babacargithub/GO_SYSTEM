@@ -1,0 +1,4 @@
+<form method="post" action="{{path('paiement_new',{"id":dossier.id})}}">
+        {{ form_widget(form) }}
+        <input class="btn btn-danger" type="submit" value="Enregistrer" />
+    {{ form_end(form) }}

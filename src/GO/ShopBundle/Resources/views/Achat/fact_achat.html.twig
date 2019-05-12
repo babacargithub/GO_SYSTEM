@@ -1,0 +1,46 @@
+
+{% if fact_achat is defined and fact_achat is not null %}
+        {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_shop_achat_fact_add')}}" class="form-horizontal col-lg-4 col-md-6 col-xs-12" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+    
+    
+    <div>
+    {{ form_label(form.produit, "Produit")}}
+    {{ form_widget(form.produit,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.quantite, "Quantité")}}
+    {{ form_widget(form.quantite,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.prixUnit, "Prix Unitaire")}}
+    {{ form_widget(form.prixUnit,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.facture, "Facture")}}
+    <select class='form-control' name='{{form.vars.name}}[{{form.facture.vars.name}}]' id='{{form.vars.name}}_{{form.facture.vars.name}}'>
+        <option value="">Selectionnez Facture</option>
+        {% for key, val in form.facture.vars.choices %}
+           {% if val.data ==fact_achat %}
+       <option  value="{{val.value}}" selected/>{{val.label}}</option>
+           {% else %}
+           
+           {%endif %}
+       
+       {% endfor %}</select>
+    </div>
+   
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+    {% else %}
+        aucune facture renseignée
+    {% endif %}
+
+  

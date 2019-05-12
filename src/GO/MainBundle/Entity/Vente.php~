@@ -1,0 +1,53 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Vente
+ *
+ * @ORM\Table(name="vente", indexes={@ORM\Index(name="prix_vente", columns={"prix_vente"}), @ORM\Index(name="index_id_produit", columns={"id_produit"})})
+ * @ORM\Entity
+ */
+class Vente
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_produit", type="integer", nullable=true)
+     */
+    private $idProduit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite_vente", type="integer", nullable=true)
+     */
+    private $quantiteVente;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix_vente", type="integer", nullable=false)
+     */
+    private $prixVente;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_vente", type="datetime", nullable=true)
+     */
+    private $dateVente;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_vente", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idVente;
+
+
+}

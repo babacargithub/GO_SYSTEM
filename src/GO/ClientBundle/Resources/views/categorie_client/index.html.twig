@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block content_body %}
+    <h1>Categorieclients list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Abrv</th>
+                <th>Comments</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorieClient in categorieClients %}
+            <tr>
+                <td><a href="{{ path('categorie_client_show', { 'id': categorieClient.id }) }}">{{ categorieClient.id }}</a></td>
+                <td>{{ categorieClient.name }}</td>
+                <td>{{ categorieClient.abrv }}</td>
+                <td>{{ categorieClient.comments }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('categorie_client_show', { 'id': categorieClient.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('categorie_client_edit', { 'id': categorieClient.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorie_client_new') }}">Create a new categorieClient</a>
+        </li>
+    </ul>
+{% endblock %}

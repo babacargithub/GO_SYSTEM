@@ -1,0 +1,10 @@
+{% extends "@GOShop/Vente/vente_main_layout.html.twig"%}
+{% block content_body %}        
+
+    <h2> Total trouvé {% if total_vente is defined and total_vente is not null %}{{ total_vente|nombre() }}{% endif %}</h2>
+        
+        {% if ventes is defined and ventes is not null %}
+            {{ include ("@GOShop/Vente/liste.html.twig", {"ventes":ventes })}}
+       {% endif %}
+    {% endblock %}
+ 

@@ -1,0 +1,423 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+use GO\ClientBundle\Entity\Client;
+use GO\ClientBundle\Entity\CompteClient;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Vente
+ *
+ * @ORM\Table(name="vente", indexes={@ORM\Index(name="prix_unit", columns={"prix_unit"}), @ORM\Index(name="index_produit", columns={"produit"})})
+ * @ORM\Entity(repositoryClass="GO\ShopBundle\Entity\VenteRepository")
+ */
+class Vente
+{
+     protected $vente;
+    // ces constances permettent de définir le dégré de sévérité de la suspucion sur la vente
+    const FLAGGED=-1;
+    const NOT_SUSPECTED=0;
+    const SUSPECTED=1;
+    const LITTLE_SUSPECTED=2;
+    const VERY_SUSPECTED=3;
+    const HIGHLY_SUSPECTED=4;
+    const EXTREMELY_SUSPECTED=5;
+    /**
+     * @var \GO\ShopBundle\Entity\Achat
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\Achat", inversedBy="ventes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="code_bar", referencedColumnName="id",onDelete="CASCADE",nullable=true)
+     * })
+     */
+    private $codeBar;
+    /**
+     * @var \GO\ShopBundle\Entity\Produit
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\Produit", inversedBy="ventes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="produit", referencedColumnName="id",onDelete="CASCADE",nullable=false)
+     * })
+     */
+    private $produit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=false)
+     */
+    private $quantite;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix_unit", type="integer", nullable=false)
+     */
+    private $prixUnit;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="benefice", type="integer", nullable=true)
+     */
+    private $benefice;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
+    /**
+     * @var \GO\ShopBundle\Entity\FactureVente
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\ShopBundle\Entity\FactureVente", inversedBy="ventes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="facture", referencedColumnName="id",onDelete="CASCADE",nullable=true)
+     * })
+     */
+     private $facture;
+     /**
+     * @var \GO\ClientBundle\Entity\CompteClient
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\ClientBundle\Entity\CompteClient", inversedBy="achats")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="compte_client", referencedColumnName="id",onDelete="NO ACTION", nullable=true)
+     * })
+     */
+    private $compteClient;
+    
+    /**
+     * @var \GO\ShopBundle\Entity\Shop
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\Shop", inversedBy="ventes")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="shop", referencedColumnName="id",onDelete="CASCADE", nullable=false)
+     * })
+     */
+    private $shop;
+    /**
+     * @var \GO\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="GO\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $user;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+
+    
+
+    
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     * @return Vente
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer 
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set prixUnit
+     *
+     * @param integer $prixUnit
+     * @return Vente
+     */
+    public function setPrixUnit($prixUnit)
+    {
+        $this->prixUnit = $prixUnit;
+
+        return $this;
+    }
+
+    /**
+     * Get prixUnit
+     *
+     * @return integer 
+     */
+    public function getPrixUnit()
+    {
+        return $this->prixUnit;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Vente
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \GO\ShopBundle\Entity\Produit $produit
+     * @return Vente
+     */
+    public function setProduit(\GO\ShopBundle\Entity\Produit $produit)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \GO\ShopBundle\Entity\Produit 
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+
+    /**
+     * Set shop
+     *
+     * @param \GO\ShopBundle\Entity\Shop $shop
+     * @return Vente
+     */
+    public function setShop(\GO\ShopBundle\Entity\Shop $shop)
+    {
+        $this->shop = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Get shop
+     *
+     * @return \GO\ShopBundle\Entity\Shop 
+     */
+    public function getShop()
+    {
+        return $this->shop;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \GO\UserBundle\Entity\User $user
+     * @return Vente
+     */
+    public function setUser(\GO\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \GO\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set benefice
+     *
+     * @param integer $benefice
+     * @return Vente
+     */
+    public function setBenefice($benefice)
+    {
+        $this->benefice = $benefice;
+
+        return $this;
+    }
+
+    /**
+     * Get benefice
+     *
+     * @return integer 
+     */
+    public function getBenefice()
+    {
+        return $this->benefice;
+    }
+    
+    //=============================FONCTIONS DIVERSES 
+    public function getTotal()
+    {
+         return $this->prixUnit*$this->quantite;
+        
+        
+    }
+    public function generateBenefice($prixAchat =null)
+    {
+        $benefice=0;
+        if(!is_null($prixAchat))
+        {
+            $benefice= ($this->prixUnit-$prixAchat)*$this->quantite;
+        }else
+        {
+            if(!is_null($this->produit->getPrixAchat()))
+           $benefice= ($this->prixUnit-$this->produit->getPrixAchat())*$this->quantite; 
+            else
+            {}
+        }
+        $this->setBenefice($benefice);
+    }
+    
+
+    /**
+     * Set facture
+     *
+     * @param \GO\ShopBundle\Entity\FactureVente $facture
+     * @return Vente
+     */
+    public function setFacture(\GO\ShopBundle\Entity\FactureVente $facture = null)
+    {
+        $this->facture = $facture;
+
+        return $this;
+    }
+
+    /**
+     * Get facture
+     *
+     * @return \GO\ShopBundle\Entity\FactureVente 
+     */
+    public function getFacture()
+    {
+        return $this->facture;
+    }
+
+    
+
+    //====================== renvoi le prix total
+    public function getPrixTotal()
+    {
+        
+        return (int) $this->prixUnit*$this->quantite;
+    }
+
+    /**
+     * Set codeBar
+     *
+     * @param \GO\ShopBundle\Entity\Achat $codeBar
+     * @return Vente
+     */
+    //public function setCodeBar(\GO\ShopBundle\Entity\Achat $codeBar = null)
+    public function setCodeBar($codeBar = null)
+    {
+        $this->codeBar = $codeBar;
+
+        return $this;
+    }
+
+    /**
+     * Get codeBar
+     *
+     * @return \GO\ShopBundle\Entity\Achat 
+     */
+    public function getCodeBar()
+    {
+        return $this->codeBar;
+    }
+     // Cette fonction a pour role de vérifier si le produit vendu a été vendu avec un prix normal en le 
+    //comparant avec le prix d'achat du produit 
+    // si le prix de vente est inférieur au prix de revient la fonction renvoie supect 
+    //sinon elle renvoie non suspect
+    // le degré de souspicion varie en fonction de l'écart entre le prix d'achat du produit et le prix vendu
+    public function inspect()
+    {
+        if(is_null($this->produit))
+        {
+            throw new FatalError(" La vente à analyser n'a pas de produit défini!");
+        }
+        
+        if($this->benefice<0)
+         {
+            return self::SUSPECTED;
+        }
+        
+        //===========
+        return self::NOT_SUSPECTED;
+        
+        
+    }
+    public function getPlainCodeBar()
+    {
+        return ($this->getCodeBar() instanceof Achat)?$this->codeBar->getCodeBar():$this->codeBar();
+    }
+
+    /**
+     * Set compteClient
+     *
+     * @param \GO\ClientBundle\Entity\CompteClient $compteClient
+     *
+     * @return Vente
+     */
+    public function setCompteClient(\GO\ClientBundle\Entity\CompteClient $compteClient = null)
+    {
+        $this->compteClient = $compteClient;
+
+        return $this;
+    }
+
+    /**
+     * Get compteClient
+     *
+     * @return \GO\ClientBundle\Entity\CompteClient
+     */
+    public function getCompteClient()
+    {
+        return $this->compteClient;
+    }
+}

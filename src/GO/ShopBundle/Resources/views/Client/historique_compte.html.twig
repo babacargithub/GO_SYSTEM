@@ -1,0 +1,55 @@
+{# empty Twig template #}
+{% extends "@GOShop/layout.html.twig"%}
+{%block content_body %}
+{% if compte is defined and compte is not null %}
+    <div class="row">
+        <ul class="nav nav-pills">
+            <li class='active'><a href="#details_compte" data-toggle="tab">Détails Compte</a></li>
+            <li><a href="#historique_achats" data-toggle="tab">Historique des Achats</a></li>
+            <li><a href="#resume" data-toggle="tab">Résumé</a></li>
+        </ul>
+        <div class="tab-content">
+              <div id="details_compte" class="tab-pane active">
+        {{render(controller('GOClientBundle:CompteClient:show',{"id":compte.id}))}}
+              </div>
+    
+    <div id="historique_achats" class="tab-pane">
+        {% if ventes is defined %}
+            <table class="table table-hover table-striped"><tr>
+                    <th>Produit Acheté</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th>Date le</th>
+                </tr>
+            {% for vente in ventes %}
+                <tr>
+                    <td>{{vente.produit}}</td>
+                    <td>{{vente.quantite}}</td>
+                    <td>{{vente.prixUnit}}</td>
+                    <td>{{vente.date.format('d/m/Y H:i:s')}}</td>
+                </tr>
+                {%endfor%}
+           
+                  {%else%}
+                      <h3> Aucune vente enregistrée dans ce compte</h3>
+            {%endif%}
+   
+        
+        </table>
+    </div>
+            <div id="resume" class="tab-pane">
+                {% if totaux is defined %}
+                    <table class="table table-bordered">
+            <tr><th>Total Vendu Au Client<h3>{{totaux.totalVente|nombre()}}</h3></th>
+                <th> Bénéfice gagné <h3>{{totaux.totalBenefice|nombre()}}</h3></th>
+                <th>Nombre de fois <h3>{{totaux.totalNombreVente|nombre()}}</h3></th>
+            </tr>
+                    </table>
+            {%endif%} 
+            </div>
+
+ </div>
+ </div>
+
+    {%endif%}
+    {%endblock%}

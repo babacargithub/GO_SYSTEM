@@ -1,0 +1,71 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PosteDepense
+ *
+ * @ORM\Table(name="poste_depense")
+ * repositoryClass="GO\ShopBundle\Entity\PosteDepenseRepository")
+ */
+class PosteDepense
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=50, nullable=false)
+     */
+    private $libelle;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="integer", nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     * @return PosteDepense
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string 
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

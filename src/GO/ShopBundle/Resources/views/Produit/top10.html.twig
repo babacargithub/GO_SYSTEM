@@ -1,0 +1,17 @@
+{# empty Twig template #}
+{% if ventes is defined %}
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>Rang N°</th>
+            <th>Produit</th>
+            <th>Vendu</th>
+        <tr>
+    {% for key,vente in ventes %}
+    <tr>
+        <td>{{ key+1 }}</td>
+        <td>{{ ventes[key][0].produit.nom}}</td>
+        <td>{{ vente.nombreVente }}</td>
+    <tr>
+        {% endfor %}
+    </table>
+    {% endif %}

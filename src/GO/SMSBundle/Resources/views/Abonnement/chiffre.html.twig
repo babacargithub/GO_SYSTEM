@@ -1,0 +1,24 @@
+{# empty Twig template #}
+{% extends "GOSMSBundle::layout.html.twig"%}
+{% block options %}
+    {{render(controller('GOSMSBundle:Abonnement:menuVertical'))}}
+    {%endblock %}
+{% block content_body %}
+    <table class='table table-bordered'>
+    <tr>
+        <th>Nombre Abonné</th>
+        <th>Nombre Mensuel</th>
+        <th>Nombre Total</th>
+        <th>Encaissé aujourd'hui</th>
+        <th>Encaissé dans le mois</th>
+    </tr>
+    <tr>
+        <td>{{ nombre_ab_today|nombre()}}</td>
+        <td>{{ nombre_ab_mensuel|nombre()}}</td>
+        <td>{{ nombre_ab_total|nombre()}}</td>
+        <td>{{ total_today|nombre()}}</td>
+        <td>{{ total|nombre()}}</td>
+    </tr>
+    </table>
+    {%endblock %}
+   

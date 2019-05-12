@@ -1,0 +1,106 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Reservation
+ *
+ * @ORM\Table(name="reservation", uniqueConstraints={@ORM\UniqueConstraint(name="reservation_unique", columns={"client", "depart"}), @ORM\UniqueConstraint(name="UNIQ_42C849552A4C4478", columns={"paiement_id"})}, indexes={@ORM\Index(name="fk_depart", columns={"depart"}), @ORM\Index(name="id_client", columns={"client"}), @ORM\Index(name="id_agent", columns={"agent"}), @ORM\Index(name="point_dep", columns={"point_dep"}), @ORM\Index(name="id_des", columns={"des"}), @ORM\Index(name="confirme", columns={"confirme"})})
+ * @ORM\Entity
+ */
+class Reservation
+{
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="confirme", type="boolean", nullable=false)
+     */
+    private $confirme;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="paye", type="boolean", nullable=false)
+     */
+    private $paye;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+      * @var \\GO\MainBundle\Entity\PointDepart
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\PointDepart")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="point_dep", referencedColumnName="id")
+     * })
+     */
+    private $pointDep;
+
+    /**
+      * @var \\GO\MainBundle\Entity\Client
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\Client")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="client", referencedColumnName="id")
+     * })
+     */
+    private $client;
+
+    /**
+      * @var \\GO\MainBundle\Entity\Destination
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\Destination")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="des", referencedColumnName="id")
+     * })
+     */
+    private $des;
+
+    /**
+      * @var \GO\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="GO\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="agent", referencedColumnName="id")
+     * })
+     */
+    private $agent;
+
+    /**
+      * @var \\GO\MainBundle\Entity\Depart
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\Depart")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="depart", referencedColumnName="id")
+     * })
+     */
+    private $depart;
+
+    /**
+      * @var \\GO\MainBundle\Entity\Payer
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\Payer")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="paiement_id", referencedColumnName="id")
+     * })
+     */
+    private $paiement;
+
+
+}

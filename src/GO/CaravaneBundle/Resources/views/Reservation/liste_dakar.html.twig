@@ -1,0 +1,32 @@
+        Detail du départ {{ depart.libelle }} 
+        {% if liste is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Confirmé</th>
+                    <th>Client</th>
+                    <th>Téléphone</th>
+                    <th>Promo</th>
+                    <th>Point départ</th>
+                    <th>Inscrit par</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for res in liste %}
+                    <tr id="row-{{ res.id }}">
+                        <td>{% if res.confirme==true %}<strong>Déjà confirmé</strong>{% else %}<a class="confirmer_action" id="{{ res.id }}" href='{{path('go_caravane_reservation_confirm',{"id":res.id})}}'>Confirmer</a>{%endif%}</td>
+                        <td>{{ res.client.prenom  }} {{ res.client.nom|upper  }}</td>
+                        <td>{{ res.client.tel|slice(-9,9)  }}</td>
+                        <td>{{ res.client.promo }}</td>
+                        <td>{{ res.pointDep.nom  }}</td>
+                         <td>{% if res.agent is null %}En Ligne{% else %}{{ res.agent.prenom }}{% endif %}</td>
+                       <td>
+                            <a class="update_action" id="{{ res.id }}" href='{{path('go_caravane_reservation_update',{"id":res.id})}}'>Modifier</a>
+                            <a class="annuler_action" id="{{ res.id }}" href='{{path('go_caravane_reservation_delete',{"id":res.id})}}'>Désister</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                <span>Liste undefined</span>
+    {% endif %}
+ 

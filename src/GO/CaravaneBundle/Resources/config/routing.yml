@@ -1,0 +1,145 @@
+
+go_caravane_client_index:
+    path:  /caravane_client_index.golob
+    defaults: { _controller: GOCaravaneBundle:Client:index }
+go_caravane_client_export:
+    path:  /caravane_client_export-{format}.golob
+    defaults: { _controller: GOCaravaneBundle:Client:export }
+go_caravane_client_show:
+    path:  /show_client-{id}.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:index }
+go_caravane_client_addform:
+    path:  /add_client_form.golob
+    defaults: { _controller: GOCaravaneBundle:Client:form }
+go_caravane_client_update:
+    path:  /update_client_form.golob
+    defaults: { _controller: GOCaravaneBundle:Client:update}
+go_caravane_client_search_index:
+    path:  /search_index_client.golob
+    defaults: { _controller: GOCaravaneBundle:Client:searchIndex}
+go_caravane_client_search:
+    path:  /search_client.golob
+    defaults: { _controller: GOCaravaneBundle:Client:search}
+go_caravane_caravane_delete:
+    path:  reservation/delete/{id}
+    defaults: { _controller: GOCaravaneBundle:Reservation:index }
+go_caravane_client_ajouter:
+    path:  /ajouter_client.golob
+    defaults: { _controller: GOCaravaneBundle:Client:ajouter }
+go_caravane_client_details:
+    path:  /details_client-{tel}.golob
+    defaults: { _controller: GOCaravaneBundle:Client:getDetails }
+go_caravane_client_historique:
+    path:  /historique_voyage_client-{tel}.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:historiqueVoyage }
+go_caravane_client_export_all:
+    path:  /client_export_all.golob
+    defaults: { _controller: GOMainBundle:Client:exportAll }
+go_caravane_reservation_confirm:
+    path:  /reservation/{id}/confirmer
+    defaults: { _controller: GOCaravaneBundle:Reservation:confirm}
+go_caravane_reservation_voyage_en_cours:
+    path:  /voyage_en_cours-{tel}.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:getVoyageEnCours}
+go_caravane_reservation_historique_res:
+    path:  /historique_reservations_event-{data}.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:getHistoriqueReservations}
+go_caravane_depart_index:
+    path:  /depart.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:index}
+go_caravane_depart_ajouter:
+    path:  /add_depart.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:add}
+go_caravane_depart_modifier_form:
+    path:  /update_depart-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:updateForm}
+go_caravane_depart_modifier:
+    path:  /update_depart.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:update}
+go_caravane_depart_supprimer:
+    path:  /delete_depart{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:delete}
+go_caravane_depart_cloturer_reservation:
+    path:  /cloturer_depart_res-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:cloturerRes}
+go_caravane_depart_cloturer_payer:
+    path:  /cloturer_depart_paye-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:cloturerPayer}
+go_caravane_depart_reopen_payer:
+    path:  /reopen_depart_paye-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:reopenPayer}
+go_caravane_depart_reopen_reservation:
+    path:  /reopen_depart_res-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:reopenRes}
+go_caravane_depart_reporter:
+    path:  /reporter_depart.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:reporter}
+go_caravane_depart_show:
+    path:  /depart/show/#
+    defaults: { _controller: GOCaravaneBundle:Depart:show}
+go_caravane_depart_etats:
+    path:  /etats_depart.golob
+    defaults: { _controller: GOCaravaneBundle:Depart:etatDeparts}
+go_caravane_event_index:
+    path:  /event.golob
+    defaults: { _controller: GOCaravaneBundle:Evenement:index}
+go_caravane_event_show:
+    path:  /event_show.golob
+    defaults: { _controller: GOCaravaneBundle:Evenement:show}
+go_caravane_event_ajouter:
+    path:  /ajouter_event.golob
+    defaults: { _controller: GOCaravaneBundle:Evenement:add}
+go_caravane_event_modifier:
+    path:  /update_event.golob
+    defaults: { _controller: GOCaravaneBundle:Evenement:update}
+go_caravane_event_supprimer:
+    path:  /delete_event.golob
+    defaults: { _controller: GOCaravaneBundle:Evenement:delete}
+go_caravane_event_reporter:
+    path:  /reporter_event.golob
+    defaults: { _controller: GOCaravaneBundle:Evenement:reporter}
+go_caravane_chiffre_index:
+    path:  /chiffre.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:indexChiffre}
+go_caravane_chiffre_depart:
+    path:  /chiffre-depart-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:chiffreDepart}
+go_caravane_point_depart_index:
+    path:  /chiffre-depart-{id_dep}.golob
+    defaults: { _controller: GOCaravaneBundle:PointDepart:index}
+go_caravane_point_depart_flash_heures:
+    path:  /flash_heures.golob
+    defaults: { _controller: GOCaravaneBundle:PointDepart:heuresDepartFlash}
+go_caravane_online_res:
+    path:  /online_res.golob
+    defaults: { _controller: GOCaravaneBundle:Reservation:addResOnline}
+go_caravane_c_kheweul_index:
+    path:  /c_kheweul.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:form}
+go_caravane_c_kheweul_add:
+    path:  /add_c_kheweul.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:add}
+go_caravane_c_kheweul_search_index:
+    path:  /search_index_c_kheweul.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:searchIndex}
+go_caravane_c_kheweul_search:
+    path:  /search_c_kheweul.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:search}
+go_caravane_c_kheweul_show:
+    path:  /show_c_kheweul.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:show}
+go_caravane_c_kheweul_export_index:
+    path:  /export_index_c_kheweul.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:exportIndex}
+go_caravane_c_kheweul_export:
+    path:  /export_c_kheweul-{format}.golob
+    defaults: { _controller: GOMainBundle:CarteKheweul:export}
+go_caravane_promo_index:
+    path:  /promo_index.golob
+    defaults: { _controller: GOMainBundle:Promo:index}
+go_caravane_promo_add:
+    path:  /promo_add.golob
+    defaults: { _controller: GOMainBundle:Promo:add}
+go_caravane_promo_add_remise:
+    path:  /promo_add_remise.golob
+    defaults: { _controller: GOMainBundle:Promo:addRemise}

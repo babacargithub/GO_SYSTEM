@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                
+                <th>Action</th>
+                <th>Formation</th>
+                <th>Plateforme</th>
+                <th>Accepte</th>
+                <th>Opérations</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidature in candidatures %}
+            <tr>
+                <td><a href="{{ path('candidature_show', { 'id': candidature.id }) }}">Consulter</a></td>
+                <td>{{ candidature.formationDemandee }}</td>
+                <td>{{ candidature.plateforme.nom }}</td>
+                <td>{% if candidature.accepte %}Accepté{% else %}Pas encore{% endif %}</td>
+                  <td>
+                    <a href="{{ path('candidature_show', { 'id': candidature.id }) }}">Supprimer</a>
+                     ||<a href="{{ path('candidature_edit', { 'id': candidature.id }) }}">Modifier</a>
+                        
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>

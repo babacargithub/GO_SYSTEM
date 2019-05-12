@@ -1,0 +1,42 @@
+      {% extends "GOShopBundle:Achat:achat_main_layout.html.twig" %}
+      {% block content_body %}
+        {% if facture is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Num Facture</th>
+                    <th>Fournisseur</th>
+                    <th>Date Facture</th>
+                    <th>Date Enregistrée</th>
+                    <th>Payé</th>
+                    <th>Avance</th>
+                    <th>Total Facture</th>
+                    <th>Opérations</th>
+                </tr>
+                
+                    <tr id="row-{{ facture.id }}">
+                        <td>{{facture.num}}</td>
+                        <td>{{facture.fournisseur.nom}}</td>
+                        <td>{{ facture.dateFacture.format('d-m-Y H:i')}}</td>
+                        <td>{{ facture.date.format('d-m-Y H:i')}}</td>
+                        <td>{{ facture.paye  }}</td>
+                        <td>{{ facture.avance|nombre()  }}</td>
+                        <td>{{ facture.total|nombre()  }}</td>
+                         <td>{%if is_granted('ROLE_SUP_BOUT')%}
+                         
+                       
+                            <a class="update_fact_achat" id="{{ facture.id }}" href='{{path("facture_achat_update",{"id": facture.id })}}'>Ajouter Produits</a>
+                            <a class="update_fact_achat" id="{{ facture.id }}" href='{{path("facture_achat_update",{"id": facture.id })}}'>Modifier</a>
+                            <a class="" id="{{ facture.id }}" href="{{ path('delete_facture_achat', {'id': facture.id}) }}">Supprimer</a>
+                             {%else%}<td></td>
+                        {%endif%} </td>
+                    </tr>
+                   
+            </table>
+                        {% set achats=facture.achats %}
+                        <p><a href="{{path("facture_add_produit", {"id":facture.id})}}">
+                        Ajouter Des produits Sur la Facture</p></a>
+                       {% include'GOShopBundle:Achat:liste.html.twig' %}
+                
+    {% endif %}
+    {% endblock %}

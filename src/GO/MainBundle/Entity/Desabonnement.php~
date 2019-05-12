@@ -1,0 +1,81 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Desabonnement
+ *
+ * @ORM\Table(name="desabonnement", indexes={@ORM\Index(name="id_client_abnmnt", columns={"client"}), @ORM\Index(name="type_abnmnt", columns={"type_abnmnt"}), @ORM\Index(name="date_desabnmnt", columns={"date_desabnmnt"})})
+ * @ORM\Entity
+ */
+class Desabonnement
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="client", type="integer", nullable=false)
+     */
+    private $client;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_abnmnt", type="date", nullable=true)
+     */
+    private $dateAbnmnt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_exp_abnmnt", type="date", nullable=true)
+     */
+    private $dateExpAbnmnt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type_abnmnt", type="integer", nullable=false)
+     */
+    private $typeAbnmnt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="etat_abnmnt", type="boolean", nullable=false)
+     */
+    private $etatAbnmnt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_desabnmnt", type="datetime", nullable=true)
+     */
+    private $dateDesabnmnt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     */
+    private $userId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="motif", type="integer", nullable=true)
+     */
+    private $motif;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

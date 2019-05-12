@@ -1,0 +1,46 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Stock
+ *
+ * @ORM\Table(name="stock")
+ * @ORM\Entity
+ */
+class Stock
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="produit", type="integer", nullable=false)
+     */
+    private $produit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=false)
+     */
+    private $quantite;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="posi", type="integer", nullable=true)
+     */
+    private $posi;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

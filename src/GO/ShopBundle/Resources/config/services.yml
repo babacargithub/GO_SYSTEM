@@ -1,0 +1,18 @@
+parameters:
+#    go_shop.example.class: GO\ShopBundle\Example
+
+services:
+     go_shop.type.produit_selector:
+        class: GO\ShopBundle\Form\ProduitSelectorType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: produit_selector }
+     go_shop.type.code_bar_to_produit:
+        class: GO\ShopBundle\Form\ProduitSelectorType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: code_bar_to_produit }
+     go_shop.static_data_generator:
+        class: GO\ShopBundle\Utils\StaticDataGenerator
+        arguments: [@doctrine.orm.entity_manager]
+        

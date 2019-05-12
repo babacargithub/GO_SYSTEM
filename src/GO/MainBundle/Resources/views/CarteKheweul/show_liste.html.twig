@@ -1,0 +1,26 @@
+{% extends 'GOMainBundle:CarteKheweul:carte_kheweul_main_layout.html.twig' %}
+{% block content_body %}
+{% if cartes is defined %}
+    <table class="table table-bordered table-responsive">
+        
+            <th>Type de  Carte</th>
+            <th>Numéro Carte</th>
+            <th>Numéro Client</th>
+            <th>Client</th>
+            <th>Date Délivrance</th>
+            <th>Date Expiration</th>
+            <th>Etat</th>
+        </tr>{% for carte in cartes %}
+        <tr>
+        <tr>
+            <td>{{ carte.type.libelle }}</td>
+   <td>{{ carte.numCarte }}</td>
+   <td>{{ carte.client.id }}</td>
+   <td>{{ carte.client.prenom~ " "~carte.client.nom }}</td>
+   <td>{{ carte.dateDeliv.format('d/m/Y') }}</td>
+   <td>{{ carte.dateExp.format('d/m/Y' ) }}</td>
+   <td>{{ carte.active }}</td>
+        <tr>
+            {% endfor %}
+   {% endif %}
+   {% endblock %}

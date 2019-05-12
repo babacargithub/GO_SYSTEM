@@ -1,0 +1,47 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block body %}
+    <h1>Exercices list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Datestart</th>
+                <th>Dateend</th>
+                <th>Comments</th>
+                <th>Current</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for exercice in exercices %}
+            <tr>
+                <td><a href="{{ path('exercice_show', { 'id': exercice.id }) }}">{{ exercice.id }}</a></td>
+                <td>{{ exercice.libelle }}</td>
+                <td>{% if exercice.dateStart %}{{ exercice.dateStart|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if exercice.dateEnd %}{{ exercice.dateEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ exercice.comments }}</td>
+                <td>{% if exercice.current %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('exercice_show', { 'id': exercice.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('exercice_edit', { 'id': exercice.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('exercice_new') }}">Create a new exercice</a>
+        </li>
+    </ul>
+{% endblock %}

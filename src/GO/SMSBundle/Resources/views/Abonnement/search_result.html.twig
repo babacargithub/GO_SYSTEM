@@ -1,0 +1,30 @@
+        Liste des abonnements trouvés
+        {% if liste is defined and liste is not null %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th>Date</th>
+                    <th>Bénéfice</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for vente in ventes %}
+                    <tr id="row-{{ vente.id }}">
+                        <td>{{vente.produit.nom}}</td>
+                        <td>{{ vente.quantite}}</td>
+                        <td>{{ vente.prixUnit|nombre()  }}</td>
+                        <td>{{ vente.date.format('d-m-Y H:i')}}</td>
+                        <td>{{ vente.benefice|nombre()  }}</td>
+                         <td>
+                            <a class="update_action" id="{{ vente.id }}" href='update_vente-{{ vente.id }}.golob'>Modifier</a>
+                            <a class="annuler_action" id="{{ vente.id }}" href='annuler_vente-{{ vente.id }}.golob'>Annuler</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+ 

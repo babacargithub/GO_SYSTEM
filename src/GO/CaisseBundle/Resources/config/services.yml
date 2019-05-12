@@ -1,0 +1,4 @@
+services:
+#    go_caisse.example:
+#        class: GO\CaisseBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

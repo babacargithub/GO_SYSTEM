@@ -1,0 +1,9 @@
+{% extends '@App/dossier/main_layout.html.twig' %}
+{% block content_title %}Recherche d'un dossier {% endblock%}
+{% block body %}
+    <div class="row">
+         <div class="col-lg-6">
+    {% include '@App/dossier/_search_form.html.twig' %}
+        </div>
+    </div>
+{% endblock body %}

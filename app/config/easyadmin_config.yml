@@ -1,0 +1,44 @@
+easy_admin:
+    site_name: 'Tableau de Bord, Golob One System'
+    translation_domain: 'messages'
+    design:
+        brand_color: "#00BFFF"
+        menu:
+            - label: Shop
+              children:
+                - {label: 'Rapports Journée', route: "show_summary_today"}
+                - {label: 'Rapports Mensuels', route: "admin_shop_month_summary", params: {mois: 1,annee: 2019 }}
+                - {label: 'Rapport Exercice', route: "admin_exercice_summary"}
+                - {label: 'Gestion Capital', route: "admin_index"}
+                - {label: 'Gestion Personnel', route: "admin_index"} 
+                - {label: 'Gestion Client', route: "admin_index"}
+                - {label: 'Créances Client', route: "admin_index"} 
+                - {label: 'Les Dépenses', route: "admin_index"} 
+                - {label: 'Gestion Comptes Banque', route: "show_summary_today"}
+                - {label: 'Employés', route: 'admin_index'}
+          
+            - { entity: 'Exercice', icon: 'user' , label: 'Exercice'}
+            - { entity: 'Capital', icon: 'money' , label: 'Capital'}
+            - { entity: 'Fournisseur', label: 'Fournisseur'}
+            - { entity: 'DetteFacture', label: 'Factures Impayées'}
+            - { entity: 'DetteLiquide', label: 'Dettes'}
+            - { entity: 'Charge', label: 'Les Charges'}
+            - { entity: 'User', icon: 'user' , label: 'Utilisateurs'}
+    entities:
+        
+        Shop:
+             class: GO\ShopBundle\Entity\Shop
+        User:
+            class: GO\UserBundle\Entity\User
+        Exercice:
+            class: GO\ShopBundle\Entity\Exercice
+        Capital:
+            class: GO\ShopBundle\Entity\Capital
+        Fournisseur:
+            class: GO\ShopBundle\Entity\Fournisseur
+        DetteFacture:
+            class: GO\ShopBundle\Entity\DetteFacture
+        DetteLiquide:
+            class: GO\ShopBundle\Entity\DetteLiquide
+        Charge:
+            class: GO\ShopBundle\Entity\Charge

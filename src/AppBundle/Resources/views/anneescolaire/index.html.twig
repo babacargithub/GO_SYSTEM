@@ -1,0 +1,43 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block body %}
+    <h1>Anneescolaires list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Datestart</th>
+                <th>Dateend</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for anneeScolaire in anneeScolaires %}
+            <tr>
+                <td><a href="{{ path('annee_scolaire_show', { 'id': anneeScolaire.id }) }}">{{ anneeScolaire.id }}</a></td>
+                <td>{{ anneeScolaire.libelle }}</td>
+                <td>{% if anneeScolaire.dateStart %}{{ anneeScolaire.dateStart|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if anneeScolaire.dateEnd %}{{ anneeScolaire.dateEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('annee_scolaire_show', { 'id': anneeScolaire.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('annee_scolaire_edit', { 'id': anneeScolaire.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('annee_scolaire_new') }}">Create a new anneeScolaire</a>
+        </li>
+    </ul>
+{% endblock %}

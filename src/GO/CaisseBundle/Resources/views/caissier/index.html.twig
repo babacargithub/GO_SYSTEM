@@ -1,0 +1,55 @@
+{% extends '@GOCaisse/caissier/caissier_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Caissiers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Tel</th>
+                <th>Adresse</th>
+                <th>Shortname</th>
+                <th>Disabled</th>
+                <th>Createdat</th>
+                <th>Deleated</th>
+                <th>Deleatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for caissier in caissiers %}
+            <tr>
+                <td><a href="{{ path('caissier_show', { 'id': caissier.id }) }}">{{ caissier.id }}</a></td>
+                <td>{{ caissier.prenom }}</td>
+                <td>{{ caissier.nom }}</td>
+                <td>{{ caissier.tel }}</td>
+                <td>{{ caissier.adresse }}</td>
+                <td>{{ caissier.shortName }}</td>
+                <td>{% if caissier.disabled %}Yes{% else %}No{% endif %}</td>
+                <td>{% if caissier.createdAt %}{{ caissier.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if caissier.deleated %}Yes{% else %}No{% endif %}</td>
+                <td>{% if caissier.deleatedAt %}{{ caissier.deleatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('caissier_show', { 'id': caissier.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('caissier_edit', { 'id': caissier.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('caissier_new') }}">Create a new caissier</a>
+        </li>
+    </ul>
+{% endblock %}

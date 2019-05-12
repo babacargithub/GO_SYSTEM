@@ -1,0 +1,9 @@
+{% set menuItems=[
+{"href":path("go_caravane_res_index"), "libelle":"Réservations"},
+{"href":path("go_caravane_reservation_liste_index"), "libelle":"Liste Des Inscrits"},
+{"href":path("go_caravane_depart_index"), "libelle":"Départs"}, 
+{"href":path("go_caravane_chiffre_index"), "libelle":"Chiffres"},
+{"href":path("go_caravane_event_index"), "libelle":"Evenement"},
+{"href":"test", "libelle":"Plus"}
+] %}
+{% include "_menu_design.html.twig" with {"menuItems": menuItems} %}

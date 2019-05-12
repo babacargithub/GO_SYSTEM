@@ -1,0 +1,32 @@
+
+ 
+        {% if form is defined %}
+
+<table class="table table-striped">
+    {{ form_errors(form)}}
+    
+    
+    <tr>
+        <td>{{ form_label(form.codeBar, "Code Bar")}}
+         {{ form_widget(form.codeBar) }}</td>
+          
+    <td>
+         {{ form_label(form.produit, "Produit à vendre ")}}
+    {{ form_widget(form.produit,{"attr":{"class":"form-control auto_com"}} )}}
+       
+    </td>
+    <td>
+    {{ form_label(form.quantite, "Quantité")}}
+    {{ form_widget(form.quantite,{"attr":{"class":"form-control"}} )}}
+    </td>
+    <td>
+    {{ form_label(form.prixUnit, "Prix Unitaire")}}
+    {{ form_widget(form.prixUnit,{"attr":{"class":"form-control"}} )}}
+    </td>
+    
+    </tr>
+</table>
+
+    {% endif %}
+
+  

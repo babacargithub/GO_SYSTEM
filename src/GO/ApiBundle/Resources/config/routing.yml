@@ -1,0 +1,3 @@
+go_express_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: GOExpressBundle:Default:index }

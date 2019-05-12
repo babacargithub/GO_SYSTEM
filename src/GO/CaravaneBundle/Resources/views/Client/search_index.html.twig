@@ -1,0 +1,29 @@
+{% extends 'GOCaravaneBundle:Client:_main_layout.html.twig' %}
+{% block content_body %}
+    <div class="col-lg-5">
+{% if form is defined %}
+    <form action="{{ path('go_caravane_client_search')}}" method="post">
+           {{ form_errors(form)}}
+    <select class='form-control' name='{{form.vars.name}}[{{form.type_search.vars.name}}]' required>
+    <option value="">Précisez le type de recherche</option>
+    {% for key, val in form.type_search.vars.choices %}
+       <option value="{{val.value}}"/>{{val.label}}</option>
+   {% endfor %}</select>
+    <div>
+    {{ form_label(form.value, "Valeur à rechercher")}}
+    {{ form_widget(form.value,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.ufr, "Ufr")}}
+    {{ form_widget(form.ufr,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.section, "Section")}}
+    {{ form_widget(form.section,{"attr":{"class":"form-control"}} )}}
+    </div>
+    {{ form_row(form._token) }}
+    <input type="submit" class="btn btn-primary" />
+</form>
+</div>
+    {% endif %}
+    {% endblock %}

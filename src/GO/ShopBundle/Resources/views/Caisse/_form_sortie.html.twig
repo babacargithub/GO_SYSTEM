@@ -1,0 +1,24 @@
+
+ 
+        {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_shop_caisse_sortie_add')}}" class="form-horizontal col-lg-4 col-md-6 col-xs-12" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+    
+    
+    
+    <div>
+ 
+    {{ form_widget(form )}}
+    </div>
+    
+   
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+
+  

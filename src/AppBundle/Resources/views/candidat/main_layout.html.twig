@@ -1,0 +1,9 @@
+{% extends '@App/base_template.html.twig' %}
+{% block content_title %}Menu Candidat{% endblock %}
+{% block  menu_vertical %}
+
+{{render(controller('AppBundle:Candidat:menuVertical'))}}
+
+{% endblock menu_vertical %}
+{% block body %}
+{% endblock %}

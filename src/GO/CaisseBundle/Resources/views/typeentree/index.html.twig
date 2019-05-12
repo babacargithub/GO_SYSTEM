@@ -1,0 +1,45 @@
+{% extends '@GOCaisse/layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Typeentrees list</h1>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Commentaire</th>
+                <th>Categorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeEntree in typeEntrees %}
+            <tr>
+                <td><a href="{{ path('type_entree_show', { 'id': typeEntree.id }) }}">{{ typeEntree.produit }}</a></td>
+                <td>{{ typeEntree.id }}</td>
+                <td>{{ typeEntree.libelle }}</td>
+                <td>{{ typeEntree.commentaire }}</td>
+                <td>{{ typeEntree.categorie }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_entree_show', { 'id': typeEntree.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_entree_edit', { 'id': typeEntree.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_entree_new') }}">Create a new typeEntree</a>
+        </li>
+    </ul>
+{% endblock %}

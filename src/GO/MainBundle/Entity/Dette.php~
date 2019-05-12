@@ -1,0 +1,39 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Dette
+ *
+ * @ORM\Table(name="dette", indexes={@ORM\Index(name="date_dette", columns={"date_dette"})})
+ * @ORM\Entity
+ */
+class Dette
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant_dette", type="integer", nullable=false)
+     */
+    private $montantDette;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_dette", type="datetime", nullable=false)
+     */
+    private $dateDette;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_dette", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idDette;
+
+
+}

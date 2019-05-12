@@ -1,0 +1,28 @@
+  Liste des fournisseurs séléctionnés
+        {% if fournisseurs is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Compte</th>
+                    <th>Nom Commercial</th>
+                    <th>Gérant(s)</th>
+                    <th>Téléphone</th>
+                    <th>Montant Dette</th>
+                       <th>Opérations</th>
+                </tr>
+                {% for fournisseur in fournisseurs %}
+                    <tr id="row-{{ fournisseur.id }}">
+                        <td><a href="{{path('show_fournisseur',{"id":fournisseur.id})}}">Ouvrir le Compte</a></td>
+                        <td>{{fournisseur.nom}}</td>
+                        <td>{{ fournisseur.gerants}}</td>
+                        <td>{{ fournisseur.tel  }}</td>
+                        <td>{{ 0}}</td>
+                       <td><a class="update_action" href="#">Modifier</a>
+                          <a class="annuler_action" id="">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}

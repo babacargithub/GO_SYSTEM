@@ -1,0 +1,17 @@
+{% extends 'GOMainBundle:Promo:promo_main_layout.html.twig' %}
+{% block content_body %}
+    {% if form is defined %}
+        <form action="{{path('go_caravane_promo_add')}}" method='post'>
+       {{ form_widget(form)}}
+       <input type="submit" class="btn btn-metis-6"/>
+        </form>
+       {% endif %}
+    {% if form_remise is defined %}
+        <form action="{{path('go_caravane_promo_add_remise')}}">
+       {{ form_widget(form_remise)}}
+       {{form_rest(form)}}
+       <input type="submit"/>
+        </form>
+       {% endif %}
+    {% endblock %}
+    

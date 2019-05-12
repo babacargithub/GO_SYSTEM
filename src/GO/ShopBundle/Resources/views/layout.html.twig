@@ -1,0 +1,51 @@
+{% extends app.request.isXmlHttpRequest() ? "_no_makeup.html.twig" : "base.html.twig" %}
+{% if not app.request.isXmlHttpRequest()  %}
+  {% block menu %}
+{% include "@GOShop/_menu.html.twig" %}
+{% endblock menu %}
+ {# Left side column. contains the logo and sidebar -->
+ {# include side bar#}
+ {% block sidebar %}
+ {{ render(controller('GOShopBundle:Main:menuVertical'))}}
+
+ {% endblock sidebar %}
+ {% endif %}
+
+   {% block content_header %}
+    <section class="content-header">
+      <h1>
+          {% block content_title %}Golob One {%endblock %}
+        <small>GOLOB ONE SHOP, Système de Gestion des Boutiques  Golob One</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li style="font-size:18px"><a href="#"><i class="fa fa-money"></i>Solde Caisse Actuelle:  </a><span class="pull-right bg-green " style="font-size: 20px; font-family: Arial"><span id="caisse">{{render(controller('GOShopBundle:Caisse:showCaisse'))}}</span></span>
+  </li>
+      </ol>
+          {% endblock content_header %}
+   
+{% block content_body %}
+        <h2>Bienvenue dans l'application pour la gestion des Boutiques de Golob One V2</h2>
+        <h1>Consignes de sécurité et récommendations</h1>
+        <ul>
+            <li><h3>Ne pas ouvrir cette application aux yeux des clients</h3></li>
+            <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise</h3></li>
+            <li><h3>Ne pas communiquer votre mot de passe aux autres collègues</h3></li>
+            <li><h3>Ne pas oubliez de vous déconnecter à chaque fois que vous quittez votre poste de travail</h3></li>
+
+            
+        </ul>
+{% endblock  content_body %}
+
+
+ {% block javascripts %}
+     {{parent()}}
+            <script src="{{asset("js/produits.js")}}"></script>
+            <script src="{{asset("js/produits_autocomplete.js")}}"></script>
+            <script src="{{asset("js/go_shop_functions.js")}}"></script>
+            <script src="{{asset("js/golob_one_db_js.js")}}"></script>
+            <script src="{{asset("js/golob_one_shop.js")}}"></script>
+{% endblock javascripts %}
+
+{% block javascript_code %}
+
+    {% endblock javascript_code %}

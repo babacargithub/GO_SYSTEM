@@ -1,0 +1,41 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block body %}
+    <h1>Plateformes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Comments</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plateforme in plateformes %}
+            <tr>
+                <td><a href="{{ path('plateforme_show', { 'id': plateforme.id }) }}">{{ plateforme.id }}</a></td>
+                <td>{{ plateforme.nom }}</td>
+                <td>{{ plateforme.comments }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('plateforme_show', { 'id': plateforme.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('plateforme_edit', { 'id': plateforme.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('plateforme_new') }}">Create a new plateforme</a>
+        </li>
+    </ul>
+{% endblock %}

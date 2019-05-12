@@ -1,0 +1,39 @@
+        Achats journée
+         {% if total_achats is defined %}
+        Total des achats {{total_achats|nombre()}}
+        {% endif %}
+        {% if achats is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Code Barre</th>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    
+                    <th>Opérations</th>
+                </tr>
+                {% for achat in achats %}
+                    <tr id="row-{{ achat.id }}">
+                        <td>{{achat.codeBar}}</td>
+                        <td>{{achat.produit.nom}}</td>
+                        <td>{{ achat.quantite}}</td>
+                        <td>{{ achat.prixUnit|nombre()  }}</td>
+                        <td>{{ (achat.prixUnit*achat.quantite)|nombre()  }}</td>
+                        <td>{{ achat.date.format('d-m-Y H:i')}}</td>
+                        {%if is_granted('ROLE_SUP_BOUT')%}
+                         <td>
+                            <a class="update_action" id="{{ achat.id }}" href="{{ path('update_achat', {'id': achat.id}) }}">Modifier</a>
+                            <a class="annuler_action" id="{{ achat.id }}" href="{{ path('go_shop_achat_annuler', {'id': achat.id}) }}">Annuler</a>
+                        </td>
+                        {%else%}<td></td>
+                        {%endif %}
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+ 

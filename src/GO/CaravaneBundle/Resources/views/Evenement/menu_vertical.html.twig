@@ -1,0 +1,6 @@
+
+{% for menu in menu_vertical %}
+<li><a class="liste_inscrit" href="{{ path('go_caravane_reservation_liste_show', {'id_dep': menu.id}) }}">{{
+menu.libelle }}</a></li>
+{% endfor %}
+

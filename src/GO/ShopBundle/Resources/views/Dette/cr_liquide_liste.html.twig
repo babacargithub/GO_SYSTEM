@@ -1,0 +1,33 @@
+
+Liste des creances trouvées
+        {% if creances is defined %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Client</th>
+                    <th>Téléphone</th>
+                    <th>Montant</th>
+                    <th>Date Créance</th>
+                    <th>Date Echéance</th>
+                    <th>Opérations</th>
+                </tr>
+                {% set total=0 %}
+                {% for creance in creances %}
+                    <tr id="row-{{ creance.id }}">
+                        <td>{{creance.client.prenom~" "~creance.client.nom}}</td>
+                        <td>{{creance.client.tel}}</td>
+                        <td>{{ creance.montant|nombre()  }}{% set total=total+creance.montant %}</td>
+                        <td>{{ creance.dateCreance.format('d/m/Y H:i:s')}}</td>
+                        <td>{{ creance.dateEcheance.format('d/m/Y H:i:s')}}</td>
+                       <td><a class="update_action" href="{{path("go_shop_creance_update", {"id":creance.id})}}">Modifier</a>
+                          <a class="annuler_action" id="{{ creance.id }}" href="{{ path('go_shop_creance_supprimer', {'id': creance.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td >Total</td><td colspan="5" class="text-center"><span >{{total|nombre()}}</span></td>
+            </table>
+            {% else %}
+                
+    {% endif %}
+  

@@ -1,0 +1,17 @@
+{# empty Twig template #}
+<h5>Voyage en cours: {% if voyage_en_cours is not null %} 
+        {{ voyage_en_cours.depart.libelle}}
+    {% endif %}</h5>
+{% if form is defined %}
+    {% if form.vars.data is null %}
+        Le client n'existe pas encore, veuillez le créer d'abord
+        {% endif %}
+    <form id="{{form.vars.id}}" class="form-horizontal" action="ajouter_client.golob" method="post">
+    {{ form_widget(form) }} 
+    {{ form_rest(form) }}
+    <input type="submit" class="btn btn-success" value="Modifier ou ajouter le client"/>
+   
+    </form>
+    
+   
+        {% endif %}

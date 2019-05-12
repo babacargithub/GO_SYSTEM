@@ -1,0 +1,153 @@
+<?php
+
+namespace  GO\ClientBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * Client
+ *
+ * @ORM\MappedSuperClass()
+ * @UniqueEntity(fields={"tel"}, message="Ce numéro téléphone {{value}} est déjà utilisé par un autre client!")
+ * @UniqueEntity(
+ *      fields={"email"}, 
+ *      ignoreNull=true,
+ *      message="Cet email {{value}} est déjà utilisé par un autre client!"
+ * )
+ */
+class AbstractClient
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstName", type="string", length=100, nullable=false)
+     * @Assert\Length(min=2, max=30, minMessage="Prénom très court", maxMessage="Prénom trop long")
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastName", type="string", length=50, nullable=false)
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", unique=true, nullable=true)
+     * @Assert\Email();
+     */
+    private $email;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tel", type="bigint", unique=true, nullable=false)
+     */
+    private $tel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     */
+    private $adresse;
+     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $createdAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sexe", type="string", length=1, nullable=true)
+     * @Assert\Choice(choices={"F", "M"}, message="Choisissez un type de sexe valide. Type de sexe choisi invalide!")
+     */
+     
+    private $sexe;
+    /**
+     * @var \GO\ClientBundle\Entity\CategorieClient
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ClientBundle\Entity\CategorieClient")
+     * @ORM\JoinColumns({@ORM\JoinColumn(name="categorie", referencedColumnName="id", nullable=false) })
+     **/
+    private $categorie;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="disabled", type="boolean", nullable=false)
+     */
+    private $disabled=false;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="boolean", nullable=false)
+     */
+    private $deleated=false;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleated_at", type="datetime", nullable=true)
+     */
+    private $deleatedAt;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=true)
+     */
+    private $active=true;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="last_active", type="datetime", nullable=true)
+     */
+    private $lastActive;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    //==========Custom functions
+ public function getPrenomAbrege()
+    {
+        if(str_word_count(trim($this->firstName),0)>1)
+        {
+            $prenom_abrege="";  
+        //$nom= str_replace(" ", ",", $this->prenom);
+               
+            $prenoms= str_word_count(trim($this->firstName),1);
+            foreach($prenoms as $prenom)
+            {
+               $prenom_abrege.= substr($prenom,0,1).'. ';
+            } 
+            return trim($prenom_abrege);
+        }else
+        {
+            return $this->firstName;
+        }
+       
+    }
+    public function getNomComplet()
+    {
+        return ucwords($this->firstName)." ".strtoupper($this->lastName);
+    }
+
+    public function getShortFirstName()
+    {
+        return $this->getPrenomAbrege();
+    }
+    public function getFullName()
+    {
+        return $this->getNomComplet();
+    }
+
+}

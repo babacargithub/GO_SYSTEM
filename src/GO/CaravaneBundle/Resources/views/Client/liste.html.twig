@@ -1,0 +1,30 @@
+{# empty Twig template #}
+{% if liste_clients is defined and liste_clients is not null %}
+    <a href="caravane_client_export-pdf.golob">Exporter PDF</a>
+    <a href="caravane_client_export-text.golob">Exporter Text</a>
+<table class='table' id="liste_clients">
+    <thead>
+    <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Tél</th>
+        <th>Adresse</th>
+        <th>Promo</th>
+        <th>Nombre voyage</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for client in liste_clients %}
+<tr>
+    <td>{{client[0].prenom}}</td>
+    <td>{{client[0].nom}}</td>
+    <td>{{client[0].tel}}</td>
+    <td>{{client[0].adresse}}</td>
+    <td>{{client[0].promo}}</td>
+    <td>{{client.num_voy}}</td>
+</tr>
+   
+{% endfor %}
+    </tbody>
+</table>
+{% endif %}

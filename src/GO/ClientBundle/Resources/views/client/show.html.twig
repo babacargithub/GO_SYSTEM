@@ -1,0 +1,60 @@
+{% extends '@GOClient/client/_main_layout.html.twig' %}
+
+{% block content_body %}
+    <h1>Détails du Client</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>#{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ client.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ client.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ client.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ client.email }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ client.id }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ client.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ client.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Crée le</th>
+                <td>{{ client.createdAt.format('d-m-Y') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="nav navbar-nav">
+        <li>
+            <a href="{{ path('client_index') }}">Retour</a>
+        </li>
+        <li>
+            <a href="{{ path('client_edit', { 'id': client.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" class="btn btn-flat" value="Supprimer">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

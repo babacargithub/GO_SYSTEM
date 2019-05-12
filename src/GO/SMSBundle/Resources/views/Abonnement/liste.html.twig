@@ -1,0 +1,23 @@
+{# empty Twig template #}
+{% if abonnements is defined  and abonnements is not null%}
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>Client</th>
+            <th>Téléphone</th>
+            <th>Formule</th>
+            <th>Date Abonnement</th>
+            <th>Date Expiration</th>
+            <th>Opérations</th>
+        </tr>
+        {% for abonm in abonnements %}
+        <tr>
+            <td>{{abonm.client.prenom~" "~abonm.client.nom|upper}}</td>
+            <td>{{abonm.client.tel}}</td>
+            <td>{{abonm.formule.abrv}}</td>
+            <td>{{abonm.date.format('d/m/Y H:i:s')}}</td>
+            <td>{{abonm.dateExpir.format('d/m/Y H:i:s')}}</td>
+            <td><a class="annuler_action" href="{{ path("abonnement_delete",{"id":abonm.id})}}">Désabonner</a>
+                <a class="update_action" href="{{ path("abonnement_update",{"id":abonm.id})}}">Modifier</a></td>
+        </tr>
+                {%endfor%}
+                {%endif%}

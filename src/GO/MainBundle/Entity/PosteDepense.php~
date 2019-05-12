@@ -1,0 +1,32 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PosteDepense
+ *
+ * @ORM\Table(name="poste_depense")
+ * @ORM\Entity
+ */
+class PosteDepense
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="libelle", type="string", length=50, nullable=true)
+     */
+    private $libelle;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}

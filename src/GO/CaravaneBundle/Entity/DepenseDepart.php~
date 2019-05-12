@@ -1,0 +1,70 @@
+<?php
+
+namespace GO\CaravaneBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DepenseDepart
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="GO\CaravaneBundle\Entity\DepenseDepartRepository")
+ */
+class DepenseDepart
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \GO\CaravaneBundle\Entity\BilanDepart
+     *
+     * @ORM\ManyToOne(targetEntity="GO\CaravaneBundle\Entity\BilanDepart")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="bilan_depart", referencedColumnName="id",nullable=false)
+     * })
+     */
+
+    private $bilanDepart;
+
+    /**
+     * @var \GO\ShopBundle\Entity\PosteDepense
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\PosteDepense")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="depense", referencedColumnName="id",nullable=false)
+     * })
+     */
+    private $depense;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant", type="integer",nullable=false)
+     */
+    private $montant;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="justification", type="string", length=255)
+     */
+    private $justification;
+
+    /**
+     * @var \GO\UserBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="GO\UserBundle\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * })
+     */
+    private $user;
+
+    
+}

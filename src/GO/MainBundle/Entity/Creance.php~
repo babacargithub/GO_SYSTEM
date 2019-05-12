@@ -1,0 +1,67 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Creance
+ *
+ * @ORM\Table(name="creance", indexes={@ORM\Index(name="fk_id_client", columns={"telephone_client"}), @ORM\Index(name="date_echeance", columns={"date_echeance"}), @ORM\Index(name="date_creance", columns={"date_creance"}), @ORM\Index(name="id_produit", columns={"id_produit"})})
+ * @ORM\Entity
+ */
+class Creance
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="telephone_client", type="bigint", nullable=false)
+     */
+    private $telephoneClient;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_produit", type="integer", nullable=false)
+     */
+    private $idProduit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite_creance", type="integer", nullable=false)
+     */
+    private $quantiteCreance;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant_creance", type="bigint", nullable=false)
+     */
+    private $montantCreance;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creance", type="datetime", nullable=false)
+     */
+    private $dateCreance;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_echeance", type="date", nullable=true)
+     */
+    private $dateEcheance;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_creance", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idCreance;
+
+
+}

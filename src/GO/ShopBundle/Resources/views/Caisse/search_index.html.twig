@@ -1,0 +1,38 @@
+{% extends "@GOShop/Vente/vente_main_layout.html.twig"%}
+{% block content_body %}       
+{% if form is defined %}
+    <div class="col-lg-6">
+    <form id="{{form.vars.id}}sortie_search_form" action="{{ path('sortie_search')}}" method="post">
+           {{ form_errors(form)}}
+    
+    <div>
+    {{ form_widget(form )}}
+    </div>
+ 
+    <input type="submit" class="btn btn-primary" />
+</form>
+    </div>
+    {% endif %}
+    {%endblock %}
+ {% block javascript_code %}
+     
+     <script type="text/javascript">
+           $("#{{form.type_search.vars.id}}").change(function(e){
+               var selected = $(this).children("option:selected").val();
+               if( selected=="poste_depense")
+               {
+                   $("#{{form.typeSortie.vars.id}}").prop('required',true);
+                $("#{{form.typeSortie.vars.id}}").parent().show();
+                }
+               else
+               {
+                $("#{{form.typeSortie.vars.id}}").parent().hide();
+                 $("#{{form.typeSortie.vars.id}}").prop('required',false);
+                }
+             }
+                );
+                 
+         
+     </script>
+     
+     {%endblock%}

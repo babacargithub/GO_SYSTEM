@@ -1,0 +1,23 @@
+{% if form is defined %}
+{{form_start(form)}}
+<div>
+    {{ form_errors(form)}}
+</div>
+    
+    
+    <div>
+    {{ form_widget(form)}}
+    </div>
+
+    
+        {{ form_rest(form) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+{% if message is defined %}
+    {{message}}
+    {%endif%}
+
+    {% endif %}
+
+  

@@ -1,0 +1,80 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Creance
+ *
+ * @ORM\Table()
+ *  @ORM\Entity
+ */
+class Creance
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="client", type="bigint", nullable=false)
+     */
+    private $client;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="produit", type="integer", nullable=false)
+     */
+    private $produitt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=false)
+     */
+    private $quantite;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixUnit", type="integer", nullable=false)
+     */
+    private $prixUnit;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_creance", type="datetime", nullable=false)
+     */
+    private $dateCreance;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_echeance", type="datetime", nullable=true)
+     */
+    private $dateEcheance;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="rembourse", type="boolean", nullable=false)
+     */
+    private $rembourse;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_creance", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    /**
+     * @return bool
+     */
+    public function isPasse()
+    {
+        $currentDate=new \DateTime();
+        return $this->dateEcheance <$currentDate ;
+    }
+}

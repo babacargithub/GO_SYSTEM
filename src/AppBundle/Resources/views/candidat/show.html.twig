@@ -1,0 +1,73 @@
+
+  <table class='table table-bordered table-hovered'>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ candidat.id }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ candidat.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ candidat.nom }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ candidat.tel }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ candidat.email }}</td>
+            </tr>
+            <tr>
+                <th>Datenaiss</th>
+                <td>{% if candidat.dateNaiss %}{{ candidat.dateNaiss|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Lieunaiss</th>
+                <td>{{ candidat.lieuNaiss }}</td>
+            </tr>
+            <tr>
+                <th>Numcni</th>
+                <td>{{ candidat.numCni }}</td>
+            </tr>
+            <tr>
+                <th>Remarques</th>
+                <td>{{ candidat.remarques }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ candidat.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Villeactuel</th>
+                <td>{{ candidat.villeActuel }}</td>
+            </tr>
+            <tr>
+                <th>Anneebac</th>
+                <td>{{ candidat.anneeBac }}</td>
+            </tr>
+            <tr>
+                <th>Etablissactuel</th>
+                <td>{{ candidat.etablissActuel }}</td>
+            </tr>
+            <tr>
+                <th>Serie</th>
+                <td>{{ candidat.serie }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('candidat_index') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('candidat_edit', { 'id': candidat.id }) }}">Modifier</a>
+            ||<a href="{{ path('candidat_delete', { 'id': candidat.id }) }}">Modifier</a>
+        </li>
+       
+    </ul>
+

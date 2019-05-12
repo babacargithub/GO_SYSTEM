@@ -1,0 +1,38 @@
+
+     {% if chiffres is defined %}
+       
+ <!-- Left side column. contains the logo and sidebar -->
+  <aside id="sidebar2" class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+      <!-- Sidebar user panel -->
+      <div class="user-panel">
+       
+      </div>
+     
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Etat Des Départs</li>
+        <!-- Cette déclaration a été ajoutée pour assurer la compatibilité avec la version 1 de GO SYS !-->
+       
+        
+        {% for chiffre in chiffres %}
+            <li>
+          <a href="{{path('go_caravane_reservation_liste_show', {'id': chiffre.depart.id})}}">
+            <i class="fa fa-envelope"></i> <span>{{chiffre.depart}}</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">{{chiffre.nombrePaye}}</small>
+              <small class="label pull-right bg-red">{{chiffre.nombre}}</small>
+            </span>
+          </a>
+        </li>
+             
+        {%endfor %}
+        
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+        {%endif %}
+
+ 

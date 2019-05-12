@@ -1,0 +1,53 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Dette
+ *
+ * @ORM\MappedSuperclass()
+ */
+class Dette extends BaseClass
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant", type="integer", nullable=false)
+     */
+    private $montant;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_dette", type="datetime", nullable=false)
+     */
+    private $dateDette;
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_echeance", type="datetime", nullable=false)
+     */
+    private $dateEcheance;
+
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="rembourse", type="boolean", nullable=false)
+     */
+    private $rembourse=false;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
+    public function __construct() {
+        $this->dateDette = new \DateTime();
+    }
+}

@@ -1,0 +1,6 @@
+** Les commentaires sont tous en français
+** Les noms de Toutes les méthodes, fonctions et Variables sont en camelCase
+** les conditions IF, WHILE, FOR, FOREACH sont toutes suivies de {}
+** Les attributs des objets sont en anglais (c'est pas retroactif)
+** Les noms des classes commencent toujours par une majuscle.
+** Les objets qui représentent une entité instanciée commence toujours en Majuscule, tous les autres objets commencent en minuscule

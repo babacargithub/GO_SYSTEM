@@ -1,0 +1,32 @@
+ {% extends '@App/paiement/main_layout.html.twig' %}
+{% block content_title %} Etat des paiements des Dossiers{%endblock%}
+{% block body %}
+    <table class="table table-hovered">
+        <thead>
+            <tr>
+                <th>Dossier</th>
+                <th>Montant Payé</th>
+                <th>Total Frais</th>
+                <th>Reste à payer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dossier in dossiers %}
+            <tr>
+                <td>{{dossier~" N° "~dossier.num}}</td>
+                <td>{{ dossier.totalPaiements}}</td>
+                <td>50 000</td>
+                {% set restant =50000-dossier.totalPaiements %}
+                  <td>{{ 50000-dossier.totalPaiements}}</td>
+                <td>
+                    <a href="{{ path('dossier_show', { 'id': dossier.id }) }}">Détails du Dossier</a>
+                        
+                </td>
+            </tr>
+        {% endfor %}
+       
+        </tbody>
+    </table>
+
+        {% endblock body %}

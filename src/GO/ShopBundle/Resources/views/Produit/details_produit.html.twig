@@ -1,0 +1,71 @@
+{# empty Twig template #}
+{% extends "GOShopBundle:Produit:produit_main_layout.html.twig"%}
+{% block content_body %}
+{% if produit is defined and produit is not null %}
+    <table class='table table-bordered table-hover'><tr>
+        <th>Produit</th>
+        <th>Prix Achat</th>
+        <th>Prix Vente</th>
+        <th>Type</th>
+        <th>Catégorie</th>
+        <th>Opération</th>
+    </tr>
+    <tr>
+        <td>{{produit.nom}}</td>
+        <td>{{produit.prixAchat}}</td>
+        <td>{{produit.prixVente|nombre()}}</td>
+        <td>{{produit.type.nom}}</td>
+        {% if produit.categorie is not null %}
+        <td>{{produit.categorie.nom}}</td>
+        {%else%}
+            <td></td>
+        {% endif %}
+        <td><a class="update_action" href="{{path("go_shop_produit_update_form", {"id":produit.id})}}">Modifier</a></td>
+    </tr>
+    {% if stock is defined and stock is not null %}
+    <tr>
+        <th>Stock restant</th>
+        <th>Dernier mis à jr</th>
+        <th>Nombre de fois Vendu</th>
+        <th>Quantité vendue</th>
+        <th>Total Vente</th>
+        <th>Benefice</th>
+        
+    </tr>
+    <tr>
+        <td>{{stock.quantite}}</td>
+        <td>{{stock.lastUpdate.format('d-m-Y')}}</td>
+        <td>{{totaux.nombreVente}}</td>
+        <td>{{totaux.totalQuantiteVente}}</td>
+        <td>{{totaux.totalVente|nombre()}}</td>
+        <td>{{totaux.totalBenef|nombre()}}</td>
+       
+        
+    </tr>
+    {% endif %}
+    {% if ventes is defined and ventes is not null %}
+        
+    <tr>Historique des ventes
+        <th>Date</th>
+        <th>Quanité</th>
+        <th>Prix Vente</th>
+        <th>Bénéfice</th>
+        <th>Agent</th>
+    <tr>
+    
+        {% for vente in ventes %}
+          <tr> 
+            <td>{{ vente.date.format('d-m-Y H:s:i')}}</td>
+            <td>{{ vente.quantite}}</td>
+            <td>{{ vente.prixUnit|nombre()}}</td>
+            <td>{{ vente.benefice|nombre()}}</td>
+            <td>{{ vente.user.prenom}}</td>
+           </tr> {% endfor %}
+    
+        {% endif %}
+</table>
+        {% else %}
+            Aucun produit trouvé!
+    {% endif %}
+    {%endblock %}
+        

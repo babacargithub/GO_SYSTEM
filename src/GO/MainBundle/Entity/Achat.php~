@@ -1,0 +1,77 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Achat
+ *
+ * @ORM\Table(name="achat", indexes={@ORM\Index(name="fk_id_produit_achete", columns={"id_produit"})})
+ * @ORM\Entity
+ */
+class Achat
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite_achat", type="integer", nullable=true)
+     */
+    private $quantiteAchat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix_achat", type="integer", nullable=true)
+     */
+    private $prixAchat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prix_vente_achat", type="integer", nullable=true)
+     */
+    private $prixVenteAchat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_fournisseur", type="integer", nullable=true)
+     */
+    private $idFournisseur;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="regle_achat", type="integer", nullable=true)
+     */
+    private $regleAchat;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_achat", type="datetime", nullable=true)
+     */
+    private $dateAchat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_achat", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idAchat;
+
+    /**
+      * @var \\GO\MainBundle\Entity\Produit
+     *
+     * @ORM\ManyToOne(targetEntity="\GO\MainBundle\Entity\Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_produit", referencedColumnName="id")
+     * })
+     */
+    private $idProduit;
+
+
+}

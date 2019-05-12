@@ -1,0 +1,40 @@
+{% if client is not null %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Client</th>
+            <th>Tel</th>
+            <th>Adresse</th>
+            <th>Nombre voyage</th>
+        </tr>
+        <tr>
+            <td>{% if client.prenom is not null %} {{client.prenom }} {% endif %} 
+                {% if client.nom is not null %} {{client.nom }}{% endif %}</td>
+            <td> {% if client.tel is not null %} {{client.tel }}{% endif %}</td>
+            <td>{{client.adresse}}</td>
+            <td>{{nombre_voyage}}</td>
+        </tr>
+    </table>
+    
+{% if liste_voyages is defined %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Evènement</th>
+            <th>Départ</th>
+            
+            <th>Date Réservation</th>
+            <th>Destination</th>
+        </tr>
+    {% for res in liste_voyages %}
+        <tr>
+    <td>{{res.depart.event.libelle}}</td>
+    <td>{{res.depart.libelle}}</td>
+    
+    <td>{{res.date.format('d/m/Y h:m')}}</td>
+    <td>{{res.des.libelle}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% else %}
+        <h2>Aucun client trouvé</h2>
+{% endif %}

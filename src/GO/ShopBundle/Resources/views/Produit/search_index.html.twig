@@ -1,0 +1,14 @@
+  <div class="col-lg-5">
+{% if form is defined %}
+    <form action="{{ path('go_shop_produit_search')}}" method="post">
+           {{ form_errors(form)}}
+    
+    <div>
+    {{ form(form)}}
+    </div>
+     {{ form_row(form._token) }}
+    <input type="submit" class="btn btn-primary" />
+</form>
+</div>
+    {% endif %}
+ 

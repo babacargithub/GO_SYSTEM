@@ -1,0 +1,6 @@
+go_main_homepage:
+    pattern:  /
+    defaults: { _controller: GOMainBundle:Base:appSelection }
+go_main_test:
+    pattern:  /test
+    defaults: { _controller: GOMainBundle:Base:testTemp }

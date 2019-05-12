@@ -1,0 +1,87 @@
+        {% if liste is defined %}
+            <table class="table table-bordered table-striped">
+                <tr>
+                    
+                    <th>Id</th>
+                    <th>Libellé</th>
+                    <th>Date</th>
+                    <th>Réservation</th>
+                    <th>Paiements</th>
+                    {%if is_granted("ROLE_SUP_CARAV") %}
+                    <th>exporter</th>
+                    {%endif%}
+                    <th>Trajet</th>
+                    {%if is_granted("ROLE_SUP_CARAV") %}
+                    <th>Opérations</th>
+                    {%endif%}
+                </tr>
+                {% for depart in liste %}
+                    <tr>
+                        
+                        <td>{{ depart.id  }}</td>
+                        <td>{{ depart.libelle  }}</td>
+                        <td>{{ depart.date.format('d/m/Y H:s')}}</td>
+                        <td>
+                            {%if is_granted('ROLE_SUP_CARAV')%}
+                            {% if depart.closRes==true %}
+                                Déja Cloturé: <a class="depart_action" href='reopen_depart_res-{{ depart.id }}.golob'>Réouvrir
+                                {% else %}Ouvert: <a class="depart_action"  href='cloturer_depart_res-{{ depart.id }}.golob'>Cloturer</a>
+                            {%endif%}
+                            {% else %}
+                                {% if depart.closRes==true%}
+                                    Clôturées
+                                    {%else%}
+                                        Non Clotûrées
+                                    {%endif%}
+                                {%endif%}
+                        </td>
+                        <td>
+                        {%if is_granted('ROLE_SUP_CARAV')%}
+                            {% if depart.closPaye==true %}
+                                Payer Clôturé: <a class="depart_action glyphicon glyphicon-open" href='reopen_depart_paye-{{ depart.id }}.golob'>Réouvrir payer
+                                {% else %}
+                                    Pyer Ouvert: <a class="depart_action glyphicon glyphicon-lock"  href='cloturer_depart_paye-{{ depart.id }}.golob'>Clôturer</a>
+                                        {%endif%}
+                                {%else%}
+                                {% if depart.closPaye==true %}
+                                Paiements Clôturés
+                                {% else %}
+                                    Paiements Ouverts
+                                {%endif %}
+                                
+                          {%endif%}
+                        </td>
+                        
+                            {%if is_granted("ROLE_SUP_CARAV") %}
+                                <td>
+                            <a class="export_action" href="{{path("go_caravane_reservation_liste_export",{"id": depart.id, "filter":0,"format":"pdf"})}}">PDF DK</a>
+                            <a class="export_action" href="{{path("go_caravane_reservation_liste_export",{"id": depart.id, "filter":1,"format":"pdf"})}}">PDF</a>
+                            <a class="export_action" href="{{path("go_caravane_reservation_liste_export",{"id": depart.id, "filter":1,"format":"text"})}}">Texte Payé</a>
+                            <a class="export_action" href="{{path("go_caravane_reservation_liste_export",{"id": depart.id, "filter":0,"format":"text"})}}"'>Texte Non Payé</a>
+                            <a class="export_action" href="{{path("go_caravane_reservation_liste_export",{"id": depart.id, "filter":2,"format":"text"})}}">Texte Tous</a>
+                            </td>
+                            {%endif%}
+                            
+                        
+                        <td>{% if depart.trajet==2%}NIEUW UGB{%else%}DEM DAKAR{%endif%}
+                         {% if depart.bilan is null %}
+                             <a class="" href='{{path("bilan_depart", {"id": depart.id })}}'>Enregistrer Bilan</a>
+                             {%else%}
+                             <a class="" href='{{path("bilan_depart_show", {"id": depart.id })}}'>Voir le Bilan</a>
+                          {%endif%} </td>
+                        {%if is_granted("ROLE_SUP_CARAV") %}
+                            <td><a class="update_action" href='{{path("update_depart", {"id": depart.id })}}'>Modifier</a>
+                            <a class="" href='{{path("update_heures_depart", {"id": depart.id })}}'>Modifier les Heures</a>
+                            <a class="" href='{{path("details_depart", {"id": depart.id })}}'>Details</a>
+                            <a class="depart_action" href='supprimer-{{ depart.id }}.golob'>Supprimer</a>
+                        </td>
+                        {%endif%}
+                        
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                <span>Aucune donnée envoyée!</span>
+               
+           {% endif %}
+   

@@ -1,0 +1,23 @@
+{# empty Twig template #}
+{% extends "GOCaravaneBundle:Evenement:evenement_main_layout.html.twig" %}
+{% block content_body %}
+    <div class="row">
+        <h3>Créer un nouvel évènement </h3>
+        {% if form is defined %}
+<form id="{{form.vars.name}}" action="ajouter_event.golob" class="form-horizontal col-lg-4 col-md-6 col-xs-12" method="post" {{ form_enctype(form) }}>
+{{ form_label(form.libelle, "Libellé") }}
+{{ form_widget(form.libelle, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.dateStart, "Date début") }}
+{{ form_widget(form.dateStart, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.trajet, "Trajet du départ") }}
+{{ form_label(form.dateEnd, "Date fin") }}
+{{ form_widget(form.dateEnd, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.trajet, "Trajet du départ") }}
+{{ form_widget(form.trajet, {"attr":{"class": "form-control"}}) }}
+{{ form_row(form._token)}}
+<input type="submit"  value="Enregistrer" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+    {% endblock %}

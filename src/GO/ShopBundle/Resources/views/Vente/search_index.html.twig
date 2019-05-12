@@ -1,0 +1,26 @@
+ {% extends "@GOShop/Vente/vente_main_layout.html.twig" %}
+{% block content_body %}
+    <div class="col-lg-5">
+{% if form is defined %}
+    <form action="{{ path('go_shop_vente_search')}}" method="post">
+           {{ form_errors(form)}}
+    
+    <div>
+    {{ form_label(form.type_search, "Type de recherche")}}
+    {{ form_widget(form.type_search,{"attr":{"class":"form-control datepicker"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.debut, "Date début")}}
+    {{ form_widget(form.debut,{"attr":{"class":"form-control datepicker"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.fin, "Date Fin")}}
+    {{ form_widget(form.fin,{"attr":{"class":"form-control datepicker"}} )}}
+    </div>
+    {{ form_row(form._token) }}
+    <input type="submit" class="btn btn-primary" />
+</form>
+</div>
+    {% endif %}
+    {% endblock %}
+ 

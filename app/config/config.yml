@@ -1,0 +1,119 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: easyadmin_config.yml }
+    - { resource: "@GOCaisseBundle/Resources/config/services.yml" }
+framework:
+    #esi:             ~
+    translator:      { fallback: "%locale%" }
+    default_locale: %locale%
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: "%kernel.debug%"
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+   # serializer: { enable_annotations: true }
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form:
+        resources: ['bootstrap_3_layout.html.twig']
+    cache: false
+    globals:
+        company_name: 'Golob One'
+        company_full_name: 'Golob One, Toujours à Votre Service'
+        company_description: 'Commerce, Consultance, Engeniering, Finance'
+        company_logo_url: "images/logo_GolobOne-small.jpg"
+        software_name: 'GO SYS'
+        software_description: "Logiciel de l'entreprise Golob One"
+        version_name: '2.0.0'
+
+        
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        # path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+        dql:
+            string_functions:
+                DATE: GO\MainBundle\DQL\Query\Mysql\Date
+                NOW: GO\MainBundle\DQL\Query\Mysql\Now
+                MONTH: GO\MainBundle\DQL\Query\Mysql\Year
+                YEAR: GO\MainBundle\DQL\Query\Mysql\Month
+                
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+sensio_framework_extra:
+    request: { converters: true }
+fos_user:
+    db_driver: orm 
+    firewall_name: go_main_firewall 
+    user_class: GO\UserBundle\Entity\User 
+    registration:
+        form:
+            type: go_user_registration
+            name: go_user_registration
+fos_rest:
+    format_listener:
+        rules:
+            path: '^/'
+            priorities: ['html','json']
+            fallback_format: 'html'
+    view:
+        #…permet de convertir les réponses au format demandé
+        view_response_listener: true
+       #permet de convertir les données de requête en objet (désérialization)
+        formats: { json: true, xml: false, rss: false }
+    serializer:
+        #serializer: jms_serializer
+        serialize_null: true
+    body_converter:
+        enabled: true
+        validate: true
+        validation_errors_argument: violations
+    param_fetcher_listener: force
+    
+fos_oauth_server:
+    db_driver:           orm
+    client_class:        GO\ApiBundle\Entity\Client
+    access_token_class:  GO\ApiBundle\Entity\AccessToken
+    refresh_token_class: GO\ApiBundle\Entity\RefreshToken
+    auth_code_class:     GO\ApiBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_manager 
+        options:
+            access_token_lifetime: 63072000
+jms_serializer:
+    handlers:
+        datetime:
+            default_format: 'd-m-Y H:i:s'     

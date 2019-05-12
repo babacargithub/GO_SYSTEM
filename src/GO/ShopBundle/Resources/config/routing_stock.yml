@@ -1,0 +1,3 @@
+go_shop_stock_index:
+    pattern:  /stock_index.golob
+    defaults: { _controller: GOShopBundle:Stock:index }

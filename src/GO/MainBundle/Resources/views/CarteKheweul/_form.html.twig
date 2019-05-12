@@ -1,0 +1,35 @@
+
+<h3>Création d'une nouvelle carte Kheweul</h3>
+       {% if form is defined %}
+<form id="{{form.vars.name}}"action="add_c_kheweul.golob" class="form-horizontal" method="post" {{ form_enctype(form) }}>
+<div>
+    {{ form_errors(form)}}
+    <div>
+    {{ form_label(form.type, "Type de Carte")}}
+    {{ form_widget(form.type,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.client, "Téléphone client")}}
+    {{ form_widget(form.client,{"attr":{"class":"form-control"}} )}}
+    </div>
+    
+    <div>
+    {{ form_label(form.dateDeliv, "Date Délivrance")}}
+    {{ form_widget(form.dateDeliv,{"attr":{"class":"form-control"}} )}}
+    </div>
+    <div>
+    {{ form_label(form.dateExp, "Date Expiration")}}
+    {{ form_widget(form.dateExp,{"attr":{"class":"form-control"}} )}}
+    </div>
+    
+   
+   
+        {{ form_row(form._token) }}
+     {# {{ form_widget(form)}}#}
+<input type="submit" class="btn btn-primary" />
+</form>
+</div>
+
+    {% endif %}
+
+  

@@ -1,0 +1,44 @@
+{% extends app.request.isXmlHttpRequest() ? "_no_makeup.html.twig" : "base.html.twig" %}
+{% if not app.request.isXmlHttpRequest()  %}
+  {% block menu %}
+{% include "@GOClient/_menu.html.twig" %}
+{% endblock menu %}
+ {# Left side column. contains the logo and sidebar -->
+ {# include side bar#}
+ {% block sidebar %}
+ {{ render(controller('GOShopBundle:Main:menuVertical'))}}
+
+ {% endblock sidebar %}
+ {% endif %}
+
+   {% block content_header %}
+    <section class="content-header">
+      <h1>
+          {% block content_title %}Golob One Soft{%endblock %}
+        <small>GOLOB ONE CRM, Système de Gestion des Clients</small>
+      </h1>
+      
+          {% endblock content_header %}
+   
+{% block content_body %}
+        <h2>Bienvenue dans l'application pour la gestion des Boutiques de Golob One V2</h2>
+        <h1>Consignes de sécurité et récommendations</h1>
+        <ul>
+            <li><h3>Ne pas ouvrir cette application aux yeux des clients</h3></li>
+            <li><h3>Ne pas ouvrir sur un appareil étranger à l'entreprise</h3></li>
+            <li><h3>Ne pas communiquer votre mot de passe aux autres collègues</h3></li>
+            <li><h3>Ne pas oubliez de vous déconnecter à chaque fois que vous quittez votre poste de travail</h3></li>
+
+            
+        </ul>
+{% endblock  content_body %}
+
+
+ {% block javascripts %}
+     {{parent()}}
+            
+{% endblock javascripts %}
+
+{% block javascript_code %}
+
+    {% endblock javascript_code %}

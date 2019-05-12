@@ -1,0 +1,6 @@
+{% extends "GOCaravaneBundle:Chiffre:chiffre_main_layout.html.twig" %}
+{% block content_body %}
+    <a class="liste_chiffre" href="{{path('chiffre_user_all',{"id":event.id})}}">Tous mes chiffres</a>
+    <a class="liste_chiffre" href="{{path('chiffre_event_all', {"id":event.id})}}">Tous les chiffres du  {{event.libelle}}</a>
+    {% include 'GOCaravaneBundle:Chiffre:liste_chiffre_total_depart.html.twig' %}
+    {% endblock %}

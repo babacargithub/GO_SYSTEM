@@ -1,0 +1,10 @@
+
+ {% if form is defined %}
+<form id="{{form.vars.name}}"action="{{path('go_shop_vente_service_add')}}" class="form-horizontal" method="post">
+
+ {{ form_widget(form)}}
+<input type="submit" value="Enregistrer Vente" class="btn btn-primary" />
+</form>
+{% endif %}
+
+  

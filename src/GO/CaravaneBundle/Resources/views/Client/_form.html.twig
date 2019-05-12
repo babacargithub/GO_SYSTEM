@@ -1,0 +1,8 @@
+{# empty Twig template #}
+{% if form is defined %}
+    <form class="form-horizontal" action="client/ajouter.golob">
+    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+    <input type="submit" value="Submit"/>
+    </form>
+    {% endif %}

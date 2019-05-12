@@ -1,0 +1,14 @@
+  {% if form_ is defined %}
+<form id="{{form_.vars.name}}"action="{{path('vente_code_bar')}}" class="form-horizontal" method="post">
+
+    {{ form_errors(form_,{"attr":{"class":"alert-danger"}})}}
+    {{ form_widget(form_) }}
+    
+      {{ form_rest(form)}}
+<input type="submit" class="btn btn-primary" />
+</form>
+
+
+    {% endif %}
+
+  

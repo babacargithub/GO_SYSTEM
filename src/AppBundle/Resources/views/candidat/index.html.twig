@@ -1,0 +1,52 @@
+{% extends '@App/candidat/main_layout.html.twig' %}
+{% block content_title %} Liste des candidats de l'exercie en cours {% endblock %}
+{% block body %}
+
+    <table class='table table-bordered'>
+        <thead>
+            <tr>
+                <th>Dossier</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>Sexe</th>
+                <th>Ville</th>
+               <th>Université</th>
+               <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidat in candidats %}
+            <tr>
+                <td>{% if candidat.dossier is not null %}<a href="{{ path('dossier_show', { 'id': candidat.dossier.id }) }}">Ouvrir le Dossier</a>
+                {%else %}
+                    <a href="{{ path('dossier_new', { 'id': candidat.id }) }}">Créer Dossier</a>
+                    {%endif%}
+                </td>
+                <td>{{ candidat.prenom }}</td>
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.tel }}</td>
+                <td>{{ candidat.email }}</td>
+                 <td>{{ candidat.sexe }}</td>
+                <td>{{ candidat.villeActuel }}</td>
+                <td>{{ candidat.etablissActuel }}</td>
+                <td>
+                 <a href="{{ path('candidat_show', { 'id': candidat.id }) }}">Details</a>
+                     ||   
+                     <a href="{{ path('candidat_edit', { 'id': candidat.id }) }}">Modifier</a>
+                    ||   
+                     <a href="{{ path('candidat_delete', { 'id': candidat.id }) }}">Supprimer</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('candidat_new') }}">Ajouter un nouveau candidat</a>
+        </li>
+    </ul>
+{% endblock %}

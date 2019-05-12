@@ -1,0 +1,12 @@
+{% extends '@App/base_template.html.twig' %}
+{% block content_title %}Création de Dossier{%endblock%}
+{% block body %}
+    
+Créer un dossier pour le Candidat {{candidat }} 
+  <form id='dossier_new' action='{{path("dossier_new",{"id":candidat.id})}}' method='post'>
+        {{ form_widget(form) }}
+        <input type="submit" value="Créer le Dossier" />
+    {{ form_end(form) }}
+
+   
+{% endblock %}

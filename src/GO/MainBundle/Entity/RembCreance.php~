@@ -1,0 +1,67 @@
+<?php
+
+namespace  GO\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * RembCreance
+ *
+ * @ORM\Table(name="remb_creance", indexes={@ORM\Index(name="id_creance", columns={"id_creance", "date_remb"}), @ORM\Index(name="date_echeance_creance", columns={"date_echeance_creance"})})
+ * @ORM\Entity
+ */
+class RembCreance
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_creance", type="integer", nullable=false)
+     */
+    private $idCreance;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant_creance_remb", type="integer", nullable=false)
+     */
+    private $montantCreanceRemb;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant_remb", type="integer", nullable=false)
+     */
+    private $montantRemb;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="montant_restant", type="integer", nullable=false)
+     */
+    private $montantRestant;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_echeance_creance", type="date", nullable=true)
+     */
+    private $dateEcheanceCreance;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_remb", type="datetime", nullable=true)
+     */
+    private $dateRemb;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_remb", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $idRemb;
+
+
+}

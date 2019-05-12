@@ -1,0 +1,9 @@
+{# empty Twig template #}
+{% extends "GOMainBundle:Client:_main_layout.html.twig" %}
+{% block content_body %}
+    <form id="{{ form.vars.name }}" method="post" action="{{path("employe_index")}}">
+{{form_widget(form)}}
+<input type="submit" value="Enregistrer"/>
+    </form>
+{% endblock %}
+

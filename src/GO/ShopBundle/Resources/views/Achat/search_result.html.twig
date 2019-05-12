@@ -1,0 +1,36 @@
+     {% extends "@GOShop/layout.html.twig" %}
+     {% block content_body %}
+         <h2>Total des achats  {% if total_achat is defined and total_achat is not null %}{{ total_achat|nombre() }}
+        {% endif %}</h2>
+        {% if achats is defined and achats is not null %}
+            <table class="table table-bordered table-striped">
+                <tr >
+                        
+                    <th>Facture N°</th>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th>Prix Unitaire</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Opérations</th>
+                </tr>
+                {% for achat in achats %}
+                    <tr id="row-{{ achat.id }}">
+                        <td>{{achat.facture.num}}</td>
+                        <td>{{achat.produit.nom}}</td>
+                        <td>{{ achat.quantite}}</td>
+                        <td>{{ achat.prixUnit|nombre()  }}</td>
+                         <td>{% set total=achat.quantite*achat.prixUnit %}{{ total|nombre()  }}</td>
+                        <td>{{ achat.date.format('d-m-Y H:i')}}</td>
+                        <td>
+                            <a class="update_action" id="{{ achat.id }}" href='update_achat-{{ achat.id }}.golob'>Modifier</a>
+                            <a class="annuler_action" id="{{ achat.id }}" href='annuler_achat-{{ achat.id }}.golob'>Annuler</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% else %}
+                
+    {% endif %}
+    {% endblock %}
+ 

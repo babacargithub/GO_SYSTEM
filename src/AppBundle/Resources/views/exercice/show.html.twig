@@ -1,0 +1,48 @@
+{% extends '@App/base_template.html.twig' %}
+
+{% block body %}
+    <h1>Exercice</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ exercice.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ exercice.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Datestart</th>
+                <td>{% if exercice.dateStart %}{{ exercice.dateStart|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateend</th>
+                <td>{% if exercice.dateEnd %}{{ exercice.dateEnd|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ exercice.comments }}</td>
+            </tr>
+            <tr>
+                <th>Current</th>
+                <td>{% if exercice.current %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('exercice_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('exercice_edit', { 'id': exercice.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

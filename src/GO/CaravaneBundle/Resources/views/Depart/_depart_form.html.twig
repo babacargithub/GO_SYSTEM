@@ -1,0 +1,16 @@
+{% if form is defined %}
+<form id="{{form.vars.name}}" action="add_depart.golob" class="form-horizontal col-lg-6" method="post" {{ form_enctype(form) }}>
+{{ form_label(form.libelle, "Libellé") }}
+{{ form_widget(form.libelle, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.date, "Date du départ") }}
+{{ form_widget(form.date, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.date, "Horaire du départ") }}
+{{ form_widget(form.horaire, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.trajet, "Trajet du départ") }}
+{{ form_widget(form.trajet, {"attr":{"class": "form-control"}}) }}
+{{ form_label(form.event, "Evement") }}
+{{ form_widget(form.event, {"attr":{"class": "form-control"}}) }}
+{{ form_row(form._token)}}
+<input type="submit" class="btn btn-primary" />
+</form>
+{% endif %}

@@ -1,0 +1,141 @@
+<?php
+
+namespace  GO\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Creance
+ *
+ * @ORM\Table(name="creance_produit")
+ *  repositoryClass="GO\ShopBundle\Entity\CreanceProduitRepository")
+ */
+class CreanceProduit extends CreanceBaseClass
+{
+   
+
+    /**
+     * @var \GO\ShopBundle\Entity\Produit
+     *
+     * @ORM\ManyToOne(targetEntity="GO\ShopBundle\Entity\Produit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="produit", referencedColumnName="id",onDelete="NO ACTION",nullable=false)
+     * })
+     */
+    private $produit;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=false)
+     */
+    private $quantite;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="prixUnit", type="integer", nullable=false)
+     */
+    private $prixUnit;
+    /**
+     * @ORM\OneToMany(targetEntity="GO\ShopBundle\Entity\RembCreance", mappedBy="creance")
+     */
+    private $remboursements;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+   
+
+    
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     * @return Creance
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer 
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set prixUnit
+     *
+     * @param integer $prixUnit
+     * @return Creance
+     */
+    public function setPrixUnit($prixUnit)
+    {
+        $this->prixUnit = $prixUnit;
+
+        return $this;
+    }
+
+    /**
+     * Get prixUnit
+     *
+     * @return integer 
+     */
+    public function getPrixUnit()
+    {
+        return $this->prixUnit;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set produit
+     *
+     * @param \GO\ShopBundle\Entity\Produit $produit
+     * @return CreanceProduit
+     */
+    public function setProduit(\GO\ShopBundle\Entity\Produit $produit)
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Get produit
+     *
+     * @return \GO\ShopBundle\Entity\Produit 
+     */
+    public function getProduit()
+    {
+        return $this->produit;
+    }
+    
+    //===================FONCTIONS DIVERSES ============
+    // renvoie le total de la quantite
+    public function getTotal()
+    {
+        return  $this->quantite*$this->prixUnit;
+    }
+}

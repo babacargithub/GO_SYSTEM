@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block content_body %}
+    <h1>Categorieclient</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorieClient.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ categorieClient.name }}</td>
+            </tr>
+            <tr>
+                <th>Abrv</th>
+                <td>{{ categorieClient.abrv }}</td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>{{ categorieClient.comments }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('categorie_client_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('categorie_client_edit', { 'id': categorieClient.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
