@@ -8,7 +8,7 @@
 
 namespace GO\CaravaneBundle\Form\DataTransformer;
 
-use GO\ClientBundle\Entity\Client;
+use GO\CaravaneBundle\Entity\Client;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;

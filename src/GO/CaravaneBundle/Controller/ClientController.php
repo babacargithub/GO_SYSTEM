@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use GO\MainBundle\Controller\ClientController as ClientMainController;
 use GO\CaravaneBundle\Utils\Constants as Cons;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use GO\CaravaneBundle\Form\ReservationType;
 /**
  * Description of ClientController
  *
@@ -180,8 +181,10 @@ class ClientController extends ClientMainController {
            $em->persist($Client->getCoordonnees());
            $em->persist($Client);
            $em->flush();
-            return $this->sendResponse(array('view'=>'GOCaravaneBundle::flash_message.html.twig',
-                    'msg'=>"Client enregistré avec succès"));
+           $resForm= $this->createForm(ReservationType::class, new Reservation());
+           $resForm->get('client')->setData($Client);
+            return $this->render('@GOCaravane/Reservation/index.html.twig',
+                    ['msg'=>"Client enregistré avec succès", "form"=>$resForm->createView()]);
         } else {
         
         return $this->render('GOCaravaneBundle:Client:_form.html.twig', array('form'=>$form->createView()));
@@ -192,7 +195,8 @@ class ClientController extends ClientMainController {
     public function getDetailsAction(Request $req)
     {
         $client=$this->getRepo('Client')->findOneByTel($req->get('tel'));
-          $clientForm= $this->createForm(new ClientType(), $client);
+          $clientForm= $this->createForm(new ClientType(), $client,['action'=> $this->generateUrl("go_caravane_client_new")]);
+          $clientForm->get('coordonnees')->get('tel')->setData($req->get('tel'));
         $voyage_en_cours= null;
         //si le client existe dans la base, on va compter le nombre de voyages qu'il a effectué, sinon on ne fait rien
        /* if(!empty($client))

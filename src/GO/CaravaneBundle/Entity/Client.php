@@ -4,12 +4,14 @@ namespace  GO\CaravaneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use GO\ClientBundle\Entity\Client as BaseClient;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Client
  *
  * @ORM\Table(name="caravane_client")
  * @ORM\Entity(repositoryClass="GO\CaravaneBundle\Entity\ClientRepository")
+ * @UniqueEntity(fields="coordonnees", message="Ce client existe déjà en tant que client caravane")
  */
 class Client
 {
@@ -32,6 +34,12 @@ class Client
      * })
      */
     private $coordonnees;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombre_voyage", type="integer", nullable=true)
+     */
+    private $nombreVoyage;
      /**
          * @ORM\OneToMany(targetEntity="GO\CaravaneBundle\Entity\Reservation", mappedBy="client")
          *
@@ -128,5 +136,29 @@ class Client
     public function getReservations()
     {
         return $this->reservations;
+    }
+
+    /**
+     * Set nombreVoyage
+     *
+     * @param integer $nombreVoyage
+     *
+     * @return Client
+     */
+    public function setNombreVoyage($nombreVoyage)
+    {
+        $this->nombreVoyage = $nombreVoyage;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreVoyage
+     *
+     * @return integer
+     */
+    public function getNombreVoyage()
+    {
+        return $this->nombreVoyage;
     }
 }

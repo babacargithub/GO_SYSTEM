@@ -3,6 +3,8 @@
 namespace GO\CaravaneBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use GO\CaravaneBundle\Form\ClientType;
@@ -13,28 +15,27 @@ class ReservationType extends AbstractType
     {
         $builder
             ->add('client', TelephoneToClientTransformerType::class)
-            ->add('depart', 'entity',array(
+            ->add('depart', EntityType::class,array(
                 "class"=>"GOCaravaneBundle:Depart", 
                 "property"=>"libelle",
                 "empty_value"=>"Sélectionner un départ",
                'query_builder'=> function(\GO\CaravaneBundle\Entity\DepartRepository $r){return $r->getListeDeparts();}
                  ))
-            ->add('pointDep', 'entity', array(
+            ->add('pointDep', EntityType::class, array(
                 "class"=>"GOCaravaneBundle:PointDepart", 
                 "property"=>"nom",
                 "empty_value"=>"Choisir Point de départ",
                 'query_builder'=> function(\GO\CaravaneBundle\Entity\PointDepartRepository $r){return $r->getListePointDeparts();}
                  ))
-            ->add('des', 'entity', array(
+            ->add('des', EntityType::class, array(
                 "class"=>"GOCaravaneBundle:Destination", 
                 "property"=>"libelle",
-                "empty_value"=>"Select une destination"), array('required'=>true))
+                "empty_value"=>"Select une destination"))
             
-             ->add('paye', 'choice', 
+             ->add('paye', ChoiceType::class, 
                      array
-                     ( "choices"=>
-                                array(false=>"Non", true=>"Oui"
-                                    ),
+                     ( "choices"=>[false=>"Non", true=>"Oui"],
+                                    
                      "multiple"=>false, 
                      "expanded"=>true,
                      "mapped"=>false

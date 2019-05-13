@@ -18,8 +18,8 @@ class ClientType extends AbstractType {
         $builder->add('firstName', Type\TextType::class, array("label" => "Prénom"))
         ->add('lastName', Type\TextType::class, array("label" => "Nom"))
         ->add('tel', Type\IntegerType::class, array("label" => "Téléphone"))
-        ->add('email', Type\EmailType::class)
-        ->add('adresse', Type\TextType::class)
+        ->add('email', Type\EmailType::class, ["required"=>false])
+        ->add('adresse', Type\TextType::class,["required"=>false])
         ->add('sexe', Type\ChoiceType::class, array("choices" => array("F" => "Féminin", "M" => "Masculin"), "placeholder" => "Choisir le Sexe"))
         ->add('categorie', EntityType::class, array("label"=>"Catégorie","class"=> CategorieClient::class,"property"=>"name", "placeholder"=>"Catégorie de Client(e)"));
     }
