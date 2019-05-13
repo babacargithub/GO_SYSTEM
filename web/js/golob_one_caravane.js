@@ -76,7 +76,7 @@ $(document).ready(function()
 			}
 			);
    //==================traitement lors de la saisie du numéro de téléphone
- $("#"+module_form+"_client_tel").on(
+ $("#"+module_form+"_client").on(
     {
         keyup:function(e)
         {
