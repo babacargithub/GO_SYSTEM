@@ -12,7 +12,7 @@ class ReservationEditType extends AbstractType
     {
         $builder
               
-            ->add('client', new ClientType())
+            ->add('client', TelephoneToClientTransformerType::class)
             ->add('depart', 'entity',array(
                 "class"=>"GOCaravaneBundle:Depart", 
                 "property"=>"libelle",

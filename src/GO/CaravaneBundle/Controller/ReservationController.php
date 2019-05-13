@@ -95,17 +95,15 @@ class ReservationController extends MainController{
        $request=$req;
          $CustomValidator=$this->get('gocar.custom_validator');
          $em=$this->em();
-        $clientRepo=$this->getRepo('Client');
+        $clientRepo=$this->getDoctrine()->getRepository('GOCaravaneBundle:Client');
         $resRepo=$this->getRepo('Reservation');
         $res= new Reservation();
-        $client=$clientRepo->findOneByTel($req->get('go_caravanebundle_reservationtype')['client']['tel']);
-        if(!empty($client))
-        {
         
+      
         $resForm= $this->createForm(new ReservationType(),$res);
-        
-        $resForm->bind($request);
-        $res->setClient($client);
+         
+        $resForm->handleRequest($request);
+       
         $res->setConfirme(false);
         $res->setDate(new \DateTime());
         
@@ -178,19 +176,7 @@ class ReservationController extends MainController{
         
   
  
-        }else
-        {
-            $errorMsg='Le Client avec le numéro: '.$req->get('go_caravanebundle_reservationtype')['client']['tel'].''
-                . ' n\'existe pas! Veuillez le créer d\'abord avant de continuer';    
-        
-           return $this->sendResponse(array(
-               "view"=>'GOCaravaneBundle:Reservation:index.html.twig',
-               "msg"=>$msg,
-               "errorMsg"=>$errorMsg
-               //"responseVars"=> array('form'=>$resForm->createView())
-               ));
-  
-        }
+       
    }
    
     /**

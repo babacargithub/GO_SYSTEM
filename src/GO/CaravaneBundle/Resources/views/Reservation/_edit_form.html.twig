@@ -10,24 +10,6 @@
     {{ form_widget(form.depart)}}
     
     </div>
-   
-    <div id="{{form.client.prenom.vars.id}}_div">
-    {{ form_label(form.client.prenom, "Prénom client")}}
-    {{ form_widget(form.client.prenom)}}
-    </div>
-    <div id="{{form.client.nom.vars.id}}_div">
-    {{ form_label(form.client.nom, "Nom client")}}
-    {{ form_widget(form.client.nom,{"attr":{"class":"form-control"}} )}}
-    </div>
-    <div>
-    
-    {{ form_widget(form.client.promo,{"attr":{"hidden":"hidden"}} )}}
-    </div>
-    <div>
-    {{ form_label(form.client.tel, "Téléphone client")}}
-    {{ form_widget(form.client.tel,{"attr":{"class":"form-control"}} )}}
-    </div>
-   
     <div>
     {{ form_label(form.pointDep, "Point de départ")}}
     <select class='form-control' name='{{form.vars.name}}[{{form.pointDep.vars.name}}]' id='{{form.vars.name}}_{{form.pointDep.vars.name}}'>
@@ -49,6 +31,7 @@
      
 <input type="submit" class="btn btn-primary" value="Enregistrer les modifications"/>
 </form>
+        <a href="#">Cliquez ici pour modifier le client</a>
 </div>
 
     {% endif %}

@@ -18,8 +18,8 @@
     
     
     <div>
-    {{ form_label(form.client.tel, "Téléphone client")}}
-    {{ form_widget(form.client.tel,{"attr":{"class":"form-control"}} )}}
+    {{ form_label(form.client, "Téléphone client")}}
+    {{ form_widget(form.client,{"attr":{"class":"form-control"}} )}}
     </div>
    
     <div>
@@ -45,7 +45,7 @@
     </div>
         {{ form_row(form._token) }}
      {# {{ form_widget(form)}}#}
-<input type="submit" class="btn btn-primary" />
+<input type="submit" value="Enregistrer Réservation" class="btn btn-primary" />
 </form>
 </div>
 

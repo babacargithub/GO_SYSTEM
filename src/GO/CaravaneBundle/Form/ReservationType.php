@@ -5,14 +5,14 @@ namespace GO\CaravaneBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use GO\MainBundle\Form\ClientType;
+use GO\CaravaneBundle\Form\ClientType;
 
 class ReservationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('client', new ClientType())
+            ->add('client', TelephoneToClientTransformerType::class)
             ->add('depart', 'entity',array(
                 "class"=>"GOCaravaneBundle:Depart", 
                 "property"=>"libelle",

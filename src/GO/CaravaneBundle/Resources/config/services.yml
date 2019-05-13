@@ -13,3 +13,9 @@ services:
         class: GO\UserBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: go_user_registration }
+    go_caravane.type.tel_to_client_transformer:
+        class: GO\CaravaneBundle\Form\TelephoneToClientTransformerType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: carav_tel_to_client_transformer }
+

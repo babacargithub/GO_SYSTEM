@@ -59,7 +59,7 @@ class ClientController extends MainController {
             $client=new Client();
         }
         $form= $this->createForm(new ClientDetailType(), $client);
-        $form->bind($req);
+        $form->handleRequest($req);
         
         
         //verfier et valider le formulaire

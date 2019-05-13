@@ -192,17 +192,17 @@ class ClientController extends ClientMainController {
     public function getDetailsAction(Request $req)
     {
         $client=$this->getRepo('Client')->findOneByTel($req->get('tel'));
-          $clientForm= $this->createForm(new ClientDetailType(), $client);
+          $clientForm= $this->createForm(new ClientType(), $client);
         $voyage_en_cours= null;
         //si le client existe dans la base, on va compter le nombre de voyages qu'il a effectué, sinon on ne fait rien
-        if(!empty($client))
+       /* if(!empty($client))
         {
         $clientForm->get('nombre_voy')->setData($this->getRepo('Reservation')->getNombreVoyage($client->getTel()));
         $en_cours=$this->getRepo('Reservation')->getDernierVoyage($client->getTel());
         if(!is_null($en_cours))
             $voyage_en_cours=$en_cours;
-        }
-        return $this->render('GOCaravaneBundle:Client:_details.html.twig', 
+        }*/
+        return $this->render('GOCaravaneBundle:Client:_form.html.twig', 
                                 array('voyage_en_cours'=>$voyage_en_cours,'form'=>$clientForm->createView(), 'data'=>$clientForm->getData()));
     }
     
