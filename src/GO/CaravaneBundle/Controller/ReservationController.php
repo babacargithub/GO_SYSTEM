@@ -5,7 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 namespace GO\CaravaneBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GO\MainBundle\Entity\Client;
@@ -166,8 +165,6 @@ class ReservationController extends MainController{
               $errorMsg="Les réservations sont clôturées sur ce départ";
           }
         } else {
-            return $this->render('GOCaravaneBundle:Reservation:index.html.twig',['form'=>$resForm->createView()]);
-      
         }
         return $this->sendResponse(array(
                "view"=>'GOCaravaneBundle:Reservation:index.html.twig',
