@@ -168,6 +168,7 @@ class ReservationController extends MainController{
               $errorMsg="Les réservations sont clôturées sur ce départ";
           }
         } else {
+            return $this->render('GOCaravaneBundle:Reservation:index.html.twig',['form'=>$resForm->createView()]);
         }
         return $this->sendResponse(array(
                "view"=>'GOCaravaneBundle:Reservation:index.html.twig',
