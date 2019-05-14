@@ -33,6 +33,7 @@
         "symfony/swiftmailer-bundle": "~2.3,>=2.3.10",
         "symfony/symfony": "2.8.49",
         "tecnick.com/tcpdf": "^6.2",
+        "temenb/symfony2-form-errors-serializer": "dev-master",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {

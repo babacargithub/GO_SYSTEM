@@ -173,7 +173,7 @@ class ClientController extends ClientMainController {
         $Client=new Client();
         $form= $this->createForm(new ClientType(), $Client,["action"=> $this->generateUrl("go_caravane_client_new")]);
         $form->handleRequest($req);
-       
+       $resForm= $this->createForm(ReservationType::class, new Reservation());
         if($form->isSubmitted()&&$form->isValid())
         {
             $Client->getCoordonnees()->setCreatedAt(new \DateTime());
@@ -181,13 +181,13 @@ class ClientController extends ClientMainController {
            $em->persist($Client->getCoordonnees());
            $em->persist($Client);
            $em->flush();
-           $resForm= $this->createForm(ReservationType::class, new Reservation());
+           
            $resForm->get('client')->setData($Client);
             return $this->render('@GOCaravane/Reservation/index.html.twig',
                     ['msg'=>"Client enregistré avec succès", "form"=>$resForm->createView()]);
         } else {
         
-        return $this->render('GOCaravaneBundle:Client:_form.html.twig', array('form'=>$form->createView()));
+        return $this->render('@GOCaravane/Reservation/index.html.twig', ["form"=>$resForm->createView(),"client_form"=>$form->createView()]);
    
         }
         

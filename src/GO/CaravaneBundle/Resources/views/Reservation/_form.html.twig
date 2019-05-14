@@ -6,7 +6,7 @@
     {{ form_errors(form)}}
     <div>
     {{ form_label(form.depart, "Départ")}}
-    <select class='form-control' name='{{form.vars.name}}[{{form.depart.vars.name}}]' id='{{form.vars.name}}_{{form.depart.vars.name}}'>
+    <select class='form-control' name='{{form.vars.name}}[{{form.depart.vars.name}}]' id='{{form.vars.name}}_{{form.depart.vars.name}}' required="required">
    <option value="">Selectionnez Départ</option>
     
    {% for key, val in form.depart.vars.choices %}
@@ -24,7 +24,7 @@
    
     <div>
     {{ form_label(form.pointDep, "Point de départ")}}
-    <select class='form-control' name='{{form.vars.name}}[{{form.pointDep.vars.name}}]' id='{{form.vars.name}}_{{form.pointDep.vars.name}}'>
+    <select class='form-control' name='{{form.vars.name}}[{{form.pointDep.vars.name}}]' id='{{form.vars.name}}_{{form.pointDep.vars.name}}' required="required">
         <option value="">Selectionnez point depart</option>
         {% for key, val in form.pointDep.vars.choices %}
        <option trajet="{{val.data.trajet}}" value="{{val.value}}"/>{{val.label}}</option>
@@ -34,7 +34,7 @@
     </div>
     <div>
     {{ form_label(form.des, "Destination ?")}}
-    <select class='form-control' name='{{form.vars.name}}[{{form.des.vars.name}}]' id='{{form.vars.name}}_{{form.des.vars.name}}'>
+    <select class='form-control' name='{{form.vars.name}}[{{form.des.vars.name}}]' id='{{form.vars.name}}_{{form.des.vars.name}}' required="required">
         <option value="">Selectionnez Destination</option>
         {% for key, val in form.des.vars.choices %}
        <option trajet="{{val.data.trajet}}" value="{{val.value}}"/>{{val.label}}</option>

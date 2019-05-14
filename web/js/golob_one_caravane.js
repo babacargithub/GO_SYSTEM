@@ -81,6 +81,7 @@ $(document).ready(function()
         keyup:function(e)
         {
             $('#details_client').hide();
+            $('#invalid_client_form').hide();
             var tel=$(this).val();
             var len_tel=tel.length;
             if(len_tel==9)

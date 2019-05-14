@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0974e8d726e0687c40d8094f4875c322",
+    "content-hash": "2dc736922dbea05e093135fc71f36d49",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -3775,6 +3775,44 @@
             "time": "2018-10-16T17:24:05+00:00"
         },
         {
+            "name": "temenb/symfony2-form-errors-serializer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/temenb/FormErrorsSerializer.git",
+                "reference": "14880ef0f84362fce6601ed8698f3465cb1135a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/temenb/FormErrorsSerializer/zipball/14880ef0f84362fce6601ed8698f3465cb1135a1",
+                "reference": "14880ef0f84362fce6601ed8698f3465cb1135a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/form": "*"
+            },
+            "require-dev": {
+                "php": ">=5.3.0",
+                "symfony/form": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "FormErrorsSerializer": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "temenb",
+                    "email": "temenb@gmail.com"
+                }
+            ],
+            "description": "Convert form error info to array",
+            "time": "2015-02-24 10:16:36"
+        },
+        {
             "name": "twig/extensions",
             "version": "v1.5.4",
             "source": {
@@ -4212,7 +4250,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "temenb/symfony2-form-errors-serializer": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
