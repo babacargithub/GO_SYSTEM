@@ -4,6 +4,7 @@ namespace  GO\ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * CompteClient
  *

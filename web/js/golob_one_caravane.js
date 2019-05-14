@@ -18,7 +18,7 @@ $.ajax({
              $('#content_body').html(reponse);});
      
      });
-     //====================Traiter de mani√®re uniformis√©e les boutons d'action dans les listes==========
+     //====================Traiter de maniËre uniformisÈe les boutons d'action dans les listes==========
    
      $(document).ajaxStart(function()
 						{
@@ -40,7 +40,7 @@ $(document).ready(function()
  $("#"+module_form+"_client_prenom_div,"+"#"+module_form+"_client_nom_div").hide();
  $('#details_client').hide();
  
- //===================Traitement lors de la selection d'un d√©part====================
+ //===================Traitement lors de la selection d'un dÈpart====================
  $("#"+module_form+"_depart").change(function(e)
         { 
                 var trajet=$(this,"option:selected").val();
@@ -75,7 +75,7 @@ $(document).ready(function()
                 }
 			}
 			);
-   //==================traitement lors de la saisie du num√©ro de t√©l√©phone
+   //==================traitement lors de la saisie du numÈro de tÈlÈphone
  $("#"+module_form+"_client").on(
     {
         keyup:function(e)
@@ -110,7 +110,7 @@ $(document).ready(function()
         $("#voy_en_cours_detail").html(reponse[0].voyage_en_cours);
          if(reponse[0].voyage_en_cours!="")
          {
-                 alert("Ce client a fait une r√©servation sur le  d√©part  "+reponse[0].voyage_en_cours);
+                 alert("Ce client a fait une rÈservation sur le  dÈpart  "+reponse[0].voyage_en_cours);
 
 //$("#formulaire_reservation :input").prop("disabled", true); 
          }
@@ -127,7 +127,7 @@ $("#nom_res").show().attr("required", true);
 }
 }*/
     }else{
-    show_alert("Erreur: le num√©ro du t√©l√©phone entr√© n'est pas valide!");
+    show_alert("Erreur: le numÈro du tÈlÈphone entrÈ n'est pas valide!");
 
     }
     }
@@ -138,48 +138,8 @@ $("#nom_res").show().attr("required", true);
 }
 });
 
-//_____ actualisation des √©tats des d√©parts toutes les 5 minutes--------------------->>>		
+//_____ actualisation des Ètats des dÈparts toutes les 5 minutes--------------------->>>		
 setInterval('Update_etat_dep()', 50000);	
 
-
-//========== GESTION DE LA BARRE DE RECHERCHE DU CLIENT A COTE GAUCHE DE LA PAGE =================//
-$('#rechercheHistoVoyage').submit(function(e)
-{
-    e.preventDefault();
-    var tel=$("#rechercheHisto").val();
-    $.get("historique_voyage_client-"+tel+".golob", "", 
-    function(res){ $("#modal").html(res).
-                dialog({
-                        width: 800, 
-                        dialogClass: "alert",
-                        title: "D√©tails du client et historique voyage"
-                    }
-                    );
-            });
-}
- );
- //================+ACTION POUR GERER LA LIGNE DE COMMANDE A COTE GAUCHE
- $("#command-lineForm").on('submit',function(e){
-    e.preventDefault();
-    var acceptedCommands=new Array('p','d','m');
-   var tel=$('#commandeField').val();
-    var targetUrl='voyage_en_cours-'+tel+'.golob';
-    //if(/^[0-9]{0,}-[pmds]([\-0-9]{2,3}){0,1}$/.test(data))
-    if(isValideTelephone(tel))
-    {
-     $.get(targetUrl,'', function(reponse){
-               $("#modal").html(reponse).dialog({
-                        width: 900, 
-                        dialogClass: "alert",
-                        title: "D√©tails du dernier voyage"
-                    }); 
-           });
-     
-        }else
-        {
-            alert('T√©l√©phone invalide!');
-        }
-   
-});
 
 });
