@@ -62,7 +62,7 @@ class CompteClientController extends MainController
         ->setCreatedAt(new \DateTime());
         $form = $this->createForm('GO\ClientBundle\Form\CompteClientType', $compteClient);
         $form->handleRequest($request);
-
+        $formView=$form->createView();
         if ($form->isSubmitted() && $form->isValid()) {
             $compteClient->generateAccountNumber();
             $em = $this->getDoctrine()->getManager();
@@ -70,11 +70,16 @@ class CompteClientController extends MainController
             $em->flush();
 
             return $this->redirectToRoute('compte_client_show', array('id' => $compteClient->getId()));
-        }
+        }/* else {
+             return $this->render('@GOClient/compte_client/new.html.twig', array(
+           
+            'form' =>$form
+        ));
+        }*/
 
         return $this->render('@GOClient/compte_client/new.html.twig', array(
             'compteClient' => $compteClient,
-            'form' => $form->createView(),
+            'form' => $form,
         ));
     }
 

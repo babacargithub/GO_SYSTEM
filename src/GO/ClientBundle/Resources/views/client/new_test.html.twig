@@ -1,0 +1,45 @@
+{% extends '@GOClient/client/_main_layout.html.twig' %}
+
+{% block content_body %}
+    
+    <div class="row">
+        <div class="col-lg-6">
+    <h1>Création d'un nouveau Client</h1>
+    {{ form_start(form) }}
+  
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success" value="Enregistrer" />
+    {{ form_end(form) }}
+
+    </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script src="{{asset("js/symfony_form_handler.js")}}"></script>
+
+    {%endblock%}
+{% block javascript_code %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+            
+            $.ajax({
+                url:"http://localhost/GO_SYS_V2_SYNCH/web/customer/test/form_handler_response",
+                contentType: "application/json",
+                dataType: 'json',
+                success:function(data)
+                {
+                        var form_name="go_clientbundle_client";
+                        var form_id="go_clientbundle_clienttype";
+                        if(hasValidationErros(data))
+                        {
+                            alert("has validation errors");
+                        }
+                         mappFormErrorsToFields(form_id,form_name,data);
+                }
+        });
+            
+        });
+        </script>
+    {%endblock%}

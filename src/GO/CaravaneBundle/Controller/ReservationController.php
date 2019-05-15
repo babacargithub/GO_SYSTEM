@@ -107,25 +107,25 @@ class ReservationController extends MainController{
         $res->setDate(new \DateTime());
         
         $res->setAgent($this->getUser());
-        //=== vérifier si le formulaire est valide
+        //=== vï¿½rifier si le formulaire est valide
          if($resForm->isValid())
         {
-             //=== Vérifier si les réservations ne sont pas cloturées pour le départ sélectionné
+             //=== Vï¿½rifier si les rï¿½servations ne sont pas cloturï¿½es pour le dï¿½part sï¿½lectionnï¿½
           if($res->getDepart()->getClosRes()==false)  
           {
-              //vérifie si le téléphone est valide  
+              //vï¿½rifie si le tï¿½lï¿½phone est valide  
               //if($CustomValidator->isValideTelephone($res->getClient()->getTel()))
                 if(1>0){
                 $em->persist($res->getClient());
                 if($resRepo->reservationExists($res->getClient()->getTel(), $res->getDepart()))
                 {
-                    $errorMsg="Le client a déjà fait une reservation sur ce départ: ".$res->getDepart()->getLibelle();
+                    $errorMsg="Le client a dï¿½jï¿½ fait une reservation sur ce dï¿½part: ".$res->getDepart()->getLibelle();
                 }
                 else
                 { 
                     $em->persist($res);
                     $em->flush();
-                            $msg="Réservation enregistrée avec succès!";
+                            $msg="Rï¿½servation enregistrï¿½e avec succï¿½s!";
                             //envoyer une notification SMS au client
                             $heure_rv=$res->getHeureDepart()->format('H\h:i');
 
@@ -136,7 +136,7 @@ class ReservationController extends MainController{
                              $tel=$client->getTel();
                              $client_data=$client->getPrenom();
                             
-                             //préparer la notification à envoyer aux clients après réservation réuissi
+                             //prï¿½parer la notification ï¿½ envoyer aux clients aprï¿½s rï¿½servation rï¿½uissi
                             
                             $form_name='go_caravanebundle_reservationtype';
                            if(isset($req->request->get($form_name)['paye']) && $req->request->get($form_name)['paye']==true)
@@ -145,10 +145,10 @@ class ReservationController extends MainController{
                                 {
                                $code=$this->payer($res);
                                $res= $this->attribuerNumPlace($res);
-                              $msg.=" ".$code. " Numéro place: <strong>".$res->getNumPlace()."</strong>";
+                              $msg.=" ".$code. " Numï¿½ro place: <strong>".$res->getNumPlace()."</strong>";
                                 }else
                                  {
-                                     $errorMsg="Impossible d'enregistrer le paiement. Motif: Vous ne disposez pas de compte boutiquier. Seuls les comptes boutiquiers sont autorisés à effectuer des paiements";
+                                     $errorMsg="Impossible d'enregistrer le paiement. Motif: Vous ne disposez pas de compte boutiquier. Seuls les comptes boutiquiers sont autorisï¿½s ï¿½ effectuer des paiements";
                                 }   
                            }
                             $notification= $this->getNotificationMessage($res);
@@ -158,20 +158,20 @@ class ReservationController extends MainController{
                  }
                 }else
                 {
-                    $errorMsg="Téléphone invalide!";
+                    $errorMsg="Tï¿½lï¿½phone invalide!";
                 } 
           }else
           {
-              $errorMsg="Les réservations sont clôturées sur ce départ";
+              $errorMsg="Les rï¿½servations sont clï¿½turï¿½es sur ce dï¿½part";
           }
         } else {
         }
         return $this->sendResponse(array(
                "view"=>'GOCaravaneBundle:Reservation:index.html.twig',
                "msg"=>$msg,
-             "errorMsg"=>$errorMsg
-               //"responseVars"=> array('form'=>$resForm->createView()
-                ));
+             "errorMsg"=>$errorMsg,
+               "responseVars"=> array('form'=>$resForm->createView()
+                )));
         
   
  
@@ -196,7 +196,7 @@ class ReservationController extends MainController{
          }
         $em->flush();
          
-         $this->msg="Réservation annulée avec succès!";
+         $this->msg="Rï¿½servation annulï¿½e avec succï¿½s!";
          return $this->sendResponse(array('view'=>'GOCaravaneBundle::flash_message.html.twig','msg'=>$this->msg));
         
     }
@@ -214,10 +214,10 @@ class ReservationController extends MainController{
         $resRepo=$this->getDoctrine()->getRepository('GOCaravaneBundle:Reservation');
         $payRepo=$this->getDoctrine()->getRepository('GOCaravaneBundle:Payer');
           $msg=null;
-        //========Vérifie si les paiements ne sont pas clôturés pour le départ sélectionné
+        //========Vï¿½rifie si les paiements ne sont pas clï¿½turï¿½s pour le dï¿½part sï¿½lectionnï¿½
         if($res->getDepart()->getClosPaye()==false)
         {
-            //=== Vérifier si la réservation n'est pas déja payée =====
+            //=== Vï¿½rifier si la rï¿½servation n'est pas dï¿½ja payï¿½e =====
        
             if(empty($payRepo->findOneByRes($res->getId())))
             {
@@ -243,12 +243,12 @@ class ReservationController extends MainController{
                 $em->persist($res);
                 $em->flush();
                 $res= $this->attribuerNumPlace($res);
-                $msg="Paiement enreistré avec succès! Voici le code:  <strong>".$paye->getCodeRecu()."</strong> Numéro place: <strong>".$res->getNumPlace()."</strong> " ;
-                $notif="Paiement enreistré avec succès! Numéro place: ".$res->getNumPlace()." Référence : ".$paye->getCodeRecu() ;
+                $msg="Paiement enreistrï¿½ avec succï¿½s! Voici le code:  <strong>".$paye->getCodeRecu()."</strong> Numï¿½ro place: <strong>".$res->getNumPlace()."</strong> " ;
+                $notif="Paiement enreistrï¿½ avec succï¿½s! Numï¿½ro place: ".$res->getNumPlace()." Rï¿½fï¿½rence : ".$paye->getCodeRecu() ;
                 SMSSender::send($res->getClient()->getTel(), $notif);
                 }else
                 {
-                    $this->errorMsg="Impossible d'enregistrer le paiement. Motif: Vous ne disposez pas de compte boutiquier. Seuls les comptes boutiquiers sont autorisés à effectuer des paiements";
+                    $this->errorMsg="Impossible d'enregistrer le paiement. Motif: Vous ne disposez pas de compte boutiquier. Seuls les comptes boutiquiers sont autorisï¿½s ï¿½ effectuer des paiements";
                 }
                 
             }else
@@ -258,11 +258,11 @@ class ReservationController extends MainController{
             $em=$this->em();
             $em->persist($res);
             $em->flush($res);
-            $msg="Cette réservation a été déjà payée!";
+            $msg="Cette rï¿½servation a ï¿½tï¿½ dï¿½jï¿½ payï¿½e!";
         }
         }else
         {
-            $msg="Les paiements sont cloturés pour le départ sélectionné";
+            $msg="Les paiements sont cloturï¿½s pour le dï¿½part sï¿½lectionnï¿½";
         }
        // return $this->render('GOCaravaneBundle:Reservation:index.html.twig', array('msg'=>$msg));
         $this->msg=$msg;
@@ -284,19 +284,19 @@ class ReservationController extends MainController{
         {
                     $resForm->handleRequest($req);
                     $ancien_num=$res->getNumPlace();
-                    //-- Si le départ est passé, on déclenche une erreur
+                    //-- Si le dï¿½part est passï¿½, on dï¿½clenche une erreur
                      if($res->getDepart()->isPasse())
                     {
-                        exit("Erreur: vous ne pouvez pas vous inscrire sur un départ passé");
+                        exit("Erreur: vous ne pouvez pas vous inscrire sur un dï¿½part passï¿½");
                     }
                     if($res->getDepart()->isResClos())
                     {
-                        $msg="Erreur: Les réservations sont clôturées";
+                        $msg="Erreur: Les rï¿½servations sont clï¿½turï¿½es";
                         return $this->sendResponse(array("errorMsg"=>$msg));
                     }
                    
                     $em= $this->em();
-                    //==========Vérifier si la résevation a été payé , si oui on modifie le paiement selon la destination
+                    //==========Vï¿½rifier si la rï¿½sevation a ï¿½tï¿½ payï¿½ , si oui on modifie le paiement selon la destination
                     $payer=$res->getPaiement();
                     // si le paiement existe avec u objet non vide, on modifie le paiemnt 
                     if($payer!==null and $payer instanceof Payer)
@@ -312,10 +312,10 @@ class ReservationController extends MainController{
                     $em->flush();
                     if(!is_null($ancien_num) && $ancien_num!=$res->getNumPlace())
                     {
-                        $notif="Cher client! Suite à la modification de votre réservation, votre numéro de place a changé. Votre avez le numéro ".$res->getNumPlace()." sur le départ: ".$res->getDepart()->getLibelle()."";
+                        $notif="Cher client! Suite ï¿½ la modification de votre rï¿½servation, votre numï¿½ro de place a changï¿½. Votre avez le numï¿½ro ".$res->getNumPlace()." sur le dï¿½part: ".$res->getDepart()->getLibelle()."";
                          SMSSender::send($res->getClient()->getTel(), $notif);
                     }
-                    $this->msg="Les modifications sont enregsitrées avec succès!";
+                    $this->msg="Les modifications sont enregsitrï¿½es avec succï¿½s!";
         return $this->sendResponse(array('view'=>'GOCaravaneBundle::flash_message.html.twig', 'msg'=>$this->msg));
         }else
         {
@@ -331,8 +331,8 @@ class ReservationController extends MainController{
         $em=$this->getDoctrine()->getManager();
         $em->persist($res);
         $em->flush();
-       // $msg="Réservation confirmée!";
-        $this->msg="Réservation confirmée avec succès!";
+       // $msg="Rï¿½servation confirmï¿½e!";
+        $this->msg="Rï¿½servation confirmï¿½e avec succï¿½s!";
          return $this->sendResponse(array('view'=>'GOCaravaneBundle::flash_message.html.twig', 'msg'=>$this->msg));
         
     }
@@ -374,18 +374,18 @@ class ReservationController extends MainController{
      */
     public function exportAllResEnCoursAction(Request $req)
     {
-        /* Cette fonction permet d'exporter la liste des réservations sur un départ donné selon le format
+        /* Cette fonction permet d'exporter la liste des rï¿½servations sur un dï¿½part donnï¿½ selon le format
         choisi, soit en PDF soit au format texte         */
         
         $ResRepo=$this->getRepo('Reservation');
         $listeRes=$ResRepo->getAll();
         $depRepo=$this->getRepo('Depart');
-        // Récupération de la liste des inscrits
+        // Rï¿½cupï¿½ration de la liste des inscrits
         if($req->get('filter')==Cons::PAYE)
         $listeRes=$ResRepo->getAllResEnCours();
         else
         
-       //Instantitiation des classes qui gèrenet les exportations selon le format choisi
+       //Instantitiation des classes qui gï¿½renet les exportations selon le format choisi
         $tableExpoPDF = new \GO\MainBundle\Utils\PDFTableExporter;
         $tableExpoText = new \GO\MainBundle\Utils\TextExporter;
         
@@ -393,8 +393,8 @@ class ReservationController extends MainController{
        
         //SI le format choisi est PDF 
         if(strtolower($req->get('format'))=="pdf")
-        {//déclaration de la variable de base, à laquelle nous ajouterons les objets sous forme de tableau
-            //Cet array sera ensuite passé à la fonction qui exporte les données, laquelle fonction prend en parametre
+        {//dï¿½claration de la variable de base, ï¿½ laquelle nous ajouterons les objets sous forme de tableau
+            //Cet array sera ensuite passï¿½ ï¿½ la fonction qui exporte les donnï¿½es, laquelle fonction prend en parametre
             //un tableau et non des objets
             $donnees=array();
             
@@ -424,31 +424,31 @@ class ReservationController extends MainController{
         }
        
         //================PREPARATION DES DONNEES POUR L'EXPORT
-        //définition des colonnes du tableau
+        //dï¿½finition des colonnes du tableau
         $columns=array(
             array("name"=>"Code", "width"=>15),
             array("name"=>"Client", "width"=>45),
-            array("name"=>"Téléphone", "width"=>40),
+            array("name"=>"Tï¿½lï¿½phone", "width"=>40),
             array("name"=>"Point dep", "width"=>20),
             array("name"=>"Des", "width"=>20),
             array("name"=>"inscrit par", "width"=>20),
-            array("name"=>"Payé", "width"=>20)); 
-        // déclarion des variables pour le fichier de sortie
-        $filename="Liste Départ ".$depart->getLibelle().'.txt'; $titre="Liste des inscrit pour la caravane ".$depart->getLibelle();
-        //Exporter les données
+            array("name"=>"Payï¿½", "width"=>20)); 
+        // dï¿½clarion des variables pour le fichier de sortie
+        $filename="Liste Dï¿½part ".$depart->getLibelle().'.txt'; $titre="Liste des inscrit pour la caravane ".$depart->getLibelle();
+        //Exporter les donnï¿½es
         $tableExpoPDF->export($donnees, $columns, $filename, $titre);
         }
         //if(strtolower($req->get('format'))=="text")
         else{
-        ////déclaration de la variable de base, à laquelle nous ajouterons les objets sous forme de text
-            //Cette variable sera ensuite passée à la fonction qui exporte les données, laquelle fonction prend en parametre
+        ////dï¿½claration de la variable de base, ï¿½ laquelle nous ajouterons les objets sous forme de text
+            //Cette variable sera ensuite passï¿½e ï¿½ la fonction qui exporte les donnï¿½es, laquelle fonction prend en parametre
             //string et  non des objets
          
         $donnees_text='';
         foreach($listeRes as $res)
         {
              $client=$res->getClient();
-             //===déterminer l'heure du départ selon l'horaire, fonction variable selon l'horraire du départ
+             //===dï¿½terminer l'heure du dï¿½part selon l'horaire, fonction variable selon l'horraire du dï¿½part
         $houer_functions=array("",'getHeurePointDep', 'getHeurePointDepSoir');
         $heur_function=$houer_functions[$res->getDepart()->getHoraire()];
            
@@ -462,7 +462,7 @@ class ReservationController extends MainController{
         
          }
         
-         $filename="Liste des ttes les réservations .txt"; $titre="Liste de tous les inscrits";
+         $filename="Liste des ttes les rï¿½servations .txt"; $titre="Liste de tous les inscrits";
          $tableExpoText->export($donnees_text, $filename);
         }
            
@@ -475,27 +475,27 @@ class ReservationController extends MainController{
    */
     public function exportAction(Request $req, Depart $depart)
     {
-        /* Cette fonction permet d'exporter la liste des réservations sur un départ donné selon le format
+        /* Cette fonction permet d'exporter la liste des rï¿½servations sur un dï¿½part donnï¿½ selon le format
         choisi, soit en PDF soit au format texte         */
          $donnees=array();
            $columns=array();
         $ResRepo=$this->getRepo('Reservation');
         $depRepo=$this->getRepo('Depart');
-        // Récupération de la liste des inscrits
+        // Rï¿½cupï¿½ration de la liste des inscrits
         if($req->get('filter')==Cons::PAYE)
         $listeRes=$ResRepo->getListePayesRes($depart,Cons::PAYE);
         elseif($req->get('filter')==Cons::NON_PAYE)
         $listeRes=$ResRepo->getListePayesRes($depart,Cons::NON_PAYE);
         else
         $listeRes=$ResRepo->getListRes($depart);
-       //Instantitiation des classes qui gèrenet les exportations selon le format choisi
+       //Instantitiation des classes qui gï¿½renet les exportations selon le format choisi
         $tableExpoPDF = new \GO\MainBundle\Utils\PDFTableExporter;
         $tableExpoText = new \GO\MainBundle\Utils\TextExporter;
         
          //SI le format choisi est PDF 
         if(strtolower($req->get('format'))=="pdf")
-        {//déclaration de la variable de base, à laquelle nous ajouterons les objets sous forme de tableau
-            //Cet array sera ensuite passé à la fonction qui exporte les données, laquelle fonction prend en parametre
+        {//dï¿½claration de la variable de base, ï¿½ laquelle nous ajouterons les objets sous forme de tableau
+            //Cet array sera ensuite passï¿½ ï¿½ la fonction qui exporte les donnï¿½es, laquelle fonction prend en parametre
             //un tableau et non des objets
            
           
@@ -526,11 +526,11 @@ class ReservationController extends MainController{
         }
        
         //================PREPARATION DES DONNEES POUR L'EXPORT
-        //définition des colonnes du tableau
+        //dï¿½finition des colonnes du tableau
         $columns=array(
             array("name"=>"Conf", "width"=>8),
             array("name"=>"Client", "width"=>50),
-            array("name"=>"Téléphone", "width"=>25),
+            array("name"=>"Tï¿½lï¿½phone", "width"=>25),
             array("name"=>"P dep", "width"=>40),
             array("name"=>"Heure", "width"=>20),
             array("name"=>"inscrit par", "width"=>20),
@@ -565,26 +565,26 @@ class ReservationController extends MainController{
         }
        
         //================PREPARATION DES DONNEES POUR L'EXPORT
-        //définition des colonnes du tableau
+        //dï¿½finition des colonnes du tableau
         $columns=array(
             array("name"=>"Place", "width"=>8),
             array("name"=>"Code", "width"=>20),
             array("name"=>"Client", "width"=>50),
-            array("name"=>"Téléphone", "width"=>25),
+            array("name"=>"Tï¿½lï¿½phone", "width"=>25),
             array("name"=>"P dep", "width"=>20),
             array("name"=>"Des", "width"=>20),
             array("name"=>"inscrit par", "width"=>20),
-            array("name"=>"Payé", "width"=>20)); 
+            array("name"=>"Payï¿½", "width"=>20)); 
             }   
-        // déclarion des variables pour le fichier de sortie
-        $filename="Liste Départ ".$depart->getLibelle().'-'; $titre="Liste des inscrit pour la caravane ".$depart->getLibelle();
-        //Exporter les données
+        // dï¿½clarion des variables pour le fichier de sortie
+        $filename="Liste Dï¿½part ".$depart->getLibelle().'-'; $titre="Liste des inscrit pour la caravane ".$depart->getLibelle();
+        //Exporter les donnï¿½es
         $tableExpoPDF->export($donnees, $columns, $filename, $titre);
     }
         if(strtolower($req->get('format'))=="text")
         {
-        ////déclaration de la variable de base, à laquelle nous ajouterons les objets sous forme de text
-            //Cette variable sera ensuite passée à la fonction qui exporte les données, laquelle fonction prend en parametre
+        ////dï¿½claration de la variable de base, ï¿½ laquelle nous ajouterons les objets sous forme de text
+            //Cette variable sera ensuite passï¿½e ï¿½ la fonction qui exporte les donnï¿½es, laquelle fonction prend en parametre
             //string et  non des objets
          
         $donnees_text='';
@@ -600,7 +600,7 @@ class ReservationController extends MainController{
         
          }
         
-         $filename="Liste Départ ".$depart->getLibelle().'.txt'; $titre="Liste des inscrits pour la caravane ".$depart->getLibelle();
+         $filename="Liste Dï¿½part ".$depart->getLibelle().'.txt'; $titre="Liste des inscrits pour la caravane ".$depart->getLibelle();
          $tableExpoText->export($donnees_text, $filename);
         }
            
@@ -677,7 +677,7 @@ class ReservationController extends MainController{
         
          }
         
-         $filename='Liste inscrits event Départ .txt'; $titre="Liste des inscrit pour la caravane ";
+         $filename='Liste inscrits event Dï¿½part .txt'; $titre="Liste des inscrit pour la caravane ";
          $tableExpoText->export($donnees_text, $filename);
         
     }
@@ -732,9 +732,9 @@ class ReservationController extends MainController{
         $chiffres=array();
         foreach($users as $user)
         {
-            //Vérifie si l'utilisateur a access à l'application caravane
+            //Vï¿½rifie si l'utilisateur a access ï¿½ l'application caravane
             //if($user->hasApp('APP_CARAVANE'))
-            //On crée cette condition pour garder la structure du code/ On va décommenter la ligne en haut 
+            //On crï¿½e cette condition pour garder la structure du code/ On va dï¿½commenter la ligne en haut 
             if(1<2)
             {
           $ar=array(
@@ -764,9 +764,9 @@ class ReservationController extends MainController{
         $chiffres=array();
         foreach($users as $user)
         {
-            //Vérifie si l'utilisateur a access à l'application caravane
+            //Vï¿½rifie si l'utilisateur a access ï¿½ l'application caravane
             //if($user->hasApp('APP_CARAVANE'))
-            //On crée cette condition pour garder la structure du code/ On va décommenter la ligne en haut 
+            //On crï¿½e cette condition pour garder la structure du code/ On va dï¿½commenter la ligne en haut 
             if(1<2)
             {
           $ar=array(
@@ -797,9 +797,9 @@ class ReservationController extends MainController{
         $departs= $this->getRepo('Depart')->getDepartsEvent($event);
         foreach($departs as $depart)
         {
-            //Vérifie si l'utilisateur a access à l'application caravane
+            //Vï¿½rifie si l'utilisateur a access ï¿½ l'application caravane
             //if($user->hasApp('APP_CARAVANE'))
-            //On crée cette condition pour garder la structure du code/ On va décommenter la ligne en haut 
+            //On crï¿½e cette condition pour garder la structure du code/ On va dï¿½commenter la ligne en haut 
           $ar=array(
               'depart'=>$depart,
               'user'=>$user, 
@@ -825,7 +825,7 @@ class ReservationController extends MainController{
                 $num=$num+1;
                 $res->setNumPlace($num);
                 }else
-                        return "Erreur: toutes les places sont occupées pour le(s) bus du départ ".$res->getDepart()->getLibelle();
+                        return "Erreur: toutes les places sont occupï¿½es pour le(s) bus du dï¿½part ".$res->getDepart()->getLibelle();
              }
              else{
                   $res->setNumPlace($num_place_vide);
@@ -846,7 +846,7 @@ class ReservationController extends MainController{
     {
         $notification="";
         $heure_rv=$res->getHeureDepart()->format('H\h:i');
-        $num_place=null;if($res->isPaye())$num_place="Numéro Place: <".$res->getNumPlace().">";
+        $num_place=null;if($res->isPaye())$num_place="Numï¿½ro Place: <".$res->getNumPlace().">";
         $salutation="Bnjr"; if(intval(\Date('H'))>=16)$salutation="Bnsoir";
 
                             $pointDep=$res->getPointDep();
@@ -855,10 +855,10 @@ class ReservationController extends MainController{
                             $depart=$res->getDepart();
                              $tel=$client->getTel();
                              $client_data=$client->getPrenomAbrege()." ".$client->getNom();
-                             //préparer la notification à envoyer au client après réservation réuissi
+                             //prï¿½parer la notification ï¿½ envoyer au client aprï¿½s rï¿½servation rï¿½uissi
                              $notification=$salutation."! ".$client_data."! "
-                                    . "Réservation à la caravane Golob1 "
-                                    .$depart->getLibelle()." enregistrée! RV: "
+                                    . "Rï¿½servation ï¿½ la caravane Golob1 "
+                                    .$depart->getLibelle()." enregistrï¿½e! RV: "
                                    .$heure_rv. '-'.$res->getPointDep()->getNom().'/ '.$arret.' /'.$num_place;
                           if(strlen($notification)>160)
                            {
@@ -914,15 +914,15 @@ class ReservationController extends MainController{
             {
             $this->payer($res);
             $this->attribuerNumPlace($res);
-            $msg="Le paiement de votre réservation par OM a été enregistré avec succès!";
+            $msg="Le paiement de votre rï¿½servation par OM a ï¿½tï¿½ enregistrï¿½ avec succï¿½s!";
             $heure_rv=$res->getHeureDepart()->format('H\h:i');
             $num_place=null;
                 if($res->isPaye())$num_place=$res->getNumPlace();
                 {
-                $notification='Après paiement par OM, votre numéro de place est le N°'.$num_place.'", RV '.$heure_rv;
+                $notification='Aprï¿½s paiement par OM, votre numï¿½ro de place est le Nï¿½'.$num_place.'", RV '.$heure_rv;
                 SMSSender::send(substr($res->getClient()->getTel(),-9,9), $notification);
                 }
-            return $this->sendResponse(array("msg"=>"Opération réussi"));
+            return $this->sendResponse(array("msg"=>"Opï¿½ration rï¿½ussi"));
             }
        }
        
@@ -941,10 +941,10 @@ class ReservationController extends MainController{
        {
             $id_res=$facture->getCustomData("id_res");
             $res= $this->getRepo('Reservation')->find($id_res);
-            $msg="Le paiement de votre réservation par OM a été enregistré avec succès!";
+            $msg="Le paiement de votre rï¿½servation par OM a ï¿½tï¿½ enregistrï¿½ avec succï¿½s!";
             return $this->render('GOCaravaneBundle::layout.html.twig', array("msg"=>$msg, "res"=>$res));
        }
-       exit("facture non payée");
+       exit("facture non payï¿½e");
       return $this->render('GOCaravaneBundle:Reservation:payer_online.html.twig', array("link"=>$link));
     }
     protected function isOnline()
