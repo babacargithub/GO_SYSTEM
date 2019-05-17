@@ -4,6 +4,7 @@ namespace  GO\ClientBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use GO\MainBundle\Validator\Constraints as GOAssert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -44,13 +45,14 @@ class AbstractClient
      * @var string
      *
      * @ORM\Column(name="email", type="string", unique=true, nullable=true)
-     * @Assert\Email();
+     * @Assert\Email()
      */
     private $email;
     /**
      * @var integer
      *
      * @ORM\Column(name="tel", type="bigint", unique=true, nullable=false)
+     * @GOAssert\PhoneNumber(message="Le numéro téléphone entré est invalide!")
      */
     private $tel;
 
