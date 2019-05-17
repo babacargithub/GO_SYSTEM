@@ -31,14 +31,14 @@ class TestController extends \GO\MainBundle\Controller\BaseController {
     public function testFormHandler(Request $req)
     {
         $form= $this->createForm(ClientType::class, new Client());
+        $form->get('email')->setData("hdjdcom@hhf.fr");
+        $form->get('prenom')->setData("hdjdcom");
+        $form->get('nom')->setData("hdjd");
+        $form->get('tel')->setData(773300849);
+        $form->get('sexe')->setData("F");
         $form->handleRequest($req);
-        if($form->isSubmitted()&&$form->isValid())
-        {
-            
-        }
-        if(!$req->isXmlHttpRequest())
-            $form=$form->createView ();
-        return $this->render("@GOClient/client/new_test.html.twig",['form'=>$form]);
+       
+        return $this->render("@GOClient/client/new_test.html.twig",['form'=>$form->createView()]);
         
     }
     /**

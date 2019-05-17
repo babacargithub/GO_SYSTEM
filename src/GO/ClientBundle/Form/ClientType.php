@@ -15,8 +15,8 @@ class ClientType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('firstName', Type\TextType::class, array("label" => "Prénom"))
-        ->add('lastName', Type\TextType::class, array("label" => "Nom"))
+        $builder->add('prenom', Type\TextType::class, array("label" => "Prénom"))
+        ->add('nom', Type\TextType::class, array("label" => "Nom"))
         ->add('tel', Type\IntegerType::class, array("label" => "Téléphone"))
         ->add('email', Type\EmailType::class, ["required"=>false])
         ->add('adresse', Type\TextType::class,["required"=>false])

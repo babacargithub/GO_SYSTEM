@@ -88,7 +88,7 @@ fos_rest:
         rules:
             path: '^/'
             priorities: ['json','html']
-            fallback_format: 'html'
+            ##fallback_format: 'html'
     view:
         #…permet de convertir les réponses au format demandé
         view_response_listener: true

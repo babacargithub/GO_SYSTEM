@@ -15,6 +15,13 @@ function handleResponse(form_id, reponse_data)
 {
     
 }
+//Mapp One error message to a specifi field
+function mappErrorMessageToField(jQuerySelectorField,error_message)
+{
+    jQuerySelectorField.closest('div').addClass('has-error');
+   jQuerySelectorField.after('<span class="help-block"><ul class="list-unstyled"><li><span class="glyphicon glyphicon-exclamation-sign"></span>'+error_message+'</li></ul></span>' );
+                           
+}
 /* 
  * This function is used when validation fails. Its role  to parse errors from the response and mapp them with there corresponding fields
  * the param "data" structured according to FosRestBundle's invalid form structure based on JSON
@@ -24,8 +31,8 @@ function handleResponse(form_id, reponse_data)
  **/
 function mappFormErrorsToFields(form_id, form_name,data)
             {
-                // handle errors not related to fields
-                if("undefined"!==typeof data.errors.errors)
+                // the argument form name is inspired by symfony form name
+              if("undefined"!==typeof data.errors.errors)
                     {
                        if(data.errors.errors.length>0)
                        {
@@ -44,37 +51,55 @@ function mappFormErrorsToFields(form_id, form_name,data)
                     {
                         if(data.errors.children[key].errors.length>0)
                         {
-                               $("input[name='"+form_name+"["+key+"]'],select[name='"+form_name+"["+key+"]']").closest('div').addClass('has-error');
-                              $("input[name='"+form_name+"["+key+"]'],select[name='"+form_name+"["+key+"]']").after('<span class="help-block"><ul class="list-unstyled"><li><span class="glyphicon glyphicon-exclamation-sign"></span>'+data.errors.children[key].errors[0]+'</li></ul></span>' );
+                            var selectedField=$("input[name='"+form_name+"["+key+"]'],select[name='"+form_name+"["+key+"]']");
+                              //mapp errors to their corresponding fields
+                            mappErrorMessageToField(selectedField, data.errors.children[key].errors[0] );
                            
                         }
                     }
                 }
             }
-function mappErrorToField(field_id, error_message)
+
+/*
+ * Clears error message displayed in a field
+ */
+function clearFieldErrorMessage(jQuerySelector)
 {
-    
+     jQuerySelector.closest('div').removeClass('has-error');
+     jQuerySelector.next("span").remove();                               
 }
 /*
- * Clears error message from a field
+ * Clears all error message displayed in fields of a form
  */
-function clearFieldErrorMessage(field_id)
+function clearAllFormErrorMessages(jQuerySelectorForm)
 {
+    // receives a jQuery Selector representing a form and selects all inputs
+     jQuerySelectorForm.find('input').each(function()
+     {
+         clearFieldErrorMessage($(this));
+     });
+                              
     
 }
-
+//Action called after form successfully sumbit with no validation errors
 function successAction(form_id)
 {
     
 }
-function validationFailedAction()
+function invalidFormatExceptionAction()
 {
     
 }
+function isFosRestValideData(data)
+{
+    var condition=true;
+if( "undefined"=== typeof data.code|| "undefined"=== typeof data.message|| "undefined"=== typeof data.errors || "undefined" === typeof data.errors.children){
+    return false;}
+return condition;
+
+}
+//Checks if a form has validation errors
 function hasValidationErros(response_data)
 {
-    
-return (response_data.code==400);
-
-
+return response_data.code===400;
 }
