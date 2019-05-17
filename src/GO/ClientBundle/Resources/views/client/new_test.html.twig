@@ -26,11 +26,10 @@
             $('form[name="go_clientbundle_client"]').on('submit',function(e)
             {
                 e.preventDefault();
+                const form=$(this);
                 clearAllFormErrorMessages($(this));
-           var form_data =  $('form[name="go_clientbundle_client"]').serialize(); 
-            console.log(form_data);
-           // console.log($('form[name="go_clientbundle_client"]').serializeArray());
-            $.ajax({
+                var form_data=form.serialize(); 
+             $.ajax({
                 url:"http://localhost/GO_SYS_V2_SYNCH/web/customer/test/form_handler_response",
                 headers: {          
                             //"Accept": "application/json",         
@@ -39,7 +38,7 @@
                 dataType: 'text',
                 method: "POST",
                 data:form_data,
-                success:function(data){alert("succcess");},
+                success:function(data){resetFormValues(form);},
                 error:function(error, textStatus)
                 {
                      try

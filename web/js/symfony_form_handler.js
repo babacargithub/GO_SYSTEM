@@ -74,7 +74,7 @@ function clearFieldErrorMessage(jQuerySelector)
 function clearAllFormErrorMessages(jQuerySelectorForm)
 {
     // receives a jQuery Selector representing a form and selects all inputs
-     jQuerySelectorForm.find('input').each(function()
+     jQuerySelectorForm.find('input, select, checkbox, textarea').each(function()
      {
          clearFieldErrorMessage($(this));
      });
@@ -86,10 +86,20 @@ function successAction(form_id)
 {
     
 }
-function invalidFormatExceptionAction()
+function resetFormValues(jQuerySelectorFrom)
 {
+    //alert(jQuerySelectorFrom.find("input").length);
+   
+    jQuerySelectorFrom.find("input[type!='hidden'][type!='submit'], select").each(
+            function()
+    {
+          $(this).val("");
+              
+              
+    });
     
 }
+
 function isFosRestValideData(data)
 {
     var condition=true;
