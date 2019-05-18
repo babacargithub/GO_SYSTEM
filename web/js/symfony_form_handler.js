@@ -11,10 +11,8 @@
  * This function is used to handle response from server with form errors
  * It checks the status code of the response and decides which function to call according to whether the form has success of errors
  */
-function handleResponse(form_id, reponse_data)
-{
-    
-}
+
+
 //Mapp One error message to a specifi field
 function mappErrorMessageToField(jQuerySelectorField,error_message)
 {
@@ -29,9 +27,11 @@ function mappErrorMessageToField(jQuerySelectorField,error_message)
  @param form_name (the form name to be referenced when selecting input elements
  @param data the structure of the data expected
  **/
-function mappFormErrorsToFields(form_id, form_name,data)
+function mappFormErrorsToFields(form,data)
             {
                 // the argument form name is inspired by symfony form name
+                let form_name=form.attr("name");
+                let form_id=form.attr("id");
               if("undefined"!==typeof data.errors.errors)
                     {
                        if(data.errors.errors.length>0)
@@ -53,7 +53,8 @@ function mappFormErrorsToFields(form_id, form_name,data)
                         {
                             var selectedField=$("input[name='"+form_name+"["+key+"]'],select[name='"+form_name+"["+key+"]']");
                               //mapp errors to their corresponding fields
-                            mappErrorMessageToField(selectedField, data.errors.children[key].errors[0] );
+                              let errorMessage=data.errors.children[key].errors[0]
+                            mappErrorMessageToField(selectedField, errorMessage );
                            
                         }
                     }
@@ -112,4 +113,59 @@ return condition;
 function hasValidationErros(response_data)
 {
 return response_data.code===400;
+}
+function handleForm(form)
+{
+    
+                
+                
+                clearAllFormErrorMessages(form);
+                var form_data=form.serialize(); 
+                let url=form.attr("action"); 
+                if("undefined"===typeof url || ""==url)
+                {
+                    //alert("Impossible de soumettre le formulaire. Url invalide!");
+                    url=window.location;
+                    //alert(url);return;
+                }
+             $.ajax({
+                url:url,
+                headers: {          
+                            //"Accept": "application/json",         
+                            //"Content-Type": "application/json"   
+                          },
+                dataType: 'text',
+                method: "POST",
+                data:form_data,
+                success:function(data){
+                    resetFormValues(form);
+                },
+                error:function(error, textStatus, errorThrown)
+                {
+                    alert(textStatus);
+                    if("errorThrown"=="Bad Request")
+                    {
+                     try
+                    {
+                        const data=JSON.parse(error.responseText);
+                        if(isFosRestValideData(data))
+                        {
+                            if(hasValidationErros(data))
+                            {
+                                mappFormErrorsToFields(form,data);
+                            }
+                        }else
+                        {
+                            alert("Le formulaire contient des erreurs! Mais elles ne peuvent pas s'afficher. Format de données  retournées par le serveur est invalide");
+                        }
+                    }catch(e)
+                    {
+                        // Si on ne parvient pas à parser la réponse c'est parce qu'elle n'est pas du bon format
+                        alert("Une erreur s'est produite. Le format de donnée retourné n'est pas valide! "+e);
+                    }
+                    }
+                }
+        });
+          
+    
 }

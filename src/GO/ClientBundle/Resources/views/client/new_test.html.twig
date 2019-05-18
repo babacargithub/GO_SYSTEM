@@ -22,48 +22,11 @@
 {% block javascript_code %}
     <script type="text/javascript">
         $(document).ready(function(){
-           //var form_data = JSON.stringify( $('form[name="go_clientbundle_client"]').serializeArray() ); 
             $('form[name="go_clientbundle_client"]').on('submit',function(e)
             {
                 e.preventDefault();
-                const form=$(this);
-                clearAllFormErrorMessages($(this));
-                var form_data=form.serialize(); 
-             $.ajax({
-                url:"http://localhost/GO_SYS_V2_SYNCH/web/customer/test/form_handler_response",
-                headers: {          
-                            //"Accept": "application/json",         
-                            //"Content-Type": "application/json"   
-                          },
-                dataType: 'text',
-                method: "POST",
-                data:form_data,
-                success:function(data){resetFormValues(form);},
-                error:function(error, textStatus)
-                {
-                     try
-                    {
-                        const data=JSON.parse(error.responseText);
-                        var form_name="go_clientbundle_client";
-                        var form_id="go_clientbundle_clienttype";
-                        if(isFosRestValideData(data))
-                        {
-                            if(hasValidationErros(data))
-                            {
-                                mappFormErrorsToFields(form_id,form_name,data);
-                            }
-                        }else
-                        {
-                            alert("Le formulaire contient des erreurs! Mais elles ne peuvent pas s'afficher. Format de données  retournées par le serveur est invalide");
-                        }
-                    }catch(e)
-                    {
-                        alert("Une erreur s'est produite. Le format de donnée retourné n'est pas valide "+e);
-                    }
-                         
-                }
-        });
-          } );
+                handleForm($(this));
+            });
         });
         
         </script>

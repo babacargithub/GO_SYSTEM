@@ -30,7 +30,7 @@ class TestController extends \GO\MainBundle\Controller\BaseController {
      */
     public function testFormHandler(Request $req)
     {
-        $form= $this->createForm(ClientType::class, new Client());
+        $form= $this->createForm(ClientType::class, new Client(), ["action"=> $this->generateUrl("test_form_hander_response")]);
         $form->get('email')->setData("hdjdcom@hhf.fr");
         $form->get('prenom')->setData("hdjdcom");
         $form->get('nom')->setData("hdjd");
