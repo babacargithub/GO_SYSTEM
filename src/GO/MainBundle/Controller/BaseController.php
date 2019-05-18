@@ -64,7 +64,7 @@ class BaseController extends FOSRestController{
         if($this->getRequest()->isXmlHttpRequest())
         {
             $response=new Response();
-            //$response->setContent(json_encode(array("code"=>1, "msg"=>'Test content')));
+            $response->headers->set("Content-Type", "application/json");
             if(isset($params['errorMsg'])&& !is_null($params['errorMsg']))
             {
                 $response->setContent($this->setErrorMessage($params['errorMsg']));
@@ -91,11 +91,11 @@ class BaseController extends FOSRestController{
     }
     public function setMessage($msg)
         {
-            return json_encode(array("code"=>1, "message"=>$msg));
+            return json_encode(array("type"=>"success","code"=>1, "message"=>$msg));
         }
     public function setErrorMessage($error)
         {
-             return json_encode(array("code"=>0, "message"=>$error));
+             return json_encode(array("type"=>"error","code"=>0, "message"=>$error));
         }
     public function indexAction(Request $req)
     {
@@ -212,27 +212,8 @@ class BaseController extends FOSRestController{
      */
     public function getDataRomeAction(Request $req)
     
-    {				
-        $data ="grant_type=client_credentials";
-
-        $data_string = json_encode($data); 
-
-        //var_dump($data_string);    die();                                                                                                  
-        $ch = curl_init('https://www.khoulefreres.com/path/1/travels');                                                                      
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);                                                                  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array( 
-            'Proxy-Authorization: Basic OTBva2pieTEteWQ0N2ZrOTp6Z3d2dDVrbXg3',
-            'Content-Type: application/x-www-form-urlencoded',                                                                                
-            'Content-Length: ' . strlen($data))                                                                       
-        );  
-        $rep=curl_exec($ch);
-          
-          
-        
-    
-        var_dump(".".$rep);die();
+    {
+       
     }
     
 }
