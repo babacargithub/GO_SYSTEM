@@ -55,7 +55,7 @@ class TestController extends \GO\MainBundle\Controller\BaseController {
         //$form->get('tel')->addError(new \Symfony\Component\Form\FormError("Telephone du client invalide!"));
         if($form->isSubmitted()&&$form->isValid())
         {
-          $response=new Response("Valide form");
+          return $this->sendResponse(['msg'=>"Valide form"]);
         $response->headers->set('Content-Type','application/json');
         return $response;   
         }

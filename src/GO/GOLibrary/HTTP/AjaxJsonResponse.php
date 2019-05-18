@@ -88,10 +88,15 @@ class AjaxJsonResponse {
      */
     public function getResponseArray()
     {
-        return array("type"=>$this->type,"message"=>$this->message,"data"=> $this->data, "code"=> $this->code,"redirectUrl"=> $this->redirectUrl);
+        return array("type"=>$this->type,
+            "message"=>$this->message,
+            "data"=> $this->data,
+            "code"=> $this->code,
+            "redirectUrl"=> $this->redirectUrl);
     }
         /*
      *@return array
+         * fonction raccourci
      */
     public function createSuccessResponseArray($message,$code=null,$data=null)
     {

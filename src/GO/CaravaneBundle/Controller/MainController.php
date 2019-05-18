@@ -33,39 +33,7 @@ class MainController extends BaseController{
         else
         return $this->getDoctrine()->getRepository('GOCaravaneBundle:'.$class);
     }
-    public function sendResponse(array $params=array())
-    {
-        if($this->getRequest()->isXmlHttpRequest())
-        {
-            $response=new Response();
-            $response->setContent(json_encode(array("code"=>1, "msg"=>'Test content')));
-            if(isset($params['msg'])&&!is_null($params['msg']))
-            {
-            $response->setContent($this->setMessage($params['msg']));
-            }if(isset($params['errorMsg'])&& !is_null($params['errorMsg']))
-            {
-                $response->setContent($this->setErrorMessage($params['errorMsg']));
-            }
-             return $response;
-        } else {
-            if(isset($params['responseVars']) && is_array($params['responseVars']))
-            {
-            return $this->render($params['view'], $params['responseVars']);
-            }
-            else{
-                return $this->render($params['view']);
-            }
-            
-        }
-    }
-    public function setMessage($msg)
-        {
-            return json_encode(array("code"=>1, "message"=>$msg));
-        }
-    public function setErrorMessage($error)
-        {
-             return json_encode(array("code"=>0, "message"=>$error));
-        }
+    
     /**
      * 
      * @param Request $req

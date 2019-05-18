@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use GO\MainBundle\AppAuthenticator\Authenticator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\FOSRestController;
+use GO\GOLibrary\HTTP\AjaxJsonResponse;
 
 class BaseController extends FOSRestController{
     //put your code here
@@ -64,14 +65,23 @@ class BaseController extends FOSRestController{
         if($this->getRequest()->isXmlHttpRequest())
         {
             $response=new Response();
+            $ajaxJsonResponse= new AjaxJsonResponse();
             $response->headers->set("Content-Type", "application/json");
             if(isset($params['errorMsg'])&& !is_null($params['errorMsg']))
             {
-                $response->setContent($this->setErrorMessage($params['errorMsg']));
-            }elseif(isset($params['msg'])&&!is_null($params['msg']))
-            {
-            $response->setContent($this->setMessage($params['msg']));
+                $ajaxJsonResponse->setCode(0)
+                        ->setMessage($params['errorMsg'])
+                        ->setType(AjaxJsonResponse::STATUS_ERROR);
+                
             }
+            elseif(isset($params['msg'])&&!is_null($params['msg']))
+            {
+           $ajaxJsonResponse->setCode(1)
+                        ->setMessage($params['msg'])
+                        ->setType(AjaxJsonResponse::STATUS_SUCCESS);
+            }
+            $response->setContent(json_encode($ajaxJsonResponse->getResponseArray()));
+          
              return $response;
         } else {
             if(isset($params['view']))
