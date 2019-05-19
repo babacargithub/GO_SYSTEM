@@ -7,7 +7,7 @@ easy_admin:
             - label: Shop
               children:
                 - {label: 'Rapports Journée', route: "show_summary_today"}
-                - {label: 'Rapports Mensuels', route: "admin_shop_month_summary", params: {mois: 1,annee: 2019 }}
+                - {label: 'Rapports Mensuels', route: "admin_shop_month_summary", params: {annee: 2019 }}
                 - {label: 'Rapport Exercice', route: "admin_exercice_summary"}
                 - {label: 'Gestion Capital', route: "admin_index"}
                 - {label: 'Gestion Personnel', route: "admin_index"} 
