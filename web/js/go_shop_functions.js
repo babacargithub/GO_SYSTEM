@@ -45,7 +45,8 @@ function showAlert(code_ajax, duree_alert=null)
     }
    try{
        //var response=JSON.parse(code_ajax);
-       var response=$.parseJSON(code_ajax);
+       //var response=$.parseJSON(code_ajax);
+       var response=code_ajax;
         
         if(response.code==0)
         {

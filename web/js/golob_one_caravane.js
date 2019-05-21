@@ -18,7 +18,7 @@ $.ajax({
              $('#content_body').html(reponse);});
      
      });
-     //====================Traiter de manière uniformisée les boutons d'action dans les listes==========
+     //====================Traiter de maniï¿½re uniformisï¿½e les boutons d'action dans les listes==========
    
      $(document).ajaxStart(function()
 						{
@@ -40,7 +40,7 @@ $(document).ready(function()
  $("#"+module_form+"_client_prenom_div,"+"#"+module_form+"_client_nom_div").hide();
  $('#details_client').hide();
  
- //===================Traitement lors de la selection d'un départ====================
+ //===================Traitement lors de la selection d'un dï¿½part====================
  $("#"+module_form+"_depart").change(function(e)
         { 
                 var trajet=$(this,"option:selected").val();
@@ -75,10 +75,10 @@ $(document).ready(function()
                 }
 			}
 			);
-   //==================traitement lors de la saisie du numéro de téléphone
+   //==================traitement lors de la saisie du numï¿½ro de tï¿½lï¿½phone
  $("#"+module_form+"_client").on(
     {
-        keyup:function(e)
+        keypress:function(e)
         {
             $('#details_client').hide();
             $('#invalid_client_form').hide();
@@ -110,7 +110,7 @@ $(document).ready(function()
         $("#voy_en_cours_detail").html(reponse[0].voyage_en_cours);
          if(reponse[0].voyage_en_cours!="")
          {
-                 alert("Ce client a fait une réservation sur le  départ  "+reponse[0].voyage_en_cours);
+                 alert("Ce client a fait une rï¿½servation sur le  dï¿½part  "+reponse[0].voyage_en_cours);
 
 //$("#formulaire_reservation :input").prop("disabled", true); 
          }
@@ -127,7 +127,7 @@ $("#nom_res").show().attr("required", true);
 }
 }*/
     }else{
-    show_alert("Erreur: le numéro du téléphone entré n'est pas valide!");
+    show_alert("Erreur: le numï¿½ro du tï¿½lï¿½phone entrï¿½ n'est pas valide!");
 
     }
     }
@@ -138,7 +138,7 @@ $("#nom_res").show().attr("required", true);
 }
 });
 
-//_____ actualisation des états des départs toutes les 5 minutes--------------------->>>		
+//_____ actualisation des ï¿½tats des dï¿½parts toutes les 5 minutes--------------------->>>		
 setInterval('Update_etat_dep()', 50000);	
 
 

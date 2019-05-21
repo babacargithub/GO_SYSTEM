@@ -83,8 +83,16 @@ function clearAllFormErrorMessages(jQuerySelectorForm)
     
 }
 //Action called after form successfully sumbit with no validation errors
-function successAction(form_id)
+function successAction(responseData)
 {
+    if(responseData.type=="success")
+    {
+        alert("Error"+responseData.message);
+    }
+    else if(responseData.type=="error")
+    {
+        alert("Success "+responseData.message);
+    }
     
 }
 function resetFormValues(jQuerySelectorFrom)
