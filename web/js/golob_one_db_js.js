@@ -3,7 +3,7 @@ $(document).ajaxStart(function(){ showLoader(); /* affiche la bare de progressio
 $(document).ajaxComplete(function(){ hideLoader(); /* cahce la bare de progression à la fin de l'appel*/});
  $(document).ready(function(){ 
      
-   	$('#sidebar a').on('click', function(e)
+   	$('#sidebar a').unbind('click').on('click', function(e)
         {
             e.preventDefault();
             var href=$(this).attr('href');
@@ -15,8 +15,8 @@ $(document).ajaxComplete(function(){ hideLoader(); /* cahce la bare de progressi
                 dataType: "html",
                 success: function(serverResponse){
                 $("#content_body").html(serverResponse);
-            },error:function(serverResponse){
-                alert("Une erreur s'est produit, le contenu de \" "+href+"\" n'as pa pu être chargé" );
+            },error:function(serverResponse, type, errorThrown){
+                alert("Une erreur s'est produit, Type: \" "+errorThrown+"\" " );
             }
              });
             
