@@ -113,9 +113,7 @@ class ReservationController extends MainController{
              //=== Vérifier si les réservations ne sont pas cloturées pour le départ sélectionné
           if($res->getDepart()->getClosRes()==false)  
           {
-              //vérifie si le téléphone est valide  
-              //if($CustomValidator->isValideTelephone($res->getClient()->getTel()))
-                if(1>0){
+              
                 $em->persist($res->getClient());
                 if($resRepo->reservationExists($res->getClient()->getTel(), $res->getDepart()))
                 {
@@ -124,6 +122,7 @@ class ReservationController extends MainController{
                 else
                 { 
                     $em->persist($res);
+                    $em->persist($res->getClient()->nombreVoyagePlus(1));
                     $em->flush();
                             $msg="Réservation enregistrée avec succés!";
                             //envoyer une notification SMS au client
@@ -154,12 +153,7 @@ class ReservationController extends MainController{
                             $notification= $this->getNotificationMessage($res);
                             SMSSender::send(substr($tel,-9,9), $notification);
 
-
-                 }
-                }else
-                {
-                    $errorMsg="Téléphone invalide!";
-                } 
+                }
           }else
           {
               $errorMsg="Les réservations sont cléturées sur ce départ";

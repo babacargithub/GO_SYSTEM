@@ -151,6 +151,39 @@ class Client
 
         return $this;
     }
+    /**
+     * Set nombreVoyage
+     *
+     * @param integer $nombre
+     *
+     * @return Client
+     */
+    public function nombreVoyagePlus($nombre)
+    {
+        if(!is_numeric($nombre))
+        {
+            throw  new \InvalidArgumentException("Argument invalide");
+        }
+        $this->nombreVoyage=+$nombre;
+
+        return $this;
+    }
+    /**
+     * Set nombreVoyage
+     *
+     * @param integer $nombre
+     *
+     * @return Client
+     */
+    public function nombreVoyageMinus($nombre)
+    { if(!is_numeric($nombre))
+        {
+            throw  new \InvalidArgumentException("Argument invalide");
+        }
+        $this->nombreVoyage =-$nombre;
+
+        return $this;
+    }
 
     /**
      * Get nombreVoyage

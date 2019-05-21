@@ -78,7 +78,7 @@ $(document).ready(function()
    //==================traitement lors de la saisie du num�ro de t�l�phone
  $("#"+module_form+"_client").on(
     {
-        keypress:function(e)
+        keyup:function(e)
         {
             $('#details_client').hide();
             $('#invalid_client_form').hide();
@@ -88,10 +88,14 @@ $(document).ready(function()
             {
                 if(isValideTelephone(tel))
                 {
-                    $.get('details_client-'+tel+'.golob', '', function(reponse){
+                    $.ajax({
+                        url:'details_client-'+tel+'.golob',
+                        dataType:"html",
+                        success:function(reponse){
                         $('#details_client').show();
                         $('#details_client .panel-body').html(reponse);
-                    });
+                    }
+                });
                     $("#"+module_form+"_client_prenom_div,"+"#"+module_form+"_client_nom_div").show();
 
                     /*function(result, data1, xch)
