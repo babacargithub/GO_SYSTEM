@@ -16,7 +16,7 @@
                         <td>{% if res.confirme==true %}<strong>Déjà confirmé</strong>{% else %}<a class="confirmer_action" id="{{ res.id }}" href='{{path('go_caravane_reservation_confirm',{"id":res.id})}}'>Confirmer</a>{%endif%}</td>
                         <td>{{ res.client.prenom  }} {{ res.client.nom|upper  }}</td>
                         <td>{{ res.client.tel|slice(-9,9)  }}</td>
-                        <td>{{ res.client.promo }}</td>
+                        <td></td>
                         <td>{{ res.pointDep.nom  }}</td>
                          <td>{% if res.agent is null %}En Ligne{% else %}{{ res.agent.prenom }}{% endif %}</td>
                        <td>

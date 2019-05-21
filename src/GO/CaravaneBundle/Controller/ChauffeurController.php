@@ -41,8 +41,8 @@ class ChauffeurController extends MainController{
        $form= $this->createForm(new ChauffeurType(), $chauffeur);
         if($req->getMethod()=="POST")
         {
-            $form->bind($req);
-            if($form->isValid())
+            $form->handleRequest($req);
+            if($form->isSubmitted()&&$form->isValid())
             {
                 
             try
@@ -53,7 +53,7 @@ class ChauffeurController extends MainController{
             {
                 return $e;
             }
-           return $this->render('GOCaravaneBundle::layout.html.twig', array('form'=>$form->createView())); 
+           return $this->render('@GOCaravane/layout.html.twig', array('form'=>$form->createView())); 
         
             } else
             return $this->render('GOCaravaneBundle:Depart:chauffeur_index.html.twig', array('form'=>$form->createView())); 

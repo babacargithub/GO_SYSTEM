@@ -1,0 +1,7 @@
+parameters:
+#    go_resto.example.class: GO\RestoBundle\Example
+
+services:
+#    go_resto.example:
+#        class: %go_resto.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="GO\MainBundle\Entity\compteBanqueRepository")
  */
-class CompteBanque
+class compteBanque
 {
     /**
      * @var integer

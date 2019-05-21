@@ -85,6 +85,7 @@ class VenteController extends MainController {
         $form= $this->createForm(new VenteType(), $Vente);
         $formCodeBar= $this->createForm(new \GO\ShopBundle\Form\VenteCodeBarType(), $Vente);
         $formCodeBar->get('compteClient')->setData($this->getDoctrine()->getRepository("GOClientBundle:CompteClient")->find(1));
+        $form->get('compteClient')->setData($this->getDoctrine()->getRepository("GOClientBundle:CompteClient")->find(1));
         return $this->render('GOShopBundle:Vente:index.html.twig', array(
             "form"=>$form->createView(),
             "form_"=>$formCodeBar->createView(),

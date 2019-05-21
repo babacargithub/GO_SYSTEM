@@ -3,24 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Form/ReservationEditType.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Form/ReservationType.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/views/Client/_form.html.twig</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Entity/ReservationRepository.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/config/services.yml</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ShopBundle/Controller/TestController.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ClientBundle/Entity/AbstractClient.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Controller/ReservationController.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Controller/ClientController.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/config/routing.yml</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/views/Reservation/_edit_form.html.twig</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Entity/Reservation.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/views/Reservation/_form.html.twig</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Entity/PayerRepository.php</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/app/AppKernel.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/translations/messages.fr.xlf</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ClientBundle/Controller/TestController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/app/config/easyadmin_config.yml</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ClientBundle/Controller/CompteClientController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Controller/DepartController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/MainBundle/Controller/BaseController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ShopBundle/Controller/ShopAdminController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Controller/MainController.php</file>
             <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/app/config/config.yml</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/views/Reservation/index.html.twig</file>
-            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Entity/Client.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ClientBundle/Form/ClientType.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ClientBundle/Entity/AbstractClient.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/GOLibrary/HTTP/AjaxJsonResponse.php</file>
         </group>
     </open-files>
 </project-private>
