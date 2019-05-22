@@ -5,6 +5,7 @@ go_client_client:
 go_api:
     resource: "@GOApiBundle/Controller/"
     type:     annotation
+    prefix:   /api/
 caisse:
     resource: "@GOCaisseBundle/Controller/"
     type:     annotation

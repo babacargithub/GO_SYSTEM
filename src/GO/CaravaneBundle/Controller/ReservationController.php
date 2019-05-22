@@ -122,7 +122,8 @@ class ReservationController extends MainController{
                 else
                 { 
                     $em->persist($res);
-                    $em->persist($res->getClient()->nombreVoyagePlus(1));
+                    $client=$res->getClient()->nombreVoyagePlus(1);
+                    $em->persist($client);
                     $em->flush();
                             $msg="Réservation enregistrée avec succés!";
                             //envoyer une notification SMS au client
@@ -183,6 +184,7 @@ class ReservationController extends MainController{
         $paye=$payRepo->findOneByRes($res->getId());
          $em=$this->getDoctrine()->getManager();
          $em->remove($res);
+         $em->persist($res->getClient()->nombreVoyageMinus(1));
          
          }if(!empty($paye))
          {
