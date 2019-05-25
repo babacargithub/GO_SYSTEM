@@ -14,8 +14,12 @@ $.ajax({
 //==========Afficher la liste des inscrits par appel AJAX===================
      $('body').on('click','.liste_inscrit, .liste_depart, .liste_chiffre', function(e){
          e.preventDefault();
-          $.get($(this).attr('href'),'', function(reponse){
-             $('#content_body').html(reponse);});
+          $.ajax({
+                  url:$(this).attr('href'),
+                  dataType:"html",
+                  success:function(reponse){$('#content_body').html(reponse);},
+                  error:function(error,type,ErrorThrown){ alert(ErrorThrown);}
+     });
      
      });
      //====================Traiter de mani�re uniformis�e les boutons d'action dans les listes==========
