@@ -18,7 +18,7 @@
         
         {% for chiffre in chiffres %}
             <li>
-          <a href="{{path('go_caravane_reservation_liste_show', {'id': chiffre.depart.id})}}">
+          <a href="{{path('go_caravane_reservation_liste_show', {'id': chiffre.depart_id})}}">
             <i class="fa fa-envelope"></i> <span>{{chiffre.depart}}</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">{{chiffre.nombrePaye}}</small>

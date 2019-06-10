@@ -55,9 +55,9 @@ class Payer
     /**
      * @var \GO\CaravaneBundle\Entity\Reservation
      *
-     * @ORM\ManyToOne(targetEntity="GO\CaravaneBundle\Entity\Reservation", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="GO\CaravaneBundle\Entity\Reservation", cascade={"persist","remove"}, inversedBy="paiement")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="res", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="res", referencedColumnName="id", onDelete="cascade")
      * })
      */
     private $res;

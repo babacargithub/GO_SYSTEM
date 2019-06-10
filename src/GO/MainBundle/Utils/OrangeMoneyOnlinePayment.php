@@ -7,10 +7,10 @@
  */
 
 namespace GO\MainBundle\Utils;
-use \Paydunya;
-use \Paydunya\Checkout\CheckoutInvoice;
-use \Paydunya\Setup;
-use \Paydunya\Checkout\Store;
+use Paydunya\Paydunya;
+use Paydunya\Checkout\CheckoutInvoice;
+use Paydunya\Setup;
+use Paydunya\Checkout\Store;
 /**
  * Description of OrangeMoneyOnlinePayment
  *
@@ -19,7 +19,7 @@ use \Paydunya\Checkout\Store;
 class OrangeMoneyOnlinePayment {
     //put your code here
 public function __construct(){
-Setup::setMasterKey("JXi0ERpN-hMFF-3toN-yDvj-L2N1OD3Rv1HB");
+\Paydunya\Setup::setMasterKey("JXi0ERpN-hMFF-3toN-yDvj-L2N1OD3Rv1HB");
 /*Setup::setPublicKey("test_public_Br2OMFdfXLchVR7aYFSrOcudF1Y");
 Setup::setPrivateKey("test_private_rzi4q6CBS4N11wvDxuuIQlSKgEG");
 Setup::setToken("mFn2XMITpIRFz0sEiKd7");
@@ -39,8 +39,8 @@ Store::setPhoneNumber("77 127 35 35");
 Store::setPostalAddress("UGB, Université Gaston Berger");
 Store::setWebsiteUrl("http://www.www.golobone.sn");
 Store::setLogoUrl("http://www.chez-sandra.sn/logo.png");
-Store::setReturnUrl("http://www.golobone.net/payer_online_success.golob");
-Store::setCallbackUrl("http://www.golobone.net/online_pay_callback.golob");
+Store::setReturnUrl("http://www.admin.golobone.net/caravane/payer_online_success.golob");
+Store::setCallbackUrl("http://www.admin.golobone.net/caravane/online_pay_callback.golob");
     }
     public function facturer($object)
     {

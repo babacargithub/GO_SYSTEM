@@ -249,7 +249,8 @@ class DepartController extends MainController{
         foreach($departs as $depart)
         { 
           $ar=array(
-              'depart'=>$depart, 
+              'depart_id'=>$depart->getId(), 
+              'depart'=>$depart->getLibelle(), 
               'total'=>(int) $Payer->getTotalPayeDepart($depart->getId()),
               'nombrePaye'=>(int) $Payer->getNombrePaye(Cons::DEPART,$depart->getId()),
                'nombre'=>(int)$Res->getNombreInscritDepart($depart->getId()),

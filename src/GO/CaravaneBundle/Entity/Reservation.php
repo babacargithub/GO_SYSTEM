@@ -55,7 +55,7 @@ class Reservation
     /**
      * @var \GO\CaravaneBundle\Entity\Payer
      *
-     * @ORM\OneToOne(targetEntity="GO\CaravaneBundle\Entity\Payer")
+     * @ORM\OneToOne(targetEntity="GO\CaravaneBundle\Entity\Payer", mappedBy="res")
       
      */
     private $paiement;

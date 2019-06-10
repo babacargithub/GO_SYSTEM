@@ -144,8 +144,10 @@ class ReservationController extends MainController{
                                if($this->getUser()->hasRole('ROLE_AG_BOUT'))
                                 {
                                $code=$this->payer($res);
-                               $res= $this->attribuerNumPlace($res);
-                              $msg.=" ".$code. " Numéro place: <strong>".$res->getNumPlace()."</strong>";
+                               $res= $res->setNumPlace($this->get('go_caravane.seat_number_generator')->generateSeat($res)->getNumPlace()) ;
+                             $em->persist($res);
+                             $em->flush();
+                               $msg.=" ".$code. " Numéro place: <strong>".$res->getNumPlace()."</strong>";
                                 }else
                                  {
                                      $errorMsg="Impossible d'enregistrer le paiement. Motif: Vous ne disposez pas de compte boutiquier. Seuls les comptes boutiquiers sont autorisés é effectuer des paiements";
@@ -181,17 +183,20 @@ class ReservationController extends MainController{
         $resRepo=$this->getDoctrine()->getRepository('GOCaravaneBundle:Reservation');
           if(!empty($res))
          {$payRepo=$this->getDoctrine()->getRepository('GOCaravaneBundle:Payer');
-        $paye=$payRepo->findOneByRes($res->getId());
          $em=$this->getDoctrine()->getManager();
-         $em->remove($res);
+          $payer=$res->getPaiement();
+         //$res->setPaiement(null);
          $em->persist($res->getClient()->nombreVoyageMinus(1));
          
-         }if(!empty($paye))
+         if(!empty($paye))
          {
          $em->remove($paye);
-         }
-        $em->flush();
          
+         }
+         $em->remove($res);
+        
+        $em->flush();
+         }
          $this->msg="Réservation annulée avec succés!";
          return $this->sendResponse(array('view'=>'GOCaravaneBundle::flash_message.html.twig','msg'=>$this->msg));
         
@@ -871,10 +876,10 @@ class ReservationController extends MainController{
     {
        $Paiement=new OrangeMoneyPayment();
       // $Paiement->setReturnUrl($this->generateUrl("payer_online_success"));
-       $Paiement->setReturnUrl("http://www.golobone.net/payer_online_success.golob");
+       $Paiement->setReturnUrl("http://www.admin.golobone.net/payer_online_success.golob");
        if($this->getUser()==null)
        {
-       $Paiement->setReturnUrl("http://www.golobone.net/RES_ONLINE/web/payer_online_success.golob");
+       $Paiement->setReturnUrl("http://www.admin.golobone.net/RES_ONLINE/web/payer_online_success.golob");
        }
        
        $link= $Paiement->facturer($res);

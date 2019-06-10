@@ -11,7 +11,7 @@ $(document).ajaxComplete(function(){ hideLoader(); /* cahce la bare de progressi
             {
             $.ajax({
                 url:href,
-                contentType: "text/plain",
+                contentType: "text/html",
                 dataType: "html",
                 success: function(serverResponse){
                 $("#content_body").html(serverResponse);

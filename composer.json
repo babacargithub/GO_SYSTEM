@@ -27,6 +27,7 @@
         "jms/security-extra-bundle": "^1.6",
         "jms/serializer-bundle": "^2.4",
         "kilik/table": "^1.0",
+        "paydunya/paydunya": "^1.0",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "symfony/monolog-bundle": "^3.0.2",

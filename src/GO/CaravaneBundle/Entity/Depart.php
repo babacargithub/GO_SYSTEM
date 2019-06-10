@@ -4,9 +4,10 @@ namespace GO\CaravaneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Depart
+ * Depart 
  *
  * @ORM\Table(name="depart", uniqueConstraints={@ORM\UniqueConstraint(name="libelle_depart", columns={"libelle", "date", "trajet", "event"})}, indexes={@ORM\Index(name="id_event_depart", columns={"event"})})
  * @ORM\Entity(repositoryClass="GO\CaravaneBundle\Entity\DepartRepository")
@@ -14,10 +15,14 @@ use Doctrine\Common\Collections\Criteria;
  */
 class Depart
 {
+    const VISIBILITY_STAFF=1;
+    const VISIBILITY_ONLINE=2;
+    const VISIBILITY_ALL=3;
     /**
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
+     * @Serializer\Groups({"list_for_api", "libelle_only"})
      */
     private $libelle;
 
@@ -25,6 +30,7 @@ class Depart
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $date;
 
@@ -39,8 +45,16 @@ class Depart
      * @var integer
      *
      * @ORM\Column(name="trajet", type="integer", nullable=true)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $trajet;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="visibilite", type="integer", nullable=true)
+     
+     */
+    private $visibilite=self::VISIBILITY_ALL;
 
     /**
      * @var boolean
@@ -61,6 +75,7 @@ class Depart
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Groups({"list_for_api"})
      */
     private $id;
 
@@ -367,5 +382,29 @@ class Depart
     public function getBilan()
     {
         return $this->bilan;
+    }
+
+    /**
+     * Set visibilite
+     *
+     * @param integer $visibilite
+     *
+     * @return Depart
+     */
+    public function setVisibilite($visibilite)
+    {
+        $this->visibilite = $visibilite;
+
+        return $this;
+    }
+
+    /**
+     * Get visibilite
+     *
+     * @return integer
+     */
+    public function getVisibilite()
+    {
+        return $this->visibilite;
     }
 }

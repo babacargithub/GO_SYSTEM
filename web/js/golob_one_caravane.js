@@ -16,6 +16,7 @@ $.ajax({
          e.preventDefault();
           $.ajax({
                   url:$(this).attr('href'),
+                  ContentType: "text/html",
                   dataType:"html",
                   success:function(reponse){$('#content_body').html(reponse);},
                   error:function(error,type,ErrorThrown){ alert(ErrorThrown);}

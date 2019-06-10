@@ -10,7 +10,6 @@ caisse:
     resource: "@GOCaisseBundle/Controller/"
     type:     annotation
     prefix:   /caisse_pro/
-
 go_main_base_controller:
     resource: "@GOMainBundle/Resources/config/routing.yml"
     prefix: /

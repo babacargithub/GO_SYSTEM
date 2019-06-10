@@ -3,9 +3,10 @@
 namespace GO\CaravaneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
- * PointDepart
+ * PointDepart 
  *
  * @ORM\Table(name="point_depart", indexes={@ORM\Index(name="nom_point_dep", columns={"nom"}), @ORM\Index(name="lieu", columns={"trajet"})})
  * @ORM\Entity(repositoryClass="GO\CaravaneBundle\Entity\PointDepartRepository")
@@ -16,6 +17,7 @@ class PointDepart
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=100, nullable=false)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $nom;
 
@@ -23,6 +25,7 @@ class PointDepart
      * @var boolean
      *
      * @ORM\Column(name="trajet", type="integer", nullable=true)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $trajet;
 
@@ -44,6 +47,7 @@ class PointDepart
      * @var string
      *
      * @ORM\Column(name="arret_bus", type="string", length=256, nullable=true)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $arretBus;
 
@@ -53,6 +57,7 @@ class PointDepart
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Groups({"list_for_api"})
      */
     private $id;
 

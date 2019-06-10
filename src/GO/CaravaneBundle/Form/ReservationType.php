@@ -48,7 +48,8 @@ class ReservationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'GO\CaravaneBundle\Entity\Reservation'
+            'data_class' => 'GO\CaravaneBundle\Entity\Reservation',
+            "allow_extra_fields"=>true
         ));
     }
 

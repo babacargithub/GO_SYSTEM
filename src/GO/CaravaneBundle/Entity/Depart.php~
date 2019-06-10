@@ -3,19 +3,26 @@
 namespace GO\CaravaneBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Criteria;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
- * Depart
+ * Depart 
  *
  * @ORM\Table(name="depart", uniqueConstraints={@ORM\UniqueConstraint(name="libelle_depart", columns={"libelle", "date", "trajet", "event"})}, indexes={@ORM\Index(name="id_event_depart", columns={"event"})})
  * @ORM\Entity(repositoryClass="GO\CaravaneBundle\Entity\DepartRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Depart
 {
+    const VISIBILITY_STAFF=1;
+    const VISIBILITY_ONLINE=2;
+    const VISIBILITY_ALL=3;
     /**
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
+     * @Serializer\Groups({"list_for_api", "libelle_only"})
      */
     private $libelle;
 
@@ -23,22 +30,31 @@ class Depart
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $date;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="trajet", type="integer", nullable=true)
+     * @ORM\Column(name="horaire", type="integer", nullable=true)
      */
     private $horaire;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="horaire", type="integer", nullable=true)
+     * @ORM\Column(name="trajet", type="integer", nullable=true)
+     * @Serializer\Groups({"list_for_api"})
      */
     private $trajet;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="visibilite", type="integer", nullable=true)
+     
+     */
+    private $visibilite=self::VISIBILITY_ALL;
 
     /**
      * @var boolean
@@ -59,6 +75,7 @@ class Depart
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Serializer\Groups({"list_for_api"})
      */
     private $id;
 
@@ -71,8 +88,19 @@ class Depart
      * })
      */
     private $event;
+    /**
+     * @var \GO\CaravaneBundle\Entity\Evenement
+     *
+     * @ORM\OneToMany(targetEntity="GO\CaravaneBundle\Entity\HeureDepart", mappedBy="depart",cascade={"persist"})
+    */
+    private $heuresDepart;
 
-
+     /**
+     * @var \GO\CaravaneBundle\Entity\BilanDepart
+     *
+     * @ORM\OneToOne(targetEntity="GO\CaravaneBundle\Entity\BilanDepart", mappedBy="depart")
+    */
+    private $bilan;
 
     /**
      * Set libelle
@@ -222,5 +250,137 @@ class Depart
     public function getClosPaye()
     {
         return $this->closPaye;
+    }
+
+    /**
+     * Set horaire
+     *
+     * @param integer $horaire
+     * @return Depart
+     */
+    public function setHoraire($horaire)
+    {
+        $this->horaire = $horaire;
+
+        return $this;
+    }
+
+    /**
+     * Get horaire
+     *
+     * @return integer 
+     */
+    public function getHoraire()
+    {
+        return $this->horaire;
+    }
+    /**
+     * @return bool
+     */
+    public function isPasse()
+    {
+        $currentDate=new \DateTime();
+        return $currentDate > $this->getDate();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->heuresDepart = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add heuresDepart
+     *
+     * @param \GO\CaravaneBundle\Entity\HeureDepart $heuresDepart
+     * @return Depart
+     */
+    public function addHeuresDepart(\GO\CaravaneBundle\Entity\HeureDepart $heuresDepart)
+    {
+        $this->heuresDepart[] = $heuresDepart;
+
+        return $this;
+    }
+
+    /**
+     * Remove heuresDepart
+     *
+     * @param \GO\CaravaneBundle\Entity\HeureDepart $heuresDepart
+     */
+    public function removeHeuresDepart(\GO\CaravaneBundle\Entity\HeureDepart $heuresDepart)
+    {
+        $this->heuresDepart->removeElement($heuresDepart);
+    }
+
+    /**
+     * Get heuresDepart
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHeuresDepart()
+    {
+        return $this->heuresDepart;
+    }
+    // fonction pour récupérer l'heure de départ d'un point de départ doné
+    public function getHeurePointDep(PointDepart $pointDep)
+    {
+        $criteria = Criteria::create()
+    ->where(Criteria::expr()->eq("pointDep", $pointDep))
+    ->setMaxResults(1);
+        return $this->getHeuresDepart()->matching($criteria)[0];
+    }
+    
+    public function isResClos()
+    {
+        return $this->closRes;
+    }
+    public function isPayeClos()
+    {
+        return $this->closPaye;
+    }
+    /**
+     * @ORM\PreUpdate()
+     * @return type
+     */
+    public function setEndTime()
+    {
+         if($this->getHoraire()==1)
+       {
+       if($this->getTrajet()==2)
+        $this->date->setTime(03,59);
+           else
+        $this->date->setTime(23,59);
+       }
+       elseif($this->getHoraire()==2)
+       {
+            $this->date->setTime(15,30);
+       }
+    }
+    public function __toString() {
+        return ucfirst($this->libelle);
+    }
+
+    /**
+     * Set bilan
+     *
+     * @param \GO\CaravaneBundle\Entity\BialnDepart $bilan
+     * @return Depart
+     */
+    public function setBilan($bilan = null)
+    {
+        $this->bilan = $bilan;
+
+        return $this;
+    }
+
+    /**
+     * Get bilan
+     *
+     * @return \GO\CaravaneBundle\Entity\BialnDepart 
+     */
+    public function getBilan()
+    {
+        return $this->bilan;
     }
 }

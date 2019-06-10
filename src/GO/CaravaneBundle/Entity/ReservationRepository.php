@@ -78,13 +78,13 @@ class ReservationRepository extends EntityRepository
                ->setParameter('dep', $id_depart);
        if($filter==Cons::PAYE)
        {
-               $qb->andWhere('r.paiement IS NOT NULL');
+               $qb->andWhere('r.paye=true');
        }
         elseif($filter==Cons::NON_PAYE)
         {
-               $qb->andWhere('r.paiement IS NULL');
+               $qb->andWhere('r.paye!=true');
         }
-               $qb->orderBy('r.numPlace,p.id,c.prenom');
+               $qb->orderBy('r.numPlace,p.id');
       return $qb->getQuery()->getResult();
       // return $this->findByDepart($id_depart);
                 

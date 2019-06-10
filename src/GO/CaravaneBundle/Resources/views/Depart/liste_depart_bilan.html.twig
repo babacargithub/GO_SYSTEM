@@ -20,6 +20,7 @@
                        <td>{{ depart.libelle  }}</td>
                         <td>{{ depart.date.format('d/m/Y')}}</td>
                         {% if depart.bilan is not null %}
+                            {%if is_granted("ROLE_SUPER_ADMIN")%}
                         <td>
                             {{ depart.bilan.chauffeur}}
                         </td>
@@ -48,6 +49,9 @@
                         <td>
                             <a href="{{path("bilan_depart_show",{"id":depart.id})}}">Voir Bilan</a>
                         </td>
+                        {%else%}
+                            <td>Déjà enregistré <a href="{{path("bilan_depart_show",{"id":depart.id})}}">Voir Bilan</a></td>
+                            {%endif%}
                     </tr>
                     {%else%}
                         <td colspan='3'>Bilan Non Disponible</td>

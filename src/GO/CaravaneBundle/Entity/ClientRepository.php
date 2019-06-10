@@ -18,7 +18,7 @@ class ClientRepository extends EntityRepository
         return $qb= $this->createQueryBuilder('c')
                 ->join("c.coordonnees", "cc")
                ->addSelect( "cc")
-                ->where('cc.tel=:tel')
+               ->where('SUBSTRING(cc.tel,-9,9)=:tel')
                ->setParameter('tel', $tel)
                 ->getQuery()->getOneOrNullResult();
                             
