@@ -5,7 +5,8 @@ namespace GO\CaravaneBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use GO\CaravaneBundle\Entity\Depart;
 class DepartEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -14,6 +15,7 @@ class DepartEditType extends AbstractType
             
             ->add('libelle', 'text', array('label'=>'Libellé du départ'))
             ->add('date', 'datetime', array("widget"=>"single_text"))
+               ->add("visibilite", ChoiceType::class,["choices"=>[Depart::VISIBILITY_ALL=>"A TOUT LE MONDE",Depart::VISIBILITY_STAFF=>"AU PERSONNEL",]])
             ->add('trajet', 'choice', array("choices"=>array(1=>"UGB vers DAKAR", 2=>"DAKAR vers UGB"), "expanded"=>false, "multiple"=>false, "empty_value"=>"Trajet du départ"))
             ->add('horaire', 'choice', array("choices"=>array(1=>"Depart NUIT", 2=>"Depart APRES-MIDI"), "expanded"=>false, "multiple"=>false, "empty_value"=>"Horaire du départ"))
             ->add('event', 'entity', array(

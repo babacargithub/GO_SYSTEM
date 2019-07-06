@@ -4,9 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Controller/ReservationController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/app/config/easyadmin_config.yml</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/AppBundle/Entity/Candidature.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/AppBundle/Controller/DefaultController.php</file>
             <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Controller/DepartController.php</file>
             <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Entity/Depart.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ShopBundle/Controller/ShopAdminController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/AppBundle/Controller/MainController.php</file>
             <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ApiBundle/Controller/ApiCaravaneController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/ShopBundle/Controller/VenteController.php</file>
+            <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/app/config/routing.yml</file>
             <file>file:/C:/wamp64/www/GO_SYS_V2_SYNCH/src/GO/CaravaneBundle/Resources/views/Depart/etat_departs.html.twig</file>
         </group>
     </open-files>

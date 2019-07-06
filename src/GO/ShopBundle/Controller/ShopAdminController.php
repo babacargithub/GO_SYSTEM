@@ -98,16 +98,19 @@ class ShopAdminController extends MainController {
      * @return type
      * @Route("month_summary/{mois}/{annee}", name="admin_shop_month_summary",
      * requirements={"mois"="\d+", "annee"="\d+"},
-     * defaults={"mois": 0}
-     * )
+     *  )
+     * @Route("month_summary/", name="admin_shop_current_month_summary"
+     *  )
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function getMonthSummaryAction(Request $req)
     {
        
-       if( $req->get('mois')==0) 
+       if( $req->get('mois')=="") 
        {
            $req->query->set("mois", \Date('m'));
+           $req->query->set("annee", \Date('Y'));
+            
        }
         $mois=$req->get('mois');
         

@@ -1225,7 +1225,7 @@ public function transformFactureVenteToFactureAchatAction(FactureVente $factureV
        $targetFactureAchat=new FactureAchat();
        $targetFactureAchat->setShop($targetShop)
                ->setDate(new \DateTime())
-               ->setFournisseur($this->getRepo('Fournisseur')->find(13))
+               ->setFournisseur($this->getRepo('Fournisseur')->find(6))
                ->setDateFacture($factureVente->getDate())
                ->setAvance($factureVente->getAvance())
                ->setValidated(true)
@@ -1259,14 +1259,7 @@ public function transformFactureVenteToFactureAchatAction(FactureVente $factureV
               $StockRepo= $this->getRepo('Stock');
               $stock=$StockRepo->findOneBy(array("produit"=>$achat->getProduit(), "shop"=> $targetShop));
                 // ===== on vérifie si on peut accéder au stock; si tel n'esét pas le cas on lance une exception qui arrete le script
-                 if($stock!==null)
-                {
-                    $stock->augmenter($achat->getQuantite());
-                    $em->persist($stock);
-                }else
-                {throw new NotFoundHttpException("Stock du produit ".$achat->getProduit()." inexistant ou inaccessible");
-              
-                }
+                 
             
        } 
        $em->persist($targetFactureAchat);

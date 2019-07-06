@@ -1,15 +1,7 @@
       {% if form is defined %}
 <form id="{{form.vars.name}}" action='{{path("update_depart", {"id": depart.id })}}' class="form-horizontal" method="post" {{ form_enctype(form) }}>
-{{ form_label(form.libelle, "Libellé") }}
-{{ form_widget(form.libelle, {"attr":{"class": "form-control"}}) }}
-{{ form_label(form.date, "Date du départ") }}
-{{ form_widget(form.date, {"attr":{"class": "form-control"}}) }}
-{{ form_label(form.trajet, "Trajet du départ") }}
-{{ form_widget(form.trajet, {"attr":{"class": "form-control"}}) }}
-{{ form_label(form.event, "Evement") }}
-{{ form_widget(form.event, {"attr":{"class": "form-control"}}) }}
-{{ form_row(form._token)}}
-<input type="submit" class="btn btn-primary" />
+{{ form_widget(form) }}
+<input type="submit" class="btn btn-primary" Value="Enregistrer les modifications" />
 </form>
 {% endif %}
    

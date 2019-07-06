@@ -8,14 +8,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
+    
+        /**
+     * switch boolean value
+     *
+     * @Route("/switch_boolean/{entity}/{id}/{property}/{value}", name="boolean_switcher2")
+     
      */
-    public function indexAction(Request $request)
+    public function booleanSwitcher(Request $req)
     {
-        // replace this example code with whatever you need
-        return $this->render('@App/default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        $Entity=ucfirst($req->get('entity'));
+        $object= $this->getDoctrine()->getRepository("AppBundle:$Entity")->find($req->get('id'));
+        $property=$req->get('property');
+        $set="set".ucfirst($property);
+        $booleanValue=!$req->get('value');
+        $object->$set($booleanValue);
+        $em=$this->getDoctrine()->getManager();
+        $em->persist($object);
+        $em->flush();
+                
+        
     }
 }

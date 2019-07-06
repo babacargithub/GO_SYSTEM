@@ -14,11 +14,11 @@ class ShopRepository extends EntityRepository
 {
     public function getListe()
     {
-        return $qb= $this->createQueryBuilder('s')->where('s.id=3')->orWhere('s.id=4');
+        return $qb= $this->createQueryBuilder('s')->where('s.id=3');
     }
     public function findAll()
     {
-        return $qb= $this->createQueryBuilder('s')->where('s.id=3')->orWhere('s.id=4')->getQuery()->getResult();
+        return $qb= $this->createQueryBuilder('s')->where('s.id=3')->getQuery()->getResult();
     }
     public function getOtherShops(Session $session)
     {
