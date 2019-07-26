@@ -9,13 +9,17 @@
 namespace GO\ShopBundle\Entity;
 use GO\GOLibrary\Entity\AbstractCompany;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits;
+use Gedmo\Mapping\Annotation\SoftDeleteable;
 
 /**
  *@ORM\Table(name="company_shop")
  *@ORM\Entity()
+ *@SoftDeleteable(fieldName="deletedAt")
  */
 class Company extends AbstractCompany{
     //put your code here
+    use Traits\SoftDeleteableEntity;
     
     /**
      * @var integer
@@ -24,6 +28,7 @@ class Company extends AbstractCompany{
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
 
     /**
      * Get id
@@ -31,7 +36,7 @@ class Company extends AbstractCompany{
      * @return integer
      */
     public function getId()
-    {
+    {       
         return $this->id;
     }
 
