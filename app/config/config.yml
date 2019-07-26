@@ -63,6 +63,10 @@ doctrine:
                 NOW: GO\MainBundle\DQL\Query\Mysql\Now
                 MONTH: GO\MainBundle\DQL\Query\Mysql\Year
                 YEAR: GO\MainBundle\DQL\Query\Mysql\Month
+        filters:
+            user_filter:
+                class:   GO\GOLibrary\Doctrine\Filter\UserFilter
+                enabled: true
                 
 
 # Swiftmailer Configuration

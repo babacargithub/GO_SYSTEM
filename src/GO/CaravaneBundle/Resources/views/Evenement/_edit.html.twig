@@ -1,0 +1,11 @@
+
+{% if form is defined %}
+<form id="{{form.vars.name}}" action="{{path("event_update", {"id":event.id})}} " class="form-horizontal" method="post" {{form_enctype(form)}}>
+{{ form_widget(form)}}
+<input type="submit" class="btn btn-primary" value="Enregistrer les modifications"/>
+{{form_rest(form)}}
+</form>
+
+    {% endif %}
+
+  

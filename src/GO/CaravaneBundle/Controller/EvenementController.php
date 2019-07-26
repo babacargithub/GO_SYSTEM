@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GO\CaravaneBundle\Entity\Evenement;
 use GO\CaravaneBundle\Form\EvenementType;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class EvenementController extends MainController {
     //put your code here
@@ -56,20 +57,30 @@ class EvenementController extends MainController {
         
         return $this->render('GOCaravaneBundle:Evenement:show.html.twig', array("events"=>$events));
     }
-    public function updateAction(Request $req)
+    /**
+     * 
+     * @param Request $req
+     * @param Evenement $event
+     * @return type
+     * @Route("event/{id}/update", name="event_update")
+     */
+    public function updateAction(Request $req, Evenement $event)
     {
+        
         $event= $this->getRepo('Evenement')->find($req->get('event'));
         $form= $this->createForm(new EvenementType(), $event);
-       $form->bind($req);
-       if($form->isValid())
+       $form->handleRequest($req);
+       if($form->isSubmitted()&& $form->isValid())
        {
            $em= $this->em();
            $em->persist($event);
            $em->flush();
-       }else
-       {
-           return;
-       } 
+           return $this->render('@GOCaravane/Evenement/show.html.twig', array("events"=>$this->getRepo('Evenement')->findAll()));
+   
+       }
+          return $this->render('@GOCaravane/Evenement/_edit.html.twig', array("form"=>$form->createView(),"event"=>$event));
+   
+       
     }
     public function deleteAction(Request $req)
     {

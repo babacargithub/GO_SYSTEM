@@ -1,0 +1,27 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace GO\ShopBundle\Entity;
+use GO\GOLibrary\Entity\AbstractCompany;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ *@ORM\Table(name="company_shop")
+ *@ORM\Entity()
+ */
+class Company extends AbstractCompany{
+    //put your code here
+    
+    /**
+     * @var integer
+     * @ORM\Column(type="integer")
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+}

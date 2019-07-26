@@ -19,7 +19,7 @@
             <td>{{event.libelle }}</td>
             <td>{{event.dateStart.format('d/m/Y')}}</td>
             <td>{{event.dateEnd.format('d/m/Y')}}</td>
-            <td>{{event.id }}</td>
+            <td><a href="{{path("event_update",{"id":event.id})}}">Modifier</a></td>
             <td><a href="historique_reservations_event-{{event.id}}.golob">Exporter</a></td>
             <td><a href="{{path("all_departs_event",{"id":event.id})}}">Afficher les départs</td>
         </tr>
