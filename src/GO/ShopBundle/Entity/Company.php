@@ -9,17 +9,24 @@
 namespace GO\ShopBundle\Entity;
 use GO\GOLibrary\Entity\AbstractCompany;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\SoftDeleteable\Traits;
+use Gedmo\SoftDeleteable\Traits as SoftDeleteTraits;
 use Gedmo\Mapping\Annotation\SoftDeleteable;
-
+use Gedmo\Mapping\Annotation\Timestampable;
+use Gedmo\Mapping\Annotation\Blameable;
+use Gedmo\Timestampable\Traits as TimestampableTraits;
+use Gedmo\Blameable\Traits as BlameableTraits;
+use Gedmo\Mapping\Annotation\Loggable;
 /**
  *@ORM\Table(name="company_shop")
- *@ORM\Entity()
+ *@ORM\Entity(repositoryClass="GO\ShopBundle\Entity\CompanyRepository")
  *@SoftDeleteable(fieldName="deletedAt")
+ 
  */
 class Company extends AbstractCompany{
     //put your code here
-    use Traits\SoftDeleteableEntity;
+    use SoftDeleteTraits\SoftDeleteableEntity;
+    use TimestampableTraits\TimestampableEntity;
+    use BlameableTraits\BlameableEntity;
     
     /**
      * @var integer
