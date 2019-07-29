@@ -7,12 +7,36 @@
  */
 
 namespace GO\ShopBundle\Form;
-
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type as Types;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Description of CompanyType
  *
  * @author LBC
  */
-class CompanyType {
+class CompanyType extends AbstractType{
     //put your code here
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+       $builder
+               ->add("nom", null,["label"=>"Nom de Société"])
+               ->add("adresse", null,["label"=>"Adresse Société"])
+               ->add("tel", null,["label"=>"Téléphone Gérant"])
+               ;
+    }
+
+   public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'GO\ShopBundle\Entity\Company'
+        ));
+    }
+
+    public function getName()
+    {
+        return 'go_shopbundle_companytype';
+    }
+
+    
 }

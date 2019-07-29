@@ -113,7 +113,7 @@
                                 {% if errorMsg is defined and errorMsg is not null %}
                                     <div class="alert col-12  alert-danger" style="border: 1px solid red">{{errorMsg}}</div>
                                     {% endif %}
-                                    <h1 class="text-center text-bold">Vous êtes affacté à plusieurs boutiques<br>
+                                    <h1 class="text-center text-bold">{{"Vous êtes affacté à plusieurs boutiques"|trans()}}<br>
                                         Sélectionnez la boutique à accéder</h1>
                                     <div class='text-bold text-center '>
                                         {% if shops is defined and shops is not null %}
