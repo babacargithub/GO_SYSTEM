@@ -23,6 +23,7 @@ class CompanyType extends AbstractType{
                ->add("nom", null,["label"=>"Nom de Société"])
                ->add("adresse", null,["label"=>"Adresse Société"])
                ->add("tel", null,["label"=>"Téléphone Gérant"])
+               ->add("Enregistrer", Types\SubmitType::class)
                ;
     }
 
