@@ -37,7 +37,7 @@ twig:
         company_logo_url: "images/logo_GolobOne-small.jpg"
         software_name: 'GO SYS'
         software_description: "Logiciel de l'entreprise Golob One"
-        version_name: '2.0.0'
+        version_name: '2.1.0'
 
         
 # Doctrine Configuration
@@ -84,6 +84,9 @@ sensio_framework_extra:
 fos_user:
     db_driver: orm 
     firewall_name: go_main_firewall 
+    from_email:
+        address: "yourapp@yourapp.com"
+        sender_name: "Demo String"
     user_class: GO\UserBundle\Entity\User 
     registration:
         form:
@@ -135,6 +138,7 @@ stof_doctrine_extensions:
     orm:
         default:
             softdeleteable: true
+            blameable: true
             tree: false
             timestampable: true
         

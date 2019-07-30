@@ -3,7 +3,7 @@
 namespace GO\UserBundle\Entity;
 
 
-use FOS\UserBundle\Entity\User as BaseUser;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -13,7 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="user", uniqueConstraints={@ORM\UniqueConstraint(name="username", columns={"username", "tel"}), @ORM\UniqueConstraint(name="email", columns={"email"})}, indexes={@ORM\Index(name="password", columns={"password"}), @ORM\Index(name="active", columns={"active"}), @ORM\Index(name="village_gere", columns={"en_ligne_user"})})
  * @ORM\Entity(repositoryClass="GO\UserBundle\Entity\UserRepository")
  */
-class User extends BaseUser
+class User extends \FOS\UserBundle\Entity\User
 {
     /**
      * @var integer

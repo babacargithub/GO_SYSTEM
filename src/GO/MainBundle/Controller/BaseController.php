@@ -197,9 +197,16 @@ class BaseController extends FOSRestController{
             
     }
     
-    public function render($viewFile, array $parameters = array(), Response $response = null)
+    public function render($viewFile, array $parameters = array(), Response $response = null, $isRest=false)
     {
         $view= $this->view();
+        if(isset($parameters['form']))
+        {
+            if ($parameters['form'] instanceof \Symfony\Component\Form\Form && !$isRest)
+            {
+                $parameters['form']=$parameters['form']->createView();
+            }
+        }
         $view->setTemplate($viewFile)
                 ->setData($parameters)
                 ->setTemplateData($parameters);

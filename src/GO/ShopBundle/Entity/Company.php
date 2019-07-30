@@ -16,6 +16,7 @@ use Gedmo\Mapping\Annotation\Blameable;
 use Gedmo\Timestampable\Traits as TimestampableTraits;
 use Gedmo\Blameable\Traits as BlameableTraits;
 use Gedmo\Mapping\Annotation\Loggable;
+use JMS\Serializer\Annotation as JMSSerializer;
 /**
  *@ORM\Table(name="company_shop")
  *@ORM\Entity(repositoryClass="GO\ShopBundle\Entity\CompanyRepository")
@@ -33,6 +34,7 @@ class Company extends AbstractCompany{
      * @ORM\Column(type="integer")
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @JMSSerializer\Groups({"list", "show"})
      */
     private $id;
     

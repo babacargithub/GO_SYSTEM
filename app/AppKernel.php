@@ -19,7 +19,7 @@ class AppKernel extends Kernel
             new GO\CaravaneBundle\GOCaravaneBundle(),
             new GO\MainBundle\GOMainBundle(),
             new GO\UserBundle\GOUserBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+           new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new GO\ShopBundle\GOShopBundle(),
             new GO\SMSBundle\GOSMSBundle(),
